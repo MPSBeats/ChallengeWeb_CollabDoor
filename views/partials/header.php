@@ -16,7 +16,6 @@
 <body>
     <header>
         <nav>
-            <!-- <h1><a href="index.php?page=home">Collabdoor</a></h1> -->
             <a href="index.php?page=home"><svg width="45" height="53" viewBox="0 0 45 53" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <rect width="45" height="53" fill="url(#pattern0_2_12)" />
                     <defs>
@@ -39,12 +38,16 @@
                     </a></li>
             </ul>
             <ul class="user">
-                <li><button><a href="index.php?page=connexion">
+                <li><a href="index.php?page=login">
+                        <button>
                             <h3>Connexion</h3>
-                        </a></button></li>
-                <li><button><a href="index.php?page=login">
+                        </button>
+                    </a></li>
+                <li><a href="index.php?page=register">
+                        <button>
                             <h3>Inscription</h3>
-                        </a></button></li>
+                        </button>
+                    </a></li>
             </ul>
         </nav>
     </header>
