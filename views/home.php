@@ -1,17 +1,109 @@
 <main>
-    <div style="margin-top: 20vh;">
-        <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae architecto accusantium vel, repellat delectus cumque nihil ullam iste blanditiis voluptatibus similique, quos facilis nesciunt nostrum voluptas quaerat iure porro ratione. Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus incidunt aperiam officia consectetur odit? Beatae odit veritatis fugit eaque qui? Similique laboriosam corrupti eius tempore odit laborum, quae delectus harum.
-            Odio porro praesentium dolor iusto nulla. Ipsa magnam dolorum voluptatibus quae dolore adipisci illum corrupti, quaerat repellendus quisquam hic facere commodi sunt? Autem sit quasi hic, quas nisi in excepturi.
-            Doloremque autem dignissimos reprehenderit dicta illo. Molestias dolores quod, veritatis tempore quis tenetur perspiciatis, cum nobis facilis architecto consequatur voluptates blanditiis pariatur quasi! Ipsa deserunt provident nihil, error autem exercitationem?
-            Quam nostrum maxime corporis tempore, commodi quibusdam nisi deleniti consectetur in, odit totam laudantium vitae iure? Vel deleniti quis, maiores nobis tempora modi laudantium, nam debitis reiciendis itaque sunt consequuntur?
-            Quia commodi ipsum quas inventore cupiditate temporibus nesciunt, nisi optio cum qui dolore? Magnam sit atque, nostrum corrupti distinctio magni aliquid similique consectetur est obcaecati veritatis, rem dolorem explicabo aliquam.
-            Aspernatur nesciunt quam ex, recusandae quaerat corrupti officia magni veritatis voluptate ducimus, fugiat voluptates nemo repellendus quo quidem doloribus. Rem ea autem molestias soluta laborum libero vero veritatis sint modi.
-            Repellendus aperiam sequi, perspiciatis atque praesentium esse omnis iure cupiditate veritatis. Laudantium, dignissimos eius ullam atque, cupiditate dolores voluptatibus sunt necessitatibus enim expedita dolorem. Exercitationem quaerat vel soluta obcaecati similique.
-            Sequi asperiores eos assumenda minima! Repellendus aliquam et alias dicta ex, ipsa voluptates error praesentium sapiente odit aspernatur placeat possimus repudiandae necessitatibus sit unde inventore ullam sunt beatae, quis quia.
-            Quibusdam ad deleniti vitae, et qui soluta reprehenderit accusamus rem fugit quisquam. Quia aliquid ducimus commodi nobis, quibusdam ipsam? Dolorem facere alias illo aut cupiditate, pariatur adipisci aspernatur debitis nesciunt.
-            Quaerat natus, porro culpa minus, impedit suscipit ducimus modi non totam ea ullam blanditiis, illum cupiditate cum laboriosam velit asperiores rerum maxime aut atque saepe deserunt quod iure tempora! Ab?
-        </p>
-    </div>
+    <section class="hero">
+        <div class="space"></div>
+        <div class="content">
+            <img src="assets/img/logoCollabdoor.png" alt="">
+            <h2>Your Gateway to Seamless Collaboration</h2>
+        </div>
+        <div class="arrow-help">
+            <a href="#collaborate" id="arrow" class="smooth-scroll">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="#000" width="23.601" height="35.499" viewBox="0 0 23.601 35.499">
+                    <path d="M12200.447,2780.352l-11.3-11.3a.5.5,0,0,1,.708-.708l10.421,10.421V2745.5a.5.5,0,1,1,1,0v33.316l10.471-10.47a.5.5,0,0,1,.708.708l-11.3,11.3a.5.5,0,0,1-.705,0Z" transform="translate(-12188.999 -2745.001)"></path>
+                </svg>
+            </a>
+        </div>
+    </section>
 
+    <section style="height: 13vh; width:100vw;" id="collaborate">
+    </section>
+
+    <section class="collaborate">
+        <div class="big-card">
+            <div class="top-card">
+                <h1>Collaborer</h1>
+                <p style="font-family: Fira code;"> --> </p>
+            </div>
+            <div class="bot-card">
+                <div class="card">
+                    <img src="assets/img/picture1.png" alt="">
+                    <p>POUMTCHAK by MPS</p>
+                </div>
+                <div class="card">
+                    <img src="assets/img/picture2.png" alt="">
+                    <p>Be Human by MPS</p>
+                </div>
+                <div class="card">
+                    <img src="assets/img/picture3.png" alt="">
+                    <p>BEFORE by MPS</p>
+                </div>
+                <div class="card">
+                    <img src="assets/img/picture4.png" alt="">
+                    <p>NEW by MPS</p>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="discover">
+        <div class="big-card">
+            <div class="top-card">
+                <h1>Découvrir</h1>
+                <p style="font-family: Fira code;"> --> </p>
+            </div>
+            <div class="bot-card">
+                <div class="card">
+                    <img src="assets/img/picture1.png" alt="">
+                    <div style="width: 100%; display: flex; align-items:center; flex-direction: column;">
+                        <div style="display: flex; justify-content: space-around; width: 100%;">
+                            <p>POUMTCHAK</p>
+                            <p>5*</p>
+                        </div>
+                        <p>MPS</p>
+                    </div>
+
+                </div>
+                <div class="card">
+                    <img src="assets/img/picture2.png" alt="">
+                    <div style="width: 100%; display: flex; align-items:center; flex-direction: column;">
+                        <div style="display: flex; justify-content: space-around; width: 100%;">
+                            <p>Be Human</p>
+                            <p>5*</p>
+                        </div>
+                        <p>MPS</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="assets/img/picture3.png" alt="">
+                    <div style="width: 100%; display: flex; align-items:center; flex-direction: column;">
+                        <div style="display: flex; justify-content: space-around; width: 100%;">
+                            <p>BEFORE</p>
+                            <p>5*</p>
+                        </div>
+                        <p>MPS</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="assets/img/picture4.png" alt="">
+                    <div style="width: 100%; display: flex; align-items:center; flex-direction: column;">
+                        <div style="display: flex; justify-content: space-around; width: 100%;">
+                            <p>NEW</p>
+                            <p>5*</p>
+                        </div>
+                        <p>MPS</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="learn">
+        <div class="big-card">
+            <div class="top-card">
+                <h1>Apprendre</h1>
+                <p style="font-family: Fira code;"> --> </p>
+            </div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+        </div>
+    </section>
 </main>

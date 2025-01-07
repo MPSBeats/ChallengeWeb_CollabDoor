@@ -84,8 +84,105 @@ header nav ul li button:hover {
 
 main {
     display: flex;
-    min-height: 200vh;
-    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;    
+    width: 100vw;
     gap: 16px;
     padding: 16px;
+}
+
+section.hero {
+    height: 100vh;
+}
+
+.hero .space {
+    height: 15vh;
+}
+
+.hero .content{
+    height: 45vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+
+.hero .arrow-help {
+    height: 40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+
+#arrow {
+    animation: moveArrow 2s infinite;
+}
+
+@keyframes moveArrow {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(15px);
+    }
+}
+
+.big-card {
+    height: 45vh;
+    width: calc(100vw - 32px);
+    border-radius: 30px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); 
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 16px;
+    padding: 24px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.top-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+
+.bot-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding-bottom: 16px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+
+}
+
+.collaborate .card>img {
+    height: 70%;
+    width: auto;
+    max-width: 70%;
+    border-radius: 50%;
+}
+
+.discover .card>img {
+    height: 70%;
+    width: auto;
+    max-width: 70%;
+}
+
+footer{
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
