@@ -1,43 +1,23 @@
 <?php
-
-namespace App\Utils;
-
-use PDO;
-
 class Database
 {
-    /** @var PDO */
-    private $dbh;
-    private static $_instance;
-    private function __construct()
+    private $host = "localhost";
+    private $port = "5432";
+    private $db_name = "collabdoor";
+    private $username = "postgres";
+    private $password = "109024";
+    private $conn;
+
+    public function connect()
     {
-        // Récupération des données du fichier de config
-        // la fonction parse_ini_file parse le fichier et retourne un array associatif
-        $configData = parse_ini_file(__DIR__ . '/../config.ini');
+        $this->conn = null;
 
         try {
-            $this->dbh = new PDO(
-                "mysql:host={$configData['DB_HOST']};dbname={$configData['DB_NAME']};charset=utf8",
-                $configData['DB_USERNAME'],
-                $configData['DB_PASSWORD'],
-                array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING) // Affiche les erreurs SQL à l'écran
-            );
-        } catch (\Exception $exception) {
-            echo 'Erreur de connexion...<br>';
-            echo $exception->getMessage() . '<br>';
-            echo '<pre>';
-            echo $exception->getTraceAsString();
-            echo '</pre>';
-            exit;
+            $this->conn = new PDO('pgsql:host=' . $this->host . ';port=' . $this->port . ';dbname=' . $this->db_name, $this->username, $this->password);
+        } catch (ErrorException $e) {
+            die('Erreur : ' . $e->getMessage());
         }
-    }
-    // the unique method you need to use
-    public static function getPDO()
-    {
-        // If no instance => create one
-        if (empty(self::$_instance)) {
-            self::$_instance = new Database();
-        }
-        return self::$_instance->dbh;
+
+        return $this->conn;
     }
 }

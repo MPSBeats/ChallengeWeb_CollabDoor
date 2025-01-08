@@ -26,6 +26,7 @@
                     </defs>
                 </svg>
             </a>
+            <button class="c-header_nav_burger" data-header="burger" hidden></button>
             <ul class="collaborate">
                 <li><a href="index.php?page=collaborate">
                         <h3>Collaborer</h3>
