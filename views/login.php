@@ -1,8 +1,11 @@
 <?php
+
     session_start();
     require_once '../models/userModel.php';
 
     $user = new User();
+
+    var_dump($_SESSION);
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Récupération des données du formulaire

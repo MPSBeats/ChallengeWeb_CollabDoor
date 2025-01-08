@@ -9,7 +9,7 @@
             <a href="#"><img src="assets/img/instagram.svg" alt=""></a>
             <a href="#"><img src="assets/img/tiktok.svg" alt="" width="25px"></a>
             <img src="assets/img/globe.svg" alt=""> 
-            <p>&z</p>
+            <p>Français</p>
         </div>
         </div>
     </footer>
