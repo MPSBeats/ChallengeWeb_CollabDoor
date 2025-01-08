@@ -31,6 +31,10 @@ switch ($page) {
         include '../views/register.php';
         break;
 
+    case 'profile':
+        include '../views/profile.php';
+        break;
+
     default:
         break;
 }
