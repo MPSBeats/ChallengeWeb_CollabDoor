@@ -1,7 +1,10 @@
 <main id="discover">
     <div class="space"></div>
-    <h2>Découvrir</h2>
-    <p>Vois ce qui te plait chef</p>
+    
+    <aside>
+        <h2>Découvrir</h2>
+        <p>Vois ce qui te plait chef</p>
+    </aside>
 
     <form action="">
         <label for="">
@@ -108,7 +111,64 @@
         
     </section>
 
-
+    <section>
+        <h3>Zoom sur un artiste</h3>
+        <div id="zoomartiste">
+            <span>
+                <p></p>
+                <h4 style="font-size: 25px;">Découvrez un gars random et sa collection</h4> <span><button><img src="assets/img/move-left.svg" alt="fleche gauche"></button> <button><img src="assets/img/move-right.svg" alt="fleche droite"></button></span>
+            </span>
+            <img src="assets/img/profile-picture.jpg" alt="hero">
+            <section id="carrousselpepite">
+            <article class="oeuvre">
+            </article>
+            <article class="oeuvre">
+                <img src="assets/img/picture1.png" alt="">
+                <div>
+                    <h4>POUMTCHAK</h4>
+                    <p>MPS, elsyr, zoji, her...</p>
+                </div>
+            </article>
+            <article class="oeuvre">
+                <img src="assets/img/picture1.png" alt="">
+                <div>
+                    <h4>POUMTCHAK</h4>
+                    <p>MPS, elsyr, zoji, her...</p>
+                </div>
+            </article>
+            <article class="oeuvre">
+                <img src="assets/img/picture1.png" alt="">
+                <div>
+                    <h4>POUMTCHAK</h4>
+                    <p>MPS, elsyr, zoji, her...</p>
+                </div>
+            </article>
+            <article class="oeuvre">
+                <img src="assets/img/picture1.png" alt="">
+                <div>
+                    <h4>POUMTCHAK</h4>
+                    <p>MPS, elsyr, zoji, her...</p>
+                </div>
+            </article>
+            <article class="oeuvre">
+                <img src="assets/img/picture1.png" alt="">
+                <div>
+                    <h4>POUMTCHAK</h4>
+                    <p>MPS, elsyr, zoji, her...</p>
+                </div>
+            </article>
+            <article class="oeuvre">
+                <img src="assets/img/picture1.png" alt="">
+                <div>
+                    <h4>POUMTCHAK</h4>
+                    <p>MPS, elsyr, zoji, her...</p>
+                </div>
+            </article>
+            
+        </section>
+        </div>
+        
+    </section>
 
 
 
