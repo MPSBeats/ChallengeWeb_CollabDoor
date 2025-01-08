@@ -5,6 +5,11 @@ class User
 {
     private $pdo;
 
+    public function __construct()
+    {
+        $this->pdo = (new Database())->connect();
+    }
+
     public function register($firstname, $pseudo, $lastname, $birth, $mail, $country, $phone, $password, $picture)
     {
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);

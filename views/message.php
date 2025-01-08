@@ -4,6 +4,8 @@
     <?php
     session_start();
 
+    require_once "../models/database.php";
+
     if (!isset($_SESSION['pseudo'])) {
         header("Location: index.php?page=login");
         exit();
