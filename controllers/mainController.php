@@ -41,6 +41,10 @@ switch ($page) {
         break;
 
 
+    case 'profile':
+        include '../views/profile.php';
+        break;
+
     default:
         break;
 }
