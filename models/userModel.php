@@ -3,6 +3,7 @@
 require_once 'Database.php';
 class User
 {
+
     private $pdo;
 
     public function __construct()
@@ -10,20 +11,20 @@ class User
         $this->pdo = (new Database())->connect();
     }
 
-    public function register($firstname, $pseudo, $lastname, $birth, $mail, $country, $phone, $password, $picture)
+    public function register($pseudo, $password, $firstname, $lastname, $birth, $country, $mail, $phone, $picture)
     {
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-        $stmt = $this->pdo->prepare('INSERT INTO users (firstname, pseudo, lastname, birth, mail, country, phone, password, picture) VALUES (:firstname, :pseudo, :lastname, :birth, :mail, :country, :phone, :password, :picture)');
+        $stmt = $this->pdo->prepare('INSERT INTO users ( pseudo, password, firstname, lastname, birth, country,  mail, phone, picture) VALUES  (:pseudo, :password,:firstname,:lastname, :birth, :country, :mail,:phone,  :picture)');
 
         return $stmt->execute([
-            'firstname' => $firstname,
             'pseudo' => $pseudo,
+            'password' => $hashed_password,
+            'firstname' => $firstname,
             'lastname' => $lastname,
             'birth' => $birth,
-            'mail' => $mail,
             'country' => $country,
+            'mail' => $mail,
             'phone' => $phone,
-            'password' => $hashed_password,
             'picture' => $picture
         ]);
     }
@@ -39,6 +40,4 @@ class User
         }
         return false;
     }
-
-    
 }
