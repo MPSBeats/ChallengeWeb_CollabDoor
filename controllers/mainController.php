@@ -30,6 +30,16 @@ switch ($page) {
     case 'register':
         include '../views/register.php';
         break;
+    case 'message':
+        include '../views/message.php';
+        break;
+    case 'fetch_messages':
+        include '../views/fetch_messages.php';
+        break;
+    case 'submit_message':
+        include '../views/submit_message.php';
+        break;
+
 
     case 'profile':
         include '../views/profile.php';

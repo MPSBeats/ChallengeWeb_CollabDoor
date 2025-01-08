@@ -1,57 +1,43 @@
 <?php
 
+require_once 'Database.php';
 class User
 {
-    private $id;
-    private $name;
-    private $email;
-    private $password;
 
-    public function __construct($id, $name, $email, $password)
+    private $pdo;
+
+    public function __construct()
     {
-        $this->id = $id;
-        $this->name = $name;
-        $this->email = $email;
-        $this->password = $password;
+        $this->pdo = (new Database())->connect();
     }
 
-    public function getId()
+    public function register($firstname, $pseudo, $lastname, $birth, $mail, $country, $phone, $password, $picture)
     {
-        return $this->id;
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        $stmt = $this->pdo->prepare('INSERT INTO users (firstname, pseudo, lastname, birth, mail, country, phone, password, picture) VALUES (:firstname, :pseudo, :lastname, :birth, :mail, :country, :phone, :password, :picture)');
+
+        return $stmt->execute([
+            'firstname' => $firstname,
+            'pseudo' => $pseudo,
+            'lastname' => $lastname,
+            'birth' => $birth,
+            'mail' => $mail,
+            'country' => $country,
+            'phone' => $phone,
+            'password' => $hashed_password,
+            'picture' => $picture
+        ]);
     }
 
-    public function getName()
+    public function login($pseudo, $password)
     {
-        return $this->name;
-    }
+        $stmt = $this->pdo->prepare('SELECT * FROM users WHERE pseudo= :pseudo');
+        $stmt->execute(['pseudo' => $pseudo]);
+        $user = $stmt->fetch();
 
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
-    public function setEmail($email)
-    {
-        $this->email = $email;
-    }
-
-    public function setPassword($password)
-    {
-        $this->password = $password;
+        if ($user && password_verify($password, $user['password'])) {
+            return $user;
+        }
+        return false;
     }
 }
