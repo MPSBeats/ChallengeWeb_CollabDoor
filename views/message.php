@@ -1,4 +1,4 @@
-<main>
+<main class="message">
     <div class="space"></div>
 
     <?php
