@@ -289,7 +289,7 @@ section.hero {
     margin-bottom: 10px;
 }
 
-/* Discover File */
+/* ---------------Discover File--------------- */
 
 aside {
     text-align: center;
@@ -503,12 +503,26 @@ h2{
 
 
 
+/* -------------FILE COLABORATE------------ */
 
-
-
-
-
-
+.fiche_artiste{
+    margin-right: 3%;
+    flex: 0 0 auto;
+    width: 25%;
+}
+.fiche_artiste img{
+    width: 100%;
+}
+.fiche_artiste div h4{
+    text-align: center;
+    padding: 5% 0;
+}
+.fiche_artiste div ul{
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 5%;
+}
 
 
 
