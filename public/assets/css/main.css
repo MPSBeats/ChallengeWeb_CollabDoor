@@ -74,7 +74,7 @@ header nav ul li button a {
     color: #eee;
 }
 
-button {
+header button, .register button, .login button, .message button {
     padding: 15px 20px;
     border: none;
     outline: none;
@@ -95,6 +95,7 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    font-size: 25px;
     gap: 16px;
     padding: 16px;
 }
@@ -288,6 +289,152 @@ section.hero {
     color: green;
     margin-bottom: 10px;
 }
+
+/* Discover File */
+
+#discover form{
+    display: flex;
+    flex-wrap: wrap;
+    /* background-color: red; */
+    width: 80%;
+    justify-content: space-between;
+    margin: auto;
+}
+#discover input{
+    font-size: 25px;
+}
+#discover label{
+    width: 50%;
+    margin-left: 10%;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #F0F0F0;
+    border-radius: 3em;
+    padding: 6px;
+}
+#discover label input{
+    width: 95%;
+    border: none;
+    background-color: #F0F0F0;
+    padding-left: 1%;
+}
+#discover label button{
+    width: 5%;
+    border: none;
+    background-color: #F0F0F0;
+}
+#discover form span{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    background-color: #F0F0F0;
+    border-radius: 3em;
+    padding: 10px;
+    margin-right: 20%;
+}
+#discover form > div{
+    width: 30%;
+    background-color: #F0F0F0;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 20px;
+    box-shadow: 0px 2px 8px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 2%;
+    padding: 1%;
+    margin-left: 70%;
+
+    display: none;
+}
+#discover form div div{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+#discover form div label{
+    margin-left: 0;
+}
+#tag{
+    width: 100%;
+    background-color: #D4D4D4;
+    padding: 5px 10px;
+}
+#tag input, #tag button{
+    background-color: #D4D4D4;
+}
+
+#discover section{
+    background-color: #F0F0F0;
+
+    border-radius: 20px;
+    padding: 2%;
+}
+
+#discover section{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+#discover section h3{
+    width: 100%;
+    font-weight: normal;
+    font-size: 40px;
+    margin-bottom: 2%;
+}
+#carrousselpepite{
+    justify-content: start !important;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    width: 90% !important;
+    padding-left: 5% !important;
+    scrollbar-width: none;
+}
+.oeuvre{
+    flex: 0 0 auto;
+    margin-right: 4%;
+    width: 16%;
+}
+.oeuvre div{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.oeuvre img{
+    width: 100%;
+}
+.oeuvre div div{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 7% 0;
+}
+.oeuvre h4{
+    font-weight: normal;
+}
+.oeuvre div > span{
+    display: flex;
+    justify-content: space-between;
+    width: 20%;
+}
+.oeuvre div span button{
+    border: none;
+    background-color: transparent;
+}
+#discover section > button{
+    width: 3%;
+    border: none;
+    background-color: transparent;
+
+}
+#discover section button img{
+    width: 100%;
+}
+
+
+
+
 
 footer{
     padding: 16px;
