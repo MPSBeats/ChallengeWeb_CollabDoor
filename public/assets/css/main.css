@@ -74,7 +74,7 @@ header nav ul li button a {
     color: #eee;
 }
 
-button {
+header button, .register button, .login button, .message button {
     padding: 15px 20px;
     border: none;
     outline: none;
@@ -95,7 +95,7 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%;
+
     gap: 16px;
     padding: 16px;
 }
