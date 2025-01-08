@@ -27,4 +27,6 @@ class User
         $this->password = $password;
         $this->picture = $picture;
     }
+
+    
 }
