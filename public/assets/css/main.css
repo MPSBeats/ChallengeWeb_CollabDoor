@@ -95,7 +95,7 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
+    font-size: 25px;
     gap: 16px;
     padding: 16px;
 }
@@ -368,6 +368,40 @@ section.hero {
     padding: 2%;
 }
 
+#discover section{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+#discover section h3{
+    width: 100%;
+    font-weight: normal;
+    font-size: 40px;
+    margin-bottom: 2%;
+}
+#discover section article{
+    margin-right: 4%;
+    width: 15%;
+}
+#discover section article div{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+#discover section article div > span{
+    display: flex;
+    justify-content: space-between;
+}
+#discover section > button{
+    width: 3%;
+    border: none;
+    background-color: none;
+
+}
+#discover section button img{
+    width: 100%;
+}
 
 
 

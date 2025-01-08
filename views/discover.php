@@ -39,12 +39,45 @@
             <img src="assets/img/picture1.png" alt="">
             <div>
                 <h4>POUMTCHAK</h4>
-                <p>5</p><button><img src="assets/img/heart.svg" alt="coeur img"></button>
+                <span><p>5</p><button><img src="assets/img/heart.svg" alt="coeur img"></button></span>
+                <p>MPS, elsyr, zoji, herinifu...</p>
+            </div>
+        </article>
+        <article class="oeuvre">
+            <img src="assets/img/picture1.png" alt="">
+            <div>
+                <h4>POUMTCHAK</h4>
+                <span><p>5</p><button><img src="assets/img/heart.svg" alt="coeur img"></button></span>
+                <p>MPS, elsyr, zoji, herinifu...</p>
+            </div>
+        </article>
+        <article class="oeuvre">
+            <img src="assets/img/picture1.png" alt="">
+            <div>
+                <h4>POUMTCHAK</h4>
+                <span><p>5</p><button><img src="assets/img/heart.svg" alt="coeur img"></button></span>
+                <p>MPS, elsyr, zoji, herinifu...</p>
+            </div>
+        </article>
+        <article class="oeuvre">
+            <img src="assets/img/picture1.png" alt="">
+            <div>
+                <h4>POUMTCHAK</h4>
+                <span><p>5</p><button><img src="assets/img/heart.svg" alt="coeur img"></button></span>
+                <p>MPS, elsyr, zoji, herinifu...</p>
+            </div>
+        </article>
+        <article class="oeuvre">
+            <img src="assets/img/picture1.png" alt="">
+            <div>
+                <span>
+                <h4>POUMTCHAK</h4>
+                <span><p>5</p><button><img src="assets/img/heart.svg" alt="coeur img"></button></span></span>
                 <p>MPS, elsyr, zoji, herinifu...</p>
             </div>
         </article>
 
-
+        <button><img src="assets/img/circle-chevron-right.svg" alt="fleche droite"></button>
         
     </section>
 
