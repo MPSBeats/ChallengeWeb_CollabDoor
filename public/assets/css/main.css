@@ -297,3 +297,20 @@ footer{
     flex-direction: column;
     gap: 16px;
 }
+
+.footer-box {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+
+.footer-content {
+    display: flex;
+}
+
+.footer-social {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
