@@ -1,30 +1,37 @@
 <?php
 
+require_once 'Database.php';
 class User
 {
-    private $id;
-    private $firstname;
-    private $lastname;
-    private $pseudo;
-    private $birth;
-    private $email;
-    private $country;
-    private $phone;
-    private $password;
-    private $picture;
+    private $pdo;
 
-
-    public function __construct($id, $firstname, $lastname, $pseudo, $birth, $email, $country, $phone, $password, $picture)
+    public function register($firstname, $pseudo, $lastname, $birth, $mail, $country, $phone, $password, $picture)
     {
-        $this->id = $id;
-        $this->firstname = $firstname;
-        $this->lastname = $lastname;
-        $this->pseudo = $pseudo;
-        $this->birth = $birth;
-        $this->email = $email;
-        $this->country = $country;
-        $this->phone = $phone;
-        $this->password = $password;
-        $this->picture = $picture;
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        $stmt = $this->pdo->prepare('INSERT INTO users (firstname, pseudo, lastname, birth, mail, country, phone, password, picture) VALUES (:firstname, :pseudo, :lastname, :birth, :mail, :country, :phone, :password, :picture)');
+
+        return $stmt->execute([
+            'firstname' => $firstname,
+            'pseudo' => $pseudo,
+            'lastname' => $lastname,
+            'birth' => $birth,
+            'mail' => $mail,
+            'country' => $country,
+            'phone' => $phone,
+            'password' => $hashed_password,
+            'picture' => $picture
+        ]);
+    }
+
+    public function login($pseudo, $password)
+    {
+        $stmt = $this->pdo->prepare('SELECT * FROM users WHERE pseudo= :pseudo');
+        $stmt->execute(['pseudo' => $pseudo]);
+        $user = $stmt->fetch();
+
+        if ($user && password_verify($password, $user['password'])) {
+            return $user;
+        }
+        return false;
     }
 }

@@ -76,7 +76,7 @@ header nav ul li button a {
     color: #eee;
 }
 
-header nav ul li button {
+button {
     padding: 15px 20px;
     border: none;
     outline: none;
@@ -88,7 +88,7 @@ header nav ul li button {
     transition: all 0.25s ease-out;
 }
 
-header nav ul li button:hover {
+button:hover {
     transform: translateY(-3px);
 }
 
@@ -188,6 +188,55 @@ section.hero {
     width: auto;
     max-width: 200px;
 }
+
+.form {
+    width: 360px;
+    height: 400px;
+    margin: auto auto;
+    border-radius: 5px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1); 
+    position: relative;
+}
+
+.form form {
+    width: 280px;
+    position: absolute;
+
+}
+
+.form-box {
+    width: 280px;
+    position: absolute;
+    top: 100px;
+    left: 40px;
+}
+
+form h3 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #000;
+}
+
+form input {
+    width: 100%;
+    padding: 10px 5px;
+    margin :5px 0;
+    border: 0;
+    border-bottom: 1px solid #999;
+    outline: none;
+    background: transparent;
+}
+::placeholder {
+    color: #777;
+}
+
+.btn-box {
+    width: 100%;
+    margin: 30px auto ;
+    text-align: center;
+}
+
+
 
 footer{
     padding: 16px;
