@@ -373,6 +373,7 @@ section.hero {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
 }
 #discover section h3{
     width: 100%;
@@ -380,23 +381,50 @@ section.hero {
     font-size: 40px;
     margin-bottom: 2%;
 }
-#discover section article{
-    margin-right: 4%;
-    width: 15%;
+#carrousselpepite{
+    justify-content: start !important;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    width: 90% !important;
+    padding-left: 5% !important;
+    scrollbar-width: none;
 }
-#discover section article div{
+.oeuvre{
+    flex: 0 0 auto;
+    margin-right: 4%;
+    width: 16%;
+}
+.oeuvre div{
     width: 100%;
     display: flex;
     flex-wrap: wrap;
 }
-#discover section article div > span{
+.oeuvre img{
+    width: 100%;
+}
+.oeuvre div div{
+    width: 100%;
     display: flex;
     justify-content: space-between;
+    margin: 7% 0;
+}
+.oeuvre h4{
+    font-weight: normal;
+}
+.oeuvre div > span{
+    display: flex;
+    justify-content: space-between;
+    width: 20%;
+}
+.oeuvre div span button{
+    border: none;
+    background-color: transparent;
 }
 #discover section > button{
     width: 3%;
     border: none;
-    background-color: none;
+    background-color: transparent;
 
 }
 #discover section button img{
