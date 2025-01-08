@@ -3,7 +3,13 @@
 require_once 'Database.php';
 class User
 {
+
     private $pdo;
+
+    public function __construct()
+    {
+        $this->pdo = (new Database())->connect();
+    }
 
     public function register($firstname, $pseudo, $lastname, $birth, $mail, $country, $phone, $password, $picture)
     {
@@ -34,6 +40,4 @@ class User
         }
         return false;
     }
-
-    
 }

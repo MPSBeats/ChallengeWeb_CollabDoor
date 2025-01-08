@@ -5,7 +5,7 @@ class Database
     private $port = "5432";
     private $db_name = "collabdoor";
     private $username = "postgres";
-    private $password = "Mapaaskla1";
+    private $password = "109024";
     private $conn;
 
     public function connect()

@@ -1,49 +1,137 @@
 <?php
+session_start();
+require_once '../models/userModel.php';
+$user = new User();
 
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Récupération des données du formulaire
+    $pseudo = htmlspecialchars($_POST['pseudo']);
+    $password = htmlspecialchars($_POST['password']);
+    $firstname = htmlspecialchars($_POST['firstname']);
+    $lastname = htmlspecialchars($_POST['lastname']);
+    $birth = htmlspecialchars($_POST['birth']);
+    $email = htmlspecialchars($_POST['email']);
+    $country = htmlspecialchars($_POST['country']);
+    $phone = htmlspecialchars($_POST['phone']);
+    $picture = htmlspecialchars($_POST['picture']);
+
+
+    // Vérifaction des champs vides
+    if (empty($pseudo) || empty($password) || empty($firstname) || empty($lastname) || empty($birth) || empty($email) || empty($country) || empty($phone) || empty($picture)) {
+        $error = 'Veuillez remplir tous les champs';
+    } else {
+        if ($user->register($firstname, $pseudo, $lastname, $birth, $email, $country, $phone, $password, $picture)) {
+            $succes = 'Inscription réussie ! Vous pouvez vous connecter.';
+        } else {
+            $error = 'Une erreur est survenue lors de l\'inscription';
+        }
+    }
+}
 ?>
 
 <main>
     <div class="space"></div>
     <div class="form">
-        <form action="">
-            <div class="form-box">
+        <form action="index.php?page=register" method="post">
+            <div class="form-box" id="form1">
                 <h3>Créer un compte</h3>
                 <input type="text" name="peusdo" id="peusdo" placeholder="Pseudo" required>
                 <input type="password" name="password" id="password" placeholder="Mot de passe" required>
                 <input type="password" name="password" id="password" placeholder="Confirmer le mot de passe" required>
                 <div class="btn-box">
-                    <button type="button">Suivant</button>
+                    <button type="button" id="suivant1">Suivant</button>
                 </div>
             </div>
 
-            <div class="form-box">
+            <div class="form-box" id="form2">
                 <h3>Informations personnelles</h3>
                 <input type="text" name="firstname" id="firstnamme" placeholder="Prénom" required>
                 <input type="text" name="lastname" id="lastname" placeholder="Nom" required>
                 <input type="date" name="birth" id="birth" required>
                 <input type="text" name="country" id="country" placeholder="Pays" required>
                 <div class="btn-box">
-                    <button type="button">Retour</button>
-                    <button type="button">Suivant</button>
+                    <button type="button" id="retour1">Retour</button>
+                    <button type="button" id="suivant2">Suivant</button>
                 </div>
             </div>
 
-            <div class="form-box">
+            <div class="form-box" id="form3">
                 <h3>Informations de contact</h3>
                 <input type="email" name="email" id="email" placeholder="Email" required>
                 <input type="tel" name="phone" id="phone" placeholder="Téléphone" required>
+                <div class="btn-box">
+                    <button type="button" id="retour2">Retour</button>
+                    <button type="button" id="suivant3">Suivant</button>
+                </div>
             </div>
 
-            <div class="form-box">
+            <div class="form-box" id="form4">
                 <h3>Photo de profil</h3>
                 <input type="file" name="picture" id="picture" accept="image/png, image/jpeg" required>
+                <div class="btn-box">
+                    <button type="button" id="retour3">Retour</button>
+                    <button type="submit">S'inscrire</button>
+                </div>
+            </div>
 
-                <button type="submit">S'inscrire</button>
+            <div class="step-row">
+                <div id="progress"></div>
+                <div class="step-col"><small>Etape 1</small></div>
+                <div class="step-col"><small>Etape 2</small></div>
+                <div class="step-col"><small>Etape 3</small></div>
+                <div class="step-col"><small>Etape 4</small></div>
             </div>
         </form>
 
         <script>
+            var form1 = document.getElementById("form1");
+            var form2 = document.getElementById("form2");
+            var form3 = document.getElementById("form3");
+            var form4 = document.getElementById("form4");
 
+            var suivant1 = document.getElementById("suivant1");
+            var suivant2 = document.getElementById("suivant2");
+            var suivant3 = document.getElementById("suivant3");
+            var retour1 = document.getElementById("retour1");
+            var retour2 = document.getElementById("retour2");
+            var retour3 = document.getElementById("retour3");
+
+            suivant1.onclick = function() {
+                form1.style.left = "-450px";
+                form2.style.left = "40px";
+                progress.style.width = "180px";
+            }
+
+            suivant2.onclick = function() {
+                form2.style.left = "-450px";
+                form3.style.left = "40px";
+                progress.style.width = "270px";
+            }
+
+            suivant3.onclick = function() {
+                form3.style.left = "-450px";
+                form4.style.left = "40px";
+                progress.style.width = "360px";
+            }
+
+            retour1.onclick = function() {
+                form1.style.left = "40px";
+                form2.style.left = "450px";
+                progress.style.width = "90px";
+            }
+
+            retour2.onclick = function() {
+                form2.style.left = "40px";
+                form3.style.left = "450px";
+                progress.style.width = "180px";
+            }
+
+            retour3.onclick = function() {
+                form3.style.left = "40px";
+                form4.style.left = "450px";
+                progress.style.width = "270px";
+            }
         </script>
 
 
