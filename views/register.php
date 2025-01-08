@@ -5,23 +5,22 @@ $user = new User();
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Récupération des données du formulaire
     $pseudo = htmlspecialchars($_POST['pseudo']);
     $password = htmlspecialchars($_POST['password']);
     $firstname = htmlspecialchars($_POST['firstname']);
     $lastname = htmlspecialchars($_POST['lastname']);
     $birth = htmlspecialchars($_POST['birth']);
-    $email = htmlspecialchars($_POST['email']);
     $country = htmlspecialchars($_POST['country']);
+    $email = htmlspecialchars($_POST['email']);
     $phone = htmlspecialchars($_POST['phone']);
     $picture = htmlspecialchars($_POST['picture']);
 
 
     // Vérifaction des champs vides
-    if (empty($pseudo) || empty($password) || empty($firstname) || empty($lastname) || empty($birth) || empty($email) || empty($country) || empty($phone) || empty($picture)) {
+    if (empty($pseudo) || empty($password) || empty($firstname) || empty($lastname) || empty($birth) || empty($country) || empty($email) || empty($phone) || empty($picture)) {
         $error = 'Veuillez remplir tous les champs';
     } else {
-        if ($user->register($firstname, $pseudo, $lastname, $birth, $email, $country, $phone, $password, $picture)) {
+        if ($user->register($pseudo, $password, $firstname, $lastname, $birth, $country, $email, $phone, $picture)) {
             $succes = 'Inscription réussie ! Vous pouvez vous connecter.';
         } else {
             $error = 'Une erreur est survenue lors de l\'inscription';
@@ -30,15 +29,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<main>
+<main class="register">
     <div class="space"></div>
     <div class="form">
         <form action="index.php?page=register" method="post">
             <div class="form-box" id="form1">
                 <h3>Créer un compte</h3>
-                <input type="text" name="peusdo" id="peusdo" placeholder="Pseudo" required>
-                <input type="password" name="password" id="password" placeholder="Mot de passe" required>
-                <input type="password" name="password" id="password" placeholder="Confirmer le mot de passe" required>
+                <input type="text" name="pseudo" id="pseudo" placeholder="Pseudo" required>
+                <input type="password" name="password" id="password1" placeholder="Mot de passe" required>
+                <input type="password" name="password2" id="password2" placeholder="Confirmer le mot de passe" required>
                 <div class="btn-box">
                     <button type="button" id="suivant1">Suivant</button>
                 </div>
