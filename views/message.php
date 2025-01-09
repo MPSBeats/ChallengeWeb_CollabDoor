@@ -42,10 +42,10 @@ if (isset($_GET['user'])) {
                 <ul>
                     <?php
                     // Fetch all users except the current user
-                    $sql = "SELECT DISTINCT u2.pseudo FROM Users u1 JOIN UsersChats uc ON u1.id_user = uc.id_userchat JOIN Chats c ON uc.id_userchat::varchar = c.sender::varchar OR uc.id_userchat::varchar = c.receiver::varchar JOIN Users u2 ON (c.sender::varchar = u2.id_user::varchar OR c.receiver::varchar = u2.id_user::varchar) WHERE u1.pseudo = :pseudo AND u1.id_user <> u2.id_user";
-                    $result = $db->prepare($sql);
-                    $result->execute([':pseudo' => $pseudo]);
-                    $users = $result->fetchAll(PDO::FETCH_ASSOC);
+                    $sqlMessage = "SELECT DISTINCT u2.pseudo FROM Users u1 JOIN UsersChats uc ON u1.id_user = uc.id_userchat JOIN Chats c ON uc.id_userchat::varchar = c.sender::varchar OR uc.id_userchat::varchar = c.receiver::varchar JOIN Users u2 ON (c.sender::varchar = u2.id_user::varchar OR c.receiver::varchar = u2.id_user::varchar) WHERE u1.pseudo = :pseudo AND u1.id_user <> u2.id_user";
+                    $resultMessage = $db->prepare($sqlMessage);
+                    $resultMessage->execute([':pseudo' => $pseudo]);
+                    $users = $resultMEssage->fetchAll(PDO::FETCH_ASSOC);
 
                     if (count($users) > 0) {
                         foreach ($users as $row) {
