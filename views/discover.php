@@ -18,12 +18,12 @@ $db = (new Database())->connect();
     </aside>
 
     <form action="">
-        <label for="recherche">
+        <label for="">
             <input type="text" name="recherche" placeholder="Rechercher un artiste, une collab...">
             <button type="submit" name="recherche"><img src="assets/img/search.svg" alt="loupe"></button>
         </label>
         <span>Filtrer par <img src="assets/img/chevron-up.svg" alt="up"></span>
-        <div>
+        <div id="filter">
             <div>
                 <input type="radio" name="type" id="collab" value="1">
                 <label for="collab">Collaboration</label>
@@ -144,12 +144,5 @@ $db = (new Database())->connect();
         </div>
 
     </section>
-
-
-
-
-
-
-
 
 </main>
