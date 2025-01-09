@@ -402,6 +402,10 @@ aside h2{
     margin-right: 4%;
     width: 16%;
 }
+.oeuvre:hover{
+    cursor: pointer;
+    scale: 1.05;
+}
 .oeuvre div{
     width: 100%;
     display: flex;
@@ -798,6 +802,46 @@ aside h2{
     display: flex;
     align-items: center;
 }
+
+
+/*------------PRODUCTSHEET-------------*/
+
+#productsheet div{
+    width: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+}
+#productsheet div article{
+    width: 50%;
+}
+#productsheet div article img{
+    width: 80%;
+    margin: 0 10%;
+}
+#productsheet h3{
+    font-size: 60px;
+    margin: 10% 0;
+}
+#productsheet h4{
+    font-size: 20px;
+    margin: 5% 0 2%;
+}
+#productsheet ul{
+    display: flex;
+    list-style: none;
+    margin-bottom: 5%;
+}
+#productsheet ul li{
+    margin-right: 2%;
+}
+#productsheet ul li:hover{
+    cursor: pointer;
+    scale: 1.05;
+    color: #3b82f6;
+}
+
+
 
 
 /*-------------FOOTER-------------*/
