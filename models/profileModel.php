@@ -47,6 +47,7 @@ class Profile
         $stmt = $this->pdo->prepare('
                 SELECT 
                     Learnings.id_learning,
+                    Learnings.title,
                     Learnings.thumbnail,
                     Learnings.description,
                     Learnings.price,
