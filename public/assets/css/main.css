@@ -289,15 +289,24 @@ section.hero {
     margin-bottom: 10px;
 }
 
-/* Discover File */
+/* ---------------Discover File--------------- */
+
+aside {
+    text-align: center;
+    line-height: 3em;
+    margin: 3% 0;
+}
+h2{
+    font-size: 50px;
+}
 
 #discover form{
     display: flex;
     flex-wrap: wrap;
-    /* background-color: red; */
     width: 80%;
     justify-content: space-between;
-    margin: auto;
+    margin: 0 auto 5%; 
+    font-size: 25px; 
 }
 #discover input{
     font-size: 25px;
@@ -362,23 +371,22 @@ section.hero {
 }
 
 #discover section{
-    background-color: #F0F0F0;
-
-    border-radius: 20px;
-    padding: 2%;
-}
-
-#discover section{
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+    background-color: #F0F0F0;
+    border-radius: 20px;
+    padding: 2%;
+}
+#discover > section{
+    margin-bottom: 5%;
 }
 #discover section h3{
     width: 100%;
     font-weight: normal;
-    font-size: 40px;
+    font-size: 30px;
     margin-bottom: 2%;
 }
 #carrousselpepite{
@@ -408,14 +416,17 @@ section.hero {
     display: flex;
     justify-content: space-between;
     margin: 7% 0;
+    align-items: center;
 }
-.oeuvre h4{
+#discover h4{
     font-weight: normal;
+    font-size: 18px;
 }
 .oeuvre div > span{
     display: flex;
     justify-content: space-between;
     width: 20%;
+    align-items: center;
 }
 .oeuvre div span button{
     border: none;
@@ -432,6 +443,86 @@ section.hero {
 }
 
 
+#zoomartiste{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    height: 45vh;
+}
+#zoomartiste > img{
+    position:absolute;
+    border-radius: 50%;
+    width: 23%;
+}
+#zoomartiste > span{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20%;
+}
+#zoomartiste span span{
+    width: 10%;
+    display: flex;
+    justify-content: space-between;
+}
+#zoomartiste span span button {
+    border: none;
+    background-color: transparent;
+}
+
+#zoomartiste #carrousselpepite {
+    margin-left: 5%;
+    background-color: transparent;
+}
+
+#zoomartiste #carrousselpepite .oeuvre {
+    position: relative;
+    overflow: hidden;
+    width: 20%;
+}
+
+#zoomartiste #carrousselpepite .oeuvre div {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    transform: translateY(100%);
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, padding 0.3s ease-in-out;
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+
+}
+
+#zoomartiste #carrousselpepite .oeuvre:hover div {
+    transform: translateY(-5%);
+    opacity: 1;
+    display: flex;
+    background-color: #e7e7e7be;
+    line-height: 2em;
+}
+
+
+
+/* -------------FILE COLABORATE------------ */
+
+.fiche_artiste{
+    margin-right: 3%;
+    flex: 0 0 auto;
+    width: 25%;
+}
+.fiche_artiste img{
+    width: 100%;
+}
+.fiche_artiste div h4{
+    text-align: center;
+    padding: 5% 0;
+}
+.fiche_artiste div ul{
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 5%;
+}
 
 
 

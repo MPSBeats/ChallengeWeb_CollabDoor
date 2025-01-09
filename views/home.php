@@ -14,7 +14,7 @@
         </div>
     </section>
 
-    <section style="height: 13vh; width: calc(100vw - 32px);" id="collaborate">
+    <section style="height: 13vh; width:100vw;" id="collaborate">
     </section>
 
     <section class="collaborate">
