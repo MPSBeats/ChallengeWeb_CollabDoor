@@ -12,58 +12,58 @@ $collabs = $profil->getAllCollabs($_SESSION['pseudo']);
 $formations = $profil->getAllMasterclass($_SESSION['pseudo']);
 ?>
 
-<main>
+<main class="profil">
     <div class="space"></div>
 
-    <div class="flex w-full justify-around">
-        <div class="bg-blue-500 w-3/5 h-auto">
-            <div class="flex flex-wrap">
-                <div class="option w-1/3 h-10vh bg-red-500 flex items-center justify-center cursor-pointer" data-action="samples">Mes Samples</div>
-                <div class="option w-1/3 h-10vh bg-red-500 flex items-center justify-center cursor-pointer" data-action="collabs">Mes Collabs</div>
-                <div class="option w-1/3 h-10vh bg-red-500 flex items-center justify-center cursor-pointer" data-action="formations">Mes Formations</div>
+    <div class="profile-container">
+        <div class="profile-content">
+            <div class="options-container">
+                <div class="option" data-action="samples">Mes Samples</div>
+                <div class="option" data-action="collabs">Mes Collabs</div>
+                <div class="option" data-action="formations">Mes Formations</div>
             </div>
 
             <!-- Container for dynamic thumbnails -->
-            <div class="squares-container flex flex-wrap justify-center gap-8">
+            <div class="squares-container">
                 <!-- Render all thumbnails by default (collabs and formations) -->
                 <?php foreach ($collabs as $index => $collab): ?>
-                    <div class="square collab h-5vh w-1/3 bg-cover bg-center mb-2" style="background-image: url('<?= htmlspecialchars($collab['thumbnail']); ?>');"></div>
+                    <div class="square collab" style="background-image: url('<?= htmlspecialchars($collab['thumbnail']); ?>');"></div>
                 <?php endforeach; ?>
 
                 <?php foreach ($formations as $index => $formation): ?>
-                    <div class="square formation h-5vh w-1/3 bg-cover bg-center mb-2" style="background-image: url('<?= htmlspecialchars($formation['thumbnail']); ?>');"></div>
+                    <div class="square formation" style="background-image: url('<?= htmlspecialchars($formation['thumbnail']); ?>');"></div>
                 <?php endforeach; ?>
             </div>
         </div>
 
         <!-- Profile Box -->
-        <div class="border-2 border-black rounded-lg w-1/3 h-65vh p-2.5">
-            <div class="flex justify-between">
-                <div class="w-25vh h-25vh overflow-hidden rounded-full">
-                    <img src="<? $profilePicture ?>" alt="Profile Picture" class="w-full h-full object-cover">
+        <div class="profile-box">
+            <div class="profile-header">
+                <div class="profile-picture">
+                    <img src="<? $profilePicture ?>" alt="Profile Picture" class="profile-img">
                 </div>
-                <div class="w-35vh h-25vh flex items-center justify-center flex-col">
+                <div class="profile-info">
                     <h2><?php echo $_SESSION['pseudo']; ?></h2>
-                    <div class="flex justify-around">
+                    <div class="profile-details">
                         <p>5*</p>
                         <p>|</p>
                         <p>Paris</p>
                     </div>
                 </div>
             </div>
-            <div class="w-full h-25vh">
+            <div class="profile-bio">
                 <h2>Bio</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod.</p>
-                <div class="flex">
+                <div class="profile-tags">
                     <p>Trap,</p>
                     <p>RNB,</p>
                     <p>NEW WAVE</p>
                 </div>
             </div>
-            <div class="flex justify-center items-center h-15vh">
-                <button class="bg-green-500 p-2.5 rounded-full text-center text-white w-1/2">Rounded Button</button>
-                <form action="index.php?page=profile" method="post" class="h-15vh w-1/2 flex items-center">
-                    <button type="submit" class="bg-red-500 p-2.5 rounded-full text-white w-full">Logout</button>
+            <div class="profile-actions">
+                <button class="btn-green">Rounded Button</button>
+                <form action="index.php?page=profile" method="post" class="logout-form">
+                    <button type="submit" class="btn-red">Logout</button>
                 </form>
             </div>
         </div>
@@ -86,9 +86,9 @@ $formations = $profil->getAllMasterclass($_SESSION['pseudo']);
             } else {
                 // Reset and show all squares
                 squares.forEach(square => {
-                    square.style.display = 'block';  // Show all squares
-                    square.style.width = '30%';  // Reset width
-                    square.style.height = '25vh';  // Reset height
+                    square.style.display = 'block'; // Show all squares
+                    square.style.width = '30%'; // Reset width
+                    square.style.height = '25vh'; // Reset height
                 });
 
                 // Adjust colors or styles for specific options
