@@ -10,6 +10,7 @@ $profil = new Profile();
 $profilePicture = $profil->getPicture($_SESSION['pseudo']);
 $collabs = $profil->getAllCollabs($_SESSION['pseudo']);
 $formations = $profil->getAllMasterclass($_SESSION['pseudo']);
+
 ?>
 
 <main class="profil">
@@ -31,7 +32,7 @@ $formations = $profil->getAllMasterclass($_SESSION['pseudo']);
                 <?php endforeach; ?>
 
                 <?php foreach ($formations as $index => $formation): ?>
-                    <div class="square formation" style="background-image: url('<?= htmlspecialchars($formation['thumbnail']); ?>');"></div>
+                    <div class="square formation" style="z-index: 10;background-image: url('<?= htmlspecialchars($formation['thumbnail']); ?>');"></div>
                 <?php endforeach; ?>
             </div>
         </div>
@@ -79,10 +80,18 @@ $formations = $profil->getAllMasterclass($_SESSION['pseudo']);
             const squaresContainer = document.querySelector('.squares-container');
 
             if (action === 'samples') {
+                
 
                 // For now, just showing the first 3 squares
-                const sampleSquares = document.querySelectorAll('.sample');
-                sampleSquares.forEach(square => square.style.display = 'block');
+                squares.forEach((square, index) => {
+                    if (index < 3) {
+                        square.style.display = 'block'; // Show the first 3 squares
+                        square.style.width = '30%'; // Adjust width
+                        square.style.height = '25vh'; // Adjust height
+                    } else {
+                        square.style.display = 'none'; // Hide the rest
+                    }
+                });
             } else {
                 // Reset and show all squares
                 squares.forEach(square => {
@@ -96,10 +105,14 @@ $formations = $profil->getAllMasterclass($_SESSION['pseudo']);
                     // Show only collaboration squares
                     document.querySelectorAll('.collab').forEach(square => square.style.display = 'block');
                     document.querySelectorAll('.formation').forEach(square => square.style.display = 'none');
+                    document.querySelectorAll('.sample').forEach(square => square.style.display = 'none');
+                    
+
                 } else if (action === 'formations') {
                     // Show only formation squares
                     document.querySelectorAll('.formation').forEach(square => square.style.display = 'block');
                     document.querySelectorAll('.collab').forEach(square => square.style.display = 'none');
+                    document.querySelectorAll('.sample').forEach(square => square.style.display = 'none');
                 }
             }
         });
