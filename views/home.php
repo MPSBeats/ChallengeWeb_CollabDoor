@@ -37,13 +37,21 @@ $db = (new Database())->connect();
 
             // Mélanger les utilisateurs pour un affichage aléatoire
             shuffle($users);
+            // Récupérer le pseudo de l'utilisateur connecté
+            $currentUser = $_SESSION['pseudo'] ?? '';
+
+            // Filtrer les utilisateurs pour exclure l'utilisateur connecté
+            $filteredUsers = array_filter($users, function($user) use ($currentUser) {
+                return $user['pseudo'] !== $currentUser;
+            });
+
 
             // Limiter le nombre d'utilisateurs affichés à 4
-            $users = array_slice($users, 0, 4);
+            $filteredUsers = array_slice($filteredUsers, 0, 4);
             ?>
 
             <div class="bot-card">
-                <?php foreach ($users as $user): ?>
+                <?php foreach ($filteredUsers as $user): ?>
                     <form action="index.php" method="get" class="card">
                         <!-- Ajouter les paramètres 'page' et 'artist' à l'URL -->
                         <input type="hidden" name="page" value="profile">
