@@ -103,4 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         });
     });
+
+    // Simulate a click on the "samples" option when the page loads
+    document.querySelector('.option[data-action="samples"]').click();
 </script>
