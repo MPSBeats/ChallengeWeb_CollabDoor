@@ -84,7 +84,7 @@ if (isset($_GET['user'])) {
                             $Pseudos = $resultPseudo->fetchAll(PDO::FETCH_ASSOC);
                             ?>
                             <div class="profile-picture-search">
-                                <img src="<? $profilePicture ?>" alt="Profile Picture" class="profile-img-search-collab">
+                                <img src="<? $profilePicture ?>" alt="Profile Picture" class="profile-img-search-collab" onclick="window.location.href='index.php?page=profilView&id=1'">
                             </div>
                             <a href='index.php?page=collaborate&user=<?php
                                                                         if (!empty($Pseudos)):

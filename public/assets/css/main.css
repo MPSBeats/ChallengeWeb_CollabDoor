@@ -445,7 +445,9 @@ aside h2{
 #discover section button img{
     width: 100%;
 }
-
+#discover #carrousselpepite .oeuvre p{
+    margin-right: 5%;
+}
 #carrousselartiste{
     justify-content: start !important;
     display: flex !important;

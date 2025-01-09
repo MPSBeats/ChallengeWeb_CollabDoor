@@ -38,7 +38,7 @@ $Pseudo = $Pseudos[0] ?? null; // Accédez au premier élément du tableau
             <ul>
                 <?php
                 foreach ($Pseudos as $pseudo) {
-                    ?><li onclick="window.location.href='index.php?page=profilView&id=<?= $pseudo['id_user']?>"> <?=$pseudo['pseudo']?></li>
+                    ?><li onclick="window.location.href='index.php?page=profilView&id=<?= $pseudo['id_user']?>'"> <?=$pseudo['pseudo']?></li>
 
                <?php } ?>
 
