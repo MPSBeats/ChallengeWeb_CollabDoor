@@ -13,6 +13,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 require_once '../models/profileModel.php';
 $profil = new Profile();
 
+$db = (new Database())->connect();
+
 if (isset($_GET['artist'])) {
     $profilePicture = $profil->getPicture($_GET['artist']);
     $collabs = $profil->getAllCollabs($_GET['artist']);
@@ -33,6 +35,12 @@ if (isset($_GET['user'])) {
     $showChatBox = false; // Set to false initially
 
 }
+$sessionpseudo = $_SESSION['pseudo'];
+
+$sqlUser = "SELECT * FROM Users WHERE pseudo = :sessionpseudo";
+$resultUser = $db->prepare($sqlUser);
+$resultUser->execute(['sessionpseudo' => $sessionpseudo]);
+$user = $resultUser->fetch(PDO::FETCH_ASSOC);
 
 ?>
 
@@ -73,7 +81,7 @@ if (isset($_GET['user'])) {
         <div class="profile-box">
             <div class="profile-header">
                 <div class="profile-picture">
-                    <img src="<? $profilePicture ?>" alt="Profile Picture" class="profile-img">
+                    <img src="<?= htmlspecialchars($user['picture']) ?>" alt="Profile Picture" class="profile-img">
                 </div>
                 <div class="profile-info">
                     <h2><?php echo $pseudo; ?></h2>
