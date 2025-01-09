@@ -105,60 +105,50 @@ $db = (new Database())->connect();
         <button id="button_right"><img src="assets/img/circle-chevron-right.svg" alt="fleche droite"></button>
 
     </section>
+    <?php  // Récupération d'un utilisateur aléatoire
+$sqlRandomUser = "SELECT * FROM Users ORDER BY RANDOM() LIMIT 1";
+$resultRandomUser = $db->prepare($sqlRandomUser);
+$resultRandomUser->execute();
+$randomUser = $resultRandomUser->fetch(PDO::FETCH_ASSOC); 
+
+
+// Récupération des collaborations de l'utilisateur aléatoire
+$sqlUserCollabs = "
+    SELECT c.*
+    FROM collaborations c
+    JOIN usercollaborations uc ON c.id_collaborations = uc.id_collaborations
+    WHERE uc.id_user = :id_user
+";
+$resultUserCollabs = $db->prepare($sqlUserCollabs);
+$resultUserCollabs->bindParam(':id_user', $randomUser['id_user'], PDO::PARAM_INT);
+$resultUserCollabs->execute();
+$userCollaborations = $resultUserCollabs->fetchAll(PDO::FETCH_ASSOC);
+?>
+
 
     <section>
         <h3>Zoom sur un artiste</h3>
         <div id="zoomartiste">
             <span>
                 <p></p>
-                <h4 style="font-size: 25px;">Découvrez un gars random et sa collection</h4> <span><button id="bLeftArtiste"><img src="assets/img/move-left.svg" alt="fleche gauche"></button> <button id="bRightArtiste"><img src="assets/img/move-right.svg" alt="fleche droite"></button></span>
+                <h4 style="font-size: 25px;">Découvrez <?= htmlspecialchars($randomUser['pseudo']) ?> et sa collection</h4> <span><button id="bLeftArtiste"><img src="assets/img/move-left.svg" alt="fleche gauche"></button> <button id="bRightArtiste"><img src="assets/img/move-right.svg" alt="fleche droite"></button></span>
             </span>
-            <img src="assets/img/profile-picture.jpg" alt="hero">
+            <img src="<?= htmlspecialchars($randomUser['picture']) ?>" alt="hero">
             <section id="carrousselartiste">
-                <article class="oeuvre">
-                </article>
-                <article class="oeuvre">
-                    <img src="assets/img/picture1.png" alt="">
-                    <div>
-                        <h4>POUMTCHAK</h4>
-                        <p>MPS, elsyr, zoji, her...</p>
-                    </div>
-                </article>
-                <article class="oeuvre">
-                    <img src="assets/img/picture1.png" alt="">
-                    <div>
-                        <h4>POUMTCHAK</h4>
-                        <p>MPS, elsyr, zoji, her...</p>
-                    </div>
-                </article>
-                <article class="oeuvre">
-                    <img src="assets/img/picture1.png" alt="">
-                    <div>
-                        <h4>POUMTCHAK</h4>
-                        <p>MPS, elsyr, zoji, her...</p>
-                    </div>
-                </article>
-                <article class="oeuvre">
-                    <img src="assets/img/picture1.png" alt="">
-                    <div>
-                        <h4>POUMTCHAK</h4>
-                        <p>MPS, elsyr, zoji, her...</p>
-                    </div>
-                </article>
-                <article class="oeuvre">
-                    <img src="assets/img/picture1.png" alt="">
-                    <div>
-                        <h4>POUMTCHAK</h4>
-                        <p>MPS, elsyr, zoji, her...</p>
-                    </div>
-                </article>
-                <article class="oeuvre">
-                    <img src="assets/img/picture1.png" alt="">
-                    <div>
-                        <h4>POUMTCHAK</h4>
-                        <p>MPS, elsyr, zoji, her...</p>
-                    </div>
-                </article>
+                <article class="oeuvre"></article>
+            <?php if (!empty($userCollaborations)): ?>
+                <?php foreach ($userCollaborations as $collab): ?>
+                    <article class="oeuvre">
+                    <img src="<?= htmlspecialchars($collab['thumbnail']) ?>" alt="">
+                        <div>
+                            <h4><?= htmlspecialchars($collab['title']) ?></h4>
+                            <p>Publié le : <?= htmlspecialchars($collab['published_at']) ?></p>
+                        </div>
+                    </article>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>Aucune collaboration trouvée pour cet artiste.</p>
+            <?php endif; ?>
 
             </section>
         </div>
