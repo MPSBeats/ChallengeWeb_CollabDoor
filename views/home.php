@@ -1,3 +1,9 @@
+<?php
+require_once "../models/database.php";
+
+$db = (new Database())->connect();
+?>
+
 <main>
     <section class="hero">
         <div class="space"></div>
@@ -14,41 +20,44 @@
         </div>
     </section>
 
-    <section style="height: 13vh; width:calc(100vw -32px);" id="collaborate">
-    </section>
+    <section style="height: 13vh; width:calc(100vw -32px);" id="collaborate"></section>
 
     <section class="collaborate">
         <div class="big-card">
             <div class="top-card">
-                <h1>Collaborer</h1>
+                <h3><a href="index.php?page=collaborate">Collaborer</a></h3>
                 <p style="font-family: Fira code;"><a href="index.php?page=collaborate">--></a></p>
             </div>
 
             <?php
-            $items = [
-                ['img' => 'assets/img/picture1.png', 'title' => 'POUMTCHAK by MPS', 'artist' => 'MPS'],
-                ['img' => 'assets/img/picture2.png', 'title' => 'Be Human by MPS', 'artist' => 'MPS'],
-                ['img' => 'assets/img/picture3.png', 'title' => 'BEFORE by MPS', 'artist' => 'MPS'],
-                ['img' => 'assets/img/picture4.png', 'title' => 'NEW by MPS', 'artist' => 'MPS'],
-            ];
+            // Récupérer les données des utilisateurs
+            $stmt = $db->prepare("SELECT pseudo, picture FROM Users");
+            $stmt->execute();
+            $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            // Mélanger les utilisateurs pour un affichage aléatoire
+            shuffle($users);
+
+            // Limiter le nombre d'utilisateurs affichés à 4
+            $users = array_slice($users, 0, 4);
             ?>
 
             <div class="bot-card">
-                <?php foreach ($items as $item): ?>
+                <?php foreach ($users as $user): ?>
                     <form action="index.php" method="get" class="card">
-                        <!-- Add 'page' and 'artist' parameters to the URL -->
+                        <!-- Ajouter les paramètres 'page' et 'artist' à l'URL -->
                         <input type="hidden" name="page" value="profile">
-                        <input type="hidden" name="artist" value="<?= $item['artist'] ?>">
-                        <img src="<?= htmlspecialchars($item['img']); ?>" alt="<?= htmlspecialchars($item['title']); ?>">
-                        <p><?= htmlspecialchars($item['title']); ?></p>
-                        <button type="submit" class="submit-button">Go to Profile</button>
+                        <input type="hidden" name="artist" value="<?= htmlspecialchars($user['pseudo']); ?>">
+                        <img src="<?= htmlspecialchars($user['picture']); ?>" alt="<?= htmlspecialchars($user['pseudo']); ?>">
+                        <p><?= htmlspecialchars($user['pseudo']); ?></p>
+                        <button type="submit" class="submit-button">Aller au Profil</button>
                     </form>
                 <?php endforeach; ?>
             </div>
 
-
         </div>
     </section>
+
     <section class="discover">
         <div class="big-card">
             <div class="top-card">
@@ -65,7 +74,6 @@
                         </div>
                         <p>MPS</p>
                     </div>
-
                 </div>
                 <div class="card">
                     <img src="assets/img/picture2.png" alt="">
@@ -100,12 +108,12 @@
             </div>
         </div>
     </section>
+
     <section class="learn">
         <div class="big-card">
             <div class="top-card">
                 <h1>Apprendre</h1>
                 <p style="font-family: Fira code;"><a href="index.php?page=learn">--></a></p>
-
             </div>
             <div class="work-in-progress">
                 🚧 Work in progress 🚧
