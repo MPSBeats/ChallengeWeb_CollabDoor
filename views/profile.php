@@ -9,15 +9,15 @@ require_once '../models/profileModel.php';
 $profil = new Profile();
 
 if (isset($_GET['artist'])) {
-$profilePicture = $profil->getPicture($_GET['artist']);
-$collabs = $profil->getAllCollabs($_GET['artist']);
-$formations = $profil->getAllMasterclass($_GET['artist']);
-$pseudo = $_GET['artist'];
-}else{
-$profilePicture = $profil->getPicture($_SESSION['pseudo']);
-$collabs = $profil->getAllCollabs($_SESSION['pseudo']);
-$formations = $profil->getAllMasterclass($_SESSION['pseudo']);
-$pseudo = $_SESSION['pseudo'];
+    $profilePicture = $profil->getPicture($_GET['artist']);
+    $collabs = $profil->getAllCollabs($_GET['artist']);
+    $formations = $profil->getAllMasterclass($_GET['artist']);
+    $pseudo = $_GET['artist'];
+} else {
+    $profilePicture = $profil->getPicture($_SESSION['pseudo']);
+    $collabs = $profil->getAllCollabs($_SESSION['pseudo']);
+    $formations = $profil->getAllMasterclass($_SESSION['pseudo']);
+    $pseudo = $_SESSION['pseudo'];
 }
 ?>
 
@@ -27,17 +27,26 @@ $pseudo = $_SESSION['pseudo'];
     <div class="profile-container">
         <div class="profile-content">
             <div class="options-container">
-                <div class="option" data-action="samples">Mes Samples</div>
-                <div class="option" data-action="collabs">Mes Collabs</div>
-                <div class="option" data-action="formations">Mes Formations</div>
+                <div class="option" data-action="samples">
+                    <h3>Mes Samples</h3>
+                </div>
+                <div class="option" data-action="collabs">
+                    <h3>Mes Collabs</h3>
+                </div>
+                <div class="option" data-action="formations">
+                    <h3>Mes Formations</h3>
+                </div>
             </div>
 
             <!-- Container for dynamic thumbnails -->
             <div class="squares-container">
                 <!-- Render all thumbnails by default (collabs and formations) -->
                 <?php foreach ($collabs as $index => $collab): ?>
-                    <div class="square collab" style="background-image: url('<?= htmlspecialchars($collab['thumbnail']); ?>');"></div>
+                    <div class="square collab" style="width: 100%;">
+                        <img src="<?= htmlspecialchars($collab['thumbnail']); ?>" alt="Collab Thumbnail" style="width: 100%; height: 100%;">
+                    </div>
                 <?php endforeach; ?>
+
 
                 <?php foreach ($formations as $index => $formation): ?>
                     <div class="square formation" style="z-index: 10;background-image: url('<?= htmlspecialchars($formation['thumbnail']); ?>');"></div>
@@ -70,10 +79,13 @@ $pseudo = $_SESSION['pseudo'];
                 </div>
             </div>
             <div class="profile-actions">
-                <button class="btn-green">Rounded Button</button>
-                <form action="index.php?page=profile" method="post" class="logout-form">
-                    <button type="submit" class="btn-red">Logout</button>
-                </form>
+                <button class="btn-green">Contacter</button>
+                <?php if (!isset($_GET['artist'])) { ?>
+                    <form action="index.php?page=profile" method="post" class="logout-form">
+                        <button type="submit" class="btn-red">Logout</button>
+                    </form>
+                <?php } ?>
+
             </div>
         </div>
     </div>
@@ -88,7 +100,7 @@ $pseudo = $_SESSION['pseudo'];
             const squaresContainer = document.querySelector('.squares-container');
 
             if (action === 'samples') {
-                
+
 
                 // For now, just showing the first 3 squares
                 squares.forEach((square, index) => {
@@ -114,7 +126,7 @@ $pseudo = $_SESSION['pseudo'];
                     document.querySelectorAll('.collab').forEach(square => square.style.display = 'block');
                     document.querySelectorAll('.formation').forEach(square => square.style.display = 'none');
                     document.querySelectorAll('.sample').forEach(square => square.style.display = 'none');
-                    
+
 
                 } else if (action === 'formations') {
                     // Show only formation squares
