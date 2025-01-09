@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $phone = htmlspecialchars($_POST['phone']);
     $picture = htmlspecialchars($_POST['picture']);
 
-
+    
     // Vérifaction des champs vides
     if (empty($pseudo) || empty($password) || empty($firstname) || empty($lastname) || empty($birth) || empty($country) || empty($email) || empty($phone) || empty($picture)) {
         $error = 'Veuillez remplir tous les champs';

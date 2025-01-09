@@ -49,6 +49,11 @@ switch ($page) {
         include '../views/collaborationsheet.php';
         break;
 
+    case 'productsheet':
+        include '../views/productsheet.php';
+        break;
+
+
     default:
         include '../views/home.php';
         break;
