@@ -75,7 +75,9 @@ if (isset($_GET['user'])) {
             <div class="chat-box" id="chat-box">
                 <div class="chat-box-header">
                     <h2><?php echo ucfirst($selectedUser); ?></h2>
-                    <button class="close-btn" onclick="closeChat()">✖</button>
+                    <div class="chat-box-controls">
+                        <p class="close-btn" onclick="closeChat()">✖</p>
+                    </div>
                 </div>
                 <div class="chat-box-body" id="chat-box-body">
                     <!-- Chat messages will be loaded here -->
