@@ -85,7 +85,10 @@ if (isset($_GET['user'])) {
                         <button type="submit" name='collab' class="btn-blue">Ajouter une collab</button>
                     </form>
                     <form action="index.php?page=profile" method="post" class="logout-form">
-                        <button type="submit" name="logout" class="btn-red">Logout</button>
+                        <button type="submit" name="logout" class="btn-red">Déconnexion</button>
+                    </form>
+                    <form action="index.php?page=message" method="post" class="message-form">
+                        <button type="submit" name="message" class="btn-green">Message</button>
                     </form>
 
                 <?php } else { ?>
