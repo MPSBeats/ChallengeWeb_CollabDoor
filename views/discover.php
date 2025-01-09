@@ -51,13 +51,16 @@ $db = (new Database())->connect();
         <h3>Pépite de la semaine :</h3>
         <button id="button_left"><img src="assets/img/circle-chevron-left.svg" alt="fleche gauche"></button>
         <section id="carrousselpepite">
-
             <?php
+            $sql1 = "SELECT * FROM collaboration ";
+            $result1 = $db->prepare($sql1);
+            $result1->execute();
+            $collaborations = $result1->fetchAll(PDO::FETCH_ASSOC);
+            $sql2 = "SELECT * FROM userscollaborations ";
+            $result2 = $db->prepare($sql2);
+            $result2->execute();
+            $userscollaborations = $result2->fetchAll(PDO::FETCH_ASSOC);
 
-            $sql = "SELECT * FROM collaboration ";
-            $$result = $db->prepare($sql);
-            $result->execute();
-            $collaborations = $result->fetchAll(PDO::FETCH_ASSOC);
 
 
 
@@ -76,10 +79,10 @@ $db = (new Database())->connect();
 
                             $sqlPseudo = "SELECT u.pseudo
                                             FROM Users u
-                                            JOIN UserCollaborations uc ON u.id_user = uc.id_user
-                                            JOIN Collaborations c ON uc.id_collaboration = c.id_collaboration
+                                            JOIN UsersCollaborations uc ON u.id_user = uc.id_user
+                                            JOIN Collaboration c ON uc.id_collaboration = c.id_collaboration
                                             WHERE c.id_collaboration = " . $collab['id_collaboration'];
-                            $resultPseudo = $db->prepare($sql);
+                            $resultPseudo = $db->prepare($sqlPseudo);
                             $resultPseudo->execute();
                             $Pseudos = $resultPseudo->fetchAll(PDO::FETCH_ASSOC);
                             var_dump($sqlPseudo);
@@ -94,6 +97,8 @@ $db = (new Database())->connect();
             <?php else: ?>
                 <p>Aucune collaboration trouvée.</p>
             <?php endif; ?>
+
+
 
 
 
