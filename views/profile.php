@@ -24,6 +24,15 @@ if (isset($_GET['artist'])) {
     $formations = $profil->getAllMasterclass($_SESSION['pseudo']);
     $pseudo = $_SESSION['pseudo'];
 }
+
+
+if (isset($_GET['user'])) {
+    $selectedUser = strtolower($_GET['user']);
+    $showChatBox = true; // Set to true only when a user is selected
+} else {
+    $showChatBox = false; // Set to false initially
+
+}
 ?>
 
 <main class="profil">
@@ -79,11 +88,36 @@ if (isset($_GET['artist'])) {
                     </form>
 
                 <?php } else { ?>
-                    <button class="btn-green">Contacter</button>
+                    <a href='index.php?page=profile&artist=<?php echo $pseudo?>&user=<?php echo $pseudo ?>'>
+                        Contacter
+                    </a>
                 <?php } ?>
             </div>
         </div>
     </div>
+
+
+
+    <?php 
+    //Affichage de la chatBox
+    if ($showChatBox): ?>
+            <div class="chat-box" id="chat-box">
+                <div class="chat-box-header">
+                    <h2><?php echo ucfirst($selectedUser); ?></h2>
+                    <button class="close-btn" onclick="closeChat()">✖</button>
+                </div>
+                <div class="chat-box-body" id="chat-box-body">
+                    <!-- Chat messages will be loaded here -->
+                </div>
+                <form class="chat-form" id="chat-form">
+                    <input type="hidden" id="sender" value="<?php echo htmlspecialchars($user); ?>">
+
+                    <input type="hidden" id="receiver" value="<?php echo $selectedUser; ?>">
+                    <input type="text" id="message" placeholder="Tapez votre message..." required>
+                    <button type="submit">Envoyer</button>
+                </form>
+            </div>
+        <?php endif; ?>
 </main>
 
 <script>
@@ -135,4 +169,81 @@ if (isset($_GET['artist'])) {
 
     // Simulate a click on the "collabs" option when the page loads
     document.querySelector('.option[data-action="collabs"]').click();
+</script>
+
+<?php
+// Script pour gérer la chat box sur le profil d'un utilisateur
+?>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    function closeChat() {
+        document.getElementById("chat-box").style.display = "none";
+    }
+
+    function fetchMessages() {
+        var sender = $('#sender').val();
+        var receiver = $('#receiver').val();
+
+        console.log("Sender: " + sender);
+        console.log("Receiver: " + receiver);
+
+        // Sauvegarder la position actuelle du défilement
+        var chatBox = $('#chat-box-body');
+        var scrollTop = chatBox.scrollTop();
+        var scrollHeight = chatBox.prop("scrollHeight");
+
+        $.ajax({
+        url: 'index.php?page=fetch_messages',
+        type: 'POST',
+        data: {
+            sender: sender,
+            receiver: receiver
+        },
+        success: function(data) {
+            $('#chat-box-body').html(data);
+
+            // Réinitialiser la position du défilement uniquement si l'utilisateur était en bas de la boîte de chat
+            if (scrollTop + chatBox.outerHeight() >= scrollHeight) {
+            scrollChatToBottom();
+            } else {
+            chatBox.scrollTop(scrollTop);
+            }
+        }
+        });
+    }
+
+    function scrollChatToBottom() {
+        var chatBox = $('#chat-box-body');
+        chatBox.scrollTop(chatBox.prop("scrollHeight"));
+    }
+
+    $(document).ready(function() {
+        // Fetch messages for the selected user when the page loads
+        fetchMessages();
+
+        // Fetch messages every 3 seconds
+        setInterval(fetchMessages, 3000);
+
+        // Submit the chat message
+        $('#chat-form').submit(function(e) {
+            e.preventDefault();
+            var sender = $('#sender').val();
+            var receiver = $('#receiver').val();
+            var message = $('#message').val();
+
+            $.ajax({
+                url: 'index.php?page=submit_message',
+                type: 'POST',
+                data: {
+                    sender: sender,
+                    receiver: receiver,
+                    message: message
+                },
+                success: function() {
+                    $('#message').val('');
+                    fetchMessages(); // Fetch messages after submitting
+                }
+            });
+        });
+    });
 </script>
