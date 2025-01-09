@@ -7,10 +7,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 require_once '../models/profileModel.php';
 $profil = new Profile();
+
+if (isset($_GET['artist'])) {
+$profilePicture = $profil->getPicture($_GET['artist']);
+$collabs = $profil->getAllCollabs($_GET['artist']);
+$formations = $profil->getAllMasterclass($_GET['artist']);
+$pseudo = $_GET['artist'];
+}else{
 $profilePicture = $profil->getPicture($_SESSION['pseudo']);
 $collabs = $profil->getAllCollabs($_SESSION['pseudo']);
 $formations = $profil->getAllMasterclass($_SESSION['pseudo']);
-
+$pseudo = $_SESSION['pseudo'];
+}
 ?>
 
 <main class="profil">
@@ -44,7 +52,7 @@ $formations = $profil->getAllMasterclass($_SESSION['pseudo']);
                     <img src="<? $profilePicture ?>" alt="Profile Picture" class="profile-img">
                 </div>
                 <div class="profile-info">
-                    <h2><?php echo $_SESSION['pseudo']; ?></h2>
+                    <h2><?php echo $pseudo; ?></h2>
                     <div class="profile-details">
                         <p>5*</p>
                         <p>|</p>

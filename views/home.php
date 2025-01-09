@@ -23,25 +23,30 @@
                 <h1>Collaborer</h1>
                 <p style="font-family: Fira code;"><a href="index.php?page=collaborate">--></a></p>
             </div>
-            <div class="bot-card">
-                <div class="card">
-                    <img src="assets/img/picture1.png" alt="">
-                    <p>POUMTCHAK by MPS</p>
-                </div>
-                <div class="card">
-                    <img src="assets/img/picture2.png" alt="">
-                    <p>Be Human by MPS</p>
-                </div>
-                <div class="card">
-                    <img src="assets/img/picture3.png" alt="">
-                    <p>BEFORE by MPS</p>
-                </div>
-                <div class="card">
-                    <img src="assets/img/picture4.png" alt="">
-                    <p>NEW by MPS</p>
 
-                </div>
+            <?php
+            $items = [
+                ['img' => 'assets/img/picture1.png', 'title' => 'POUMTCHAK by MPS','artist' => 'MPS'],
+                ['img' => 'assets/img/picture2.png', 'title' => 'Be Human by MPS','artist' => 'MPS'],
+                ['img' => 'assets/img/picture3.png', 'title' => 'BEFORE by MPS','artist' => 'MPS'],
+                ['img' => 'assets/img/picture4.png', 'title' => 'NEW by MPS','artist' => 'MPS'],
+            ];
+            ?>
+
+            <div class="bot-card">
+                <?php foreach ($items as $item): ?>
+                    <form action="index.php" method="get" class="card">
+                        <!-- Add 'page' and 'artist' parameters to the URL -->
+                        <input type="hidden" name="page" value="profile">
+                        <input type="hidden" name="artist" value="<?= $item['artist'] ?>">
+                        <img src="<?= htmlspecialchars($item['img']); ?>" alt="<?= htmlspecialchars($item['title']); ?>">
+                        <p><?= htmlspecialchars($item['title']); ?></p>
+                        <button type="submit" class="submit-button">Go to Profile</button>
+                    </form>
+                <?php endforeach; ?>
             </div>
+
+
         </div>
     </section>
     <section class="discover">
@@ -103,7 +108,7 @@
 
             </div>
             <div class="work-in-progress">
-                    🚧 Work in progress 🚧
+                🚧 Work in progress 🚧
             </div>
         </div>
     </section>
