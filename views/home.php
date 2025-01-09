@@ -100,10 +100,11 @@
             <div class="top-card">
                 <h1>Apprendre</h1>
                 <p style="font-family: Fira code;"><a href="index.php?page=learn">--></a></p>
+
             </div>
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
+            <div class="work-in-progress">
+                    🚧 Work in progress 🚧
+            </div>
         </div>
     </section>
 </main>
