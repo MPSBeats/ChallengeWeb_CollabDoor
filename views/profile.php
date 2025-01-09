@@ -1,8 +1,13 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    session_destroy();
-    header('Location: index.php?page=home');
-    exit();
+    if (isset($_POST['logout'])) {
+        session_destroy();
+        header('Location: index.php?page=home');
+        exit();
+    } elseif (isset($_POST['collab'])) {
+        header('Location: index.php?page=collaborationsheet');
+        exit();
+    }
 }
 
 require_once '../models/profileModel.php';
@@ -62,30 +67,20 @@ if (isset($_GET['artist'])) {
                 </div>
                 <div class="profile-info">
                     <h2><?php echo $pseudo; ?></h2>
-                    <div class="profile-details">
-                        <p>5*</p>
-                        <p>|</p>
-                        <p>Paris</p>
-                    </div>
-                </div>
-            </div>
-            <div class="profile-bio">
-                <h2>Bio</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod.</p>
-                <div class="profile-tags">
-                    <p>Trap,</p>
-                    <p>RNB,</p>
-                    <p>NEW WAVE</p>
                 </div>
             </div>
             <div class="profile-actions">
-                <button class="btn-green">Contacter</button>
                 <?php if (!isset($_GET['artist'])) { ?>
-                    <form action="index.php?page=profile" method="post" class="logout-form">
-                        <button type="submit" class="btn-red">Logout</button>
+                    <form action="index.php?page=profile" method="post" class="collab-form">
+                        <button type="submit" name='collab' class="btn-blue">Ajouter une collab</button>
                     </form>
-                <?php } ?>
+                    <form action="index.php?page=profile" method="post" class="logout-form">
+                        <button type="submit" name="logout" class="btn-red">Logout</button>
+                    </form>
 
+                <?php } else { ?>
+                    <button class="btn-green">Contacter</button>
+                <?php } ?>
             </div>
         </div>
     </div>

@@ -116,6 +116,14 @@ CREATE TABLE LearningFilters (
     FOREIGN KEY (id_filter) REFERENCES Filters(id_filter)
 );
 
+CREATE TABLE UsersSearchCollaborations (
+    id_userssearchcollaborations SERIAL PRIMARY KEY,
+    id_user INT,
+    id_searchcollaborations INT,
+    FOREIGN KEY (id_user) REFERENCES Users(id_user),
+    FOREIGN KEY (id_searchcollaborations) REFERENCES SearchCollaborations(id_searchcollaborations)
+);
+
 ALTER SEQUENCE users_id_user_seq RESTART WITH 1;
 ALTER SEQUENCE collaborations_id_collaborations_seq RESTART WITH 1;
 ALTER SEQUENCE searchcollaborations_id_searchcollaborations_seq RESTART WITH 1;
@@ -191,6 +199,30 @@ INSERT INTO public.UserCollaborations (id_user, id_collaborations) VALUES
 
 -- Insertion des données dans la table UsersLearnings
 INSERT INTO public.UserLearnings (id_user, id_learning) VALUES
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5),
+(6, 6),
+(7, 7),
+(8, 8),
+(9, 9),
+(10, 10);
+
+INSERT INTO public.searchcollaborations (title, thumbnail, published_at) VALUES
+('SearchA', '/assets/media/collaboration/thumbnail/SearchA.jpg', '2023-01-15'),
+('SearchB', '/assets/media/collaboration/thumbnail/SearchB.jpg', '2023-02-20'),
+('SearchC', '/assets/media/collaboration/thumbnail/SearchC.jpg', '2023-03-25'),
+('SearchD', '/assets/media/collaboration/thumbnail/ProjectD.jpg', '2023-04-30'),
+('SearchE', '/assets/media/collaboration/thumbnail/SearchD.jpg', '2023-05-10'),
+('SearchF', '/assets/media/collaboration/thumbnail/SearchF.jpg', '2023-06-15'),
+('SearchH', '/assets/media/collaboration/thumbnail/SearchH.jpg', '2023-07-20'),
+('SearchI', '/assets/media/collaboration/thumbnail/SearchI.jpg', '2023-08-25'),
+('SearchJ', '/assets/media/collaboration/thumbnail/SearchJ.jpg', '2023-09-30'),
+('SearchH', '/assets/media/collaboration/thumbnail/SearchH.jpg', '2023-10-10');
+
+INSERT INTO public.userssearchcollaborations (id_user, id_searchcollaborations) VALUES
 (1, 1),
 (2, 2),
 (3, 3),

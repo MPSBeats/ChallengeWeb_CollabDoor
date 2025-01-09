@@ -45,8 +45,11 @@ switch ($page) {
         include '../views/profile.php';
         break;
 
+    case 'collaborationsheet':
+        include '../views/collaborationsheet.php';
+        break;
+
     default:
         include '../views/home.php';
         break;
 }
-?>
