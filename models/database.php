@@ -1,6 +1,5 @@
 <?php
 
-require_once 'config.ini';
 class Database
 {
     private $host;
