@@ -126,6 +126,7 @@ if (isset($_GET['user'])) {
                 </div>
                 <form class="chat-form" id="chat-form">
                     <input type="hidden" id="sender" value="<?php echo htmlspecialchars($user); ?>">
+
                     <input type="hidden" id="receiver" value="<?php echo $selectedUser; ?>">
                     <input type="text" id="message" placeholder="Tapez votre message..." required>
                     <button type="submit">Envoyer</button>

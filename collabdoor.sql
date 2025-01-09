@@ -124,6 +124,22 @@ CREATE TABLE UsersSearchCollaborations (
     FOREIGN KEY (id_searchcollaborations) REFERENCES SearchCollaborations(id_searchcollaborations)
 );
 
+CREATE TABLE CollaborationsFilters (
+    id_collaborationsfilters SERIAL PRIMARY KEY,
+    id_collaborations INT,
+    id_filter INT,
+    FOREIGN KEY (id_collaborations) REFERENCES Collaborations(id_collaborations),
+    FOREIGN KEY (id_filter) REFERENCES Filters(id_filter)
+);
+
+CREATE TABLE UsersChats (
+    id_userchat SERIAL PRIMARY KEY,
+    id_user INT,
+    id_chat INT,
+    FOREIGN KEY (id_user) REFERENCES Users(id_user),
+    FOREIGN KEY (id_chat) REFERENCES Chats(id_chat)
+);
+
 ALTER SEQUENCE users_id_user_seq RESTART WITH 1;
 ALTER SEQUENCE collaborations_id_collaborations_seq RESTART WITH 1;
 ALTER SEQUENCE searchcollaborations_id_searchcollaborations_seq RESTART WITH 1;
@@ -137,6 +153,9 @@ ALTER SEQUENCE searchcollaborationfilters_id_searchcollaborationfilters_seq REST
 ALTER SEQUENCE usercollaborations_id_usercollaborations_seq RESTART WITH 1;
 ALTER SEQUENCE userlearnings_id_userlearning_seq RESTART WITH 1;
 ALTER SEQUENCE learningfilters_id_learningfilters_seq RESTART WITH 1;
+ALTER SEQUENCE collaborationsfilters_id_collaborationsfilters_seq RESTART WITH 1;
+ALTER SEQUENCE userschats_id_userchat_seq RESTART WITH 1;
+
 
 -- Insertion des données dans la table MediaType
 INSERT INTO public.MediaType (label) VALUES
