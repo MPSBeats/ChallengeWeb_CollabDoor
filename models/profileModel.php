@@ -24,17 +24,18 @@ class Profile
     {
         $stmt = $this->pdo->prepare('
             SELECT 
-                Collaboration.id_collaboration,
-                Collaboration.title,
-                Collaboration.thumbnail
+                Collaborations.id_collaborations,
+                Collaborations.title,
+                Collaborations.thumbnail
             FROM 
                 Users
             JOIN 
-                UsersCollaborations ON Users.id_user = UsersCollaborations.id_user
+                UserCollaborations ON Users.id_user = UserCollaborations.id_user
             JOIN 
-                Collaboration ON UsersCollaborations.id_collaboration = Collaboration.id_collaboration
+                Collaborations ON UserCollaborations.id_collaborations = Collaborations.id_collaborations
             WHERE 
-                Users.pseudo = :pseudo
+                Users.pseudo = :pseudo;
+
         ');
         $stmt->execute(['pseudo' => $pseudo]);
         return $stmt->fetchAll(); // Use fetchAll to retrieve all records
@@ -44,17 +45,23 @@ class Profile
     public function getAllMasterclass($pseudo)
     {
         $stmt = $this->pdo->prepare('
-            SELECT 
-                Learnings.title,
-                Learnings.thumbnail
-            FROM 
-                Users
-            JOIN 
-                UsersLearnings ON Users.id_user = UsersLearnings.id_user
-            JOIN 
-                Learnings ON UsersLearnings.id_learning = Learnings.id_learning
-            WHERE 
-                Users.pseudo = :pseudo
+                SELECT 
+                    Learnings.id_learning,
+                    Learnings.title,
+                    Learnings.thumbnail,
+                    Learnings.description,
+                    Learnings.price,
+                    Learnings.date,
+                    Learnings.rate
+                FROM 
+                    Users
+                JOIN 
+                    UserLearnings ON Users.id_user = UserLearnings.id_user
+                JOIN 
+                    Learnings ON UserLearnings.id_learning = Learnings.id_learning
+                WHERE 
+                    Users.pseudo = :pseudo;
+
         ');
         $stmt->execute(['pseudo' => $pseudo]);
         return $stmt->fetchAll(); // Use fetchAll to retrieve all records

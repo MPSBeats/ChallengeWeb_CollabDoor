@@ -14,7 +14,7 @@
         </div>
     </section>
 
-    <section style="height: 13vh; width:100vw;" id="collaborate">
+    <section style="height: 13vh; width:calc(100vw -32px);" id="collaborate">
     </section>
 
     <section class="collaborate">
@@ -26,10 +26,10 @@
 
             <?php
             $items = [
-                ['img' => 'assets/img/picture1.png', 'title' => 'POUMTCHAK by MPS','artist' => 'MPS'],
-                ['img' => 'assets/img/picture2.png', 'title' => 'Be Human by MPS','artist' => 'MPS'],
-                ['img' => 'assets/img/picture3.png', 'title' => 'BEFORE by MPS','artist' => 'MPS'],
-                ['img' => 'assets/img/picture4.png', 'title' => 'NEW by MPS','artist' => 'MPS'],
+                ['img' => 'assets/img/picture1.png', 'title' => 'POUMTCHAK by MPS', 'artist' => 'MPS'],
+                ['img' => 'assets/img/picture2.png', 'title' => 'Be Human by MPS', 'artist' => 'MPS'],
+                ['img' => 'assets/img/picture3.png', 'title' => 'BEFORE by MPS', 'artist' => 'MPS'],
+                ['img' => 'assets/img/picture4.png', 'title' => 'NEW by MPS', 'artist' => 'MPS'],
             ];
             ?>
 
