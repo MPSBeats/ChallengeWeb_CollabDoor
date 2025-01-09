@@ -350,7 +350,6 @@ h2{
     margin-top: 2%;
     padding: 1%;
     margin-left: 70%;
-
     display: none;
 }
 #discover form div div{
@@ -432,6 +431,7 @@ h2{
     border: none;
     background-color: transparent;
 }
+
 #discover section > button{
     width: 3%;
     border: none;
@@ -552,7 +552,7 @@ h2{
 }
 
 .profile-content {
-    background-color: #3b82f6; /* Tailwind bg-blue-500 */
+    
     width: 60%;
     height: auto;
 }
@@ -560,12 +560,13 @@ h2{
 .options-container {
     display: flex;
     flex-wrap: wrap;
+    font-size: larger   ;
 }
 
 .option {
     width: 33.33%;
     height: 10vh;
-    background-color: #ef4444; /* Tailwind bg-red-500 */
+    
     display: flex;
     align-items: center;
     justify-content: center;
@@ -577,6 +578,7 @@ h2{
     flex-wrap: wrap;
     justify-content: center;
     gap: 2rem; /* Tailwind gap-8 */
+    
 }
 
 .square {
@@ -585,14 +587,23 @@ h2{
     background-size: cover;
     background-position: center;
     margin-bottom: 0.5rem; /* Tailwind mb-2 */
+    /* border: solid black 2px; */
+    border-radius: 50px;
+    border-radius: 30px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1); 
+    
+    
 }
 
 .profile-box {
-    border: 2px solid black;
-    border-radius: 0.5rem; /* Tailwind rounded-lg */
+   
+     
     width: 33%;
     height: 65vh;
     padding: 0.625rem; /* Tailwind p-2.5 */
+    border-radius: 30px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1); 
+   
 }
 
 .profile-header {
@@ -641,12 +652,14 @@ h2{
     justify-content: center;
     align-items: center;
     height: 15vh;
+    
 }
 
 .btn-green {
     background-color: #10b981; /* Tailwind bg-green-500 */
     padding: 0.625rem; /* Tailwind p-2.5 */
     border-radius: 50px; /* Tailwind rounded-full */
+    border: none;
     color: white;
     width: 50%;
     text-align: center;
