@@ -148,12 +148,24 @@ Make sure you have the following installed on your machine:
     - Open the `config.ini` file located in the root of the project.
     - Update the `password` field with your PostgreSQL password.
 
-3. **Start a local PHP server in the public directory:**
+3. **Create the database:**
+    - Open pgAdmin 4.
+    - Connect to your PostgreSQL server.
+    - Right-click on the `Databases` node and select `Create > Database...`.
+    - Enter `collabdoor` as the database name and click `Save`.
+
+4. **Create the database tables:**
+    - Open the `collabdoor.sql` file located in the root of the project.
+    - Copy the contents of the file.
+    - In pgAdmin 4, open the Query Tool.
+    - Paste the contents into the Query Tool and execute the query to create the tables.
+
+5. **Start a local PHP server in the public directory:**
     ```sh
     php -S localhost:8000 -t public
     ```
 
-4. **Open your browser and navigate to:**
+6. **Open your browser and navigate to:**
     ```
     http://localhost:8000
     ```
