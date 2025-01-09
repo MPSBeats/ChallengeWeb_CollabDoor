@@ -82,8 +82,9 @@ $db = (new Database())->connect();
                             $Pseudos = $resultPseudo->fetchAll(PDO::FETCH_ASSOC);
 
                             ?>
-                            <p><?php foreach ($Pseudos as $pseudo): echo $pseudo['pseudo'];
-                                endforeach; ?></p>
+                            <?php foreach ($Pseudos as $pseudo):?> 
+                                <p><?=$pseudo['pseudo'];?></p>
+                                <?php endforeach; ?>
                         </div>
                     </article>
                 <?php endforeach; ?>
