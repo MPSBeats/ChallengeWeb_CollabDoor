@@ -22,7 +22,7 @@ $db = (new Database())->connect();
             <button type="submit" name="recherche"><img src="assets/img/search.svg" alt="loupe"></button>
         </label>
         <span>Filtrer par <img src="assets/img/chevron-up.svg" alt="up"></span>
-        <div>
+        <div id="filter">
             <div>
                 <input type="radio" name="type" id="collab" value="1">
                 <label for="collab">Collaboration</label>
@@ -55,7 +55,7 @@ $db = (new Database())->connect();
             $result1 = $db->prepare($sql1);
             $result1->execute();
             $collaborations = $result1->fetchAll(PDO::FETCH_ASSOC);
-            
+
             $sql2 = "SELECT * FROM usercollaborations ";
             $result2 = $db->prepare($sql2);
             $result2->execute();
@@ -121,7 +121,7 @@ $db = (new Database())->connect();
         <h3>Zoom sur un artiste</h3>
         <div id="zoomartiste">
             <span>
-               <p></p> <!-- exprès pour faire l'espace a gauche -->
+                <p></p> <!-- exprès pour faire l'espace a gauche -->
                 <h4 style="font-size: 25px;">Découvrez <?= htmlspecialchars($randomUser['pseudo']) ?> et sa collection</h4> <span><button id="bLeftArtiste"><img src="assets/img/move-left.svg" alt="fleche gauche"></button> <button id="bRightArtiste"><img src="assets/img/move-right.svg" alt="fleche droite"></button></span>
             </span>
             <img src="<?= htmlspecialchars($randomUser['picture']) ?>" alt="hero">
@@ -129,7 +129,7 @@ $db = (new Database())->connect();
                 <article class="oeuvre"></article>
                 <?php if (!empty($userCollaborations)): ?>
                     <?php foreach ($userCollaborations as $collab): ?>
-                        <article class="oeuvre"  onclick="window.location.href='index.php?page=productsheet&id=<?= $collab['id_collaborations'] ?>'">
+                        <article class="oeuvre" onclick="window.location.href='index.php?page=productsheet&id=<?= $collab['id_collaborations'] ?>'">
                             <img src="<?= htmlspecialchars($collab['thumbnail']) ?>" alt="">
                             <div>
                                 <h4><?= htmlspecialchars($collab['title']) ?></h4>
@@ -145,12 +145,5 @@ $db = (new Database())->connect();
         </div>
 
     </section>
-
-
-
-
-
-
-
 
 </main>

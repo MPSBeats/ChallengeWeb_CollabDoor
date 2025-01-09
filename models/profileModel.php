@@ -42,7 +42,7 @@ class Profile
     }
 
     // Get all masterclasses for the user
-    public function getAllMasterclass($pseudo)
+    public function getAllLearningsByUser($pseudo)
     {
         $stmt = $this->pdo->prepare('
                 SELECT 

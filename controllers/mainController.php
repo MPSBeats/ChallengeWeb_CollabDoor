@@ -49,6 +49,10 @@ switch ($page) {
         include '../views/collaborationsheet.php';
         break;
 
+    case 'learningProfile':
+        include '../views/learningProfile.php';
+        break;
+
     case 'productsheet':
         include '../views/productsheet.php';
         break;

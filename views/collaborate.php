@@ -1,13 +1,13 @@
 <?php
 
-    require_once '../models/database.php';
-    $db = (new Database())->connect();
+require_once '../models/database.php';
+$db = (new Database())->connect();
 
-    $selectedUser = '';
+$selectedUser = '';
 
-    $user = strtolower($_SESSION['pseudo']);
+$user = strtolower($_SESSION['pseudo']);
 
-    
+
 if (isset($_GET['user'])) {
     $selectedUser = strtolower($_GET['user']);
     $showChatBox = true; // Set to true only when a user is selected
@@ -17,9 +17,9 @@ if (isset($_GET['user'])) {
 }
 ?>
 
-<main id="discover">
-    <div class="space"></div>
+<main id="collaborate">
 
+    <div class="space"></div>
     <aside>
         <h2>Collaborer</h2>
         <p>Trouve ton futur duo ou ta future équipe pour briller dans le game !</p>
@@ -31,7 +31,7 @@ if (isset($_GET['user'])) {
             <button type="submit" name="recherche"><img src="assets/img/search.svg" alt="loupe"></button>
         </label>
         <span>Filtrer par <img src="assets/img/chevron-up.svg" alt="up"></span>
-        <div id="filter">
+        <div>
             <div>
                 <input type="radio" name="type" id="collab" value="1">
                 <label for="collab">Collaboration</label>
@@ -86,23 +86,23 @@ if (isset($_GET['user'])) {
                             <div class="profile-picture-search">
                                 <img src="<? $profilePicture ?>" alt="Profile Picture" class="profile-img-search-collab" onclick="window.location.href='index.php?page=profilView&id=1'">
                             </div>
-                            <a href='index.php?page=collaborate&user=<?php 
-                                if (!empty($Pseudos)): 
-                                    foreach ($Pseudos as $pseudo): 
-                                        echo htmlspecialchars($pseudo['pseudo']);
-                                    endforeach; 
-                                endif; ?>'>
-                                <?php 
+                            <a href='index.php?page=collaborate&user=<?php
+                                                                        if (!empty($Pseudos)):
+                                                                            foreach ($Pseudos as $pseudo):
+                                                                                echo htmlspecialchars($pseudo['pseudo']);
+                                                                            endforeach;
+                                                                        endif; ?>'>
+                                <?php
                                 if (!empty($Pseudos)): ?>
                                     <p><?php foreach ($Pseudos as $pseudo): echo htmlspecialchars($pseudo['pseudo']);
-                                        endforeach; ?></p> 
+                                        endforeach; ?></p>
                                 <?php else: ?>
                                     <p>Aucun pseudo trouvé.</p>
                                 <?php endif; ?>
                                 <img src="assets/img/mail-plus.svg">
                             </a>
-                        
-                        
+
+
                         </div>
                     </article>
                 <?php endforeach; ?>
@@ -116,23 +116,24 @@ if (isset($_GET['user'])) {
 
 
     <?php if ($showChatBox): ?>
-            <div class="chat-box" id="chat-box">
-                <div class="chat-box-header">
-                    <h2><?php echo ucfirst($selectedUser); ?></h2>
-                    <button class="close-btn" onclick="closeChat()">✖</button>
+        <div class="chat-box" id="chat-box">
+            <div class="chat-box-header">
+                <h2><?php echo ucfirst($selectedUser); ?></h2>
+                <div class="chat-box-controls">
+                    <p class="close-btn" onclick="closeChat()">✖</p>
                 </div>
-                <div class="chat-box-body" id="chat-box-body">
-                    <!-- Chat messages will be loaded here -->
-                </div>
-                <form class="chat-form" id="chat-form">
-                    <input type="hidden" id="sender" value="<?php echo htmlspecialchars($user); ?>">
-
-                    <input type="hidden" id="receiver" value="<?php echo $selectedUser; ?>">
-                    <input type="text" id="message" placeholder="Tapez votre message..." required>
-                    <button type="submit">Envoyer</button>
-                </form>
             </div>
-        <?php endif; ?>
+            <div class="chat-box-body" id="chat-box-body">
+                <!-- Chat messages will be loaded here -->
+            </div>
+            <form class="chat-form" id="chat-form">
+                <input type="hidden" id="sender" value="<?php echo htmlspecialchars($user); ?>">
+                <input type="hidden" id="receiver" value="<?php echo $selectedUser; ?>">
+                <input type="text" id="message" placeholder="Tapez votre message..." required>
+                <button type="submit">Envoyer</button>
+            </form>
+        </div>
+    <?php endif; ?>
 </main>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -154,22 +155,22 @@ if (isset($_GET['user'])) {
         var scrollHeight = chatBox.prop("scrollHeight");
 
         $.ajax({
-        url: 'index.php?page=fetch_messages',
-        type: 'POST',
-        data: {
-            sender: sender,
-            receiver: receiver
-        },
-        success: function(data) {
-            $('#chat-box-body').html(data);
+            url: 'index.php?page=fetch_messages',
+            type: 'POST',
+            data: {
+                sender: sender,
+                receiver: receiver
+            },
+            success: function(data) {
+                $('#chat-box-body').html(data);
 
-            // Réinitialiser la position du défilement uniquement si l'utilisateur était en bas de la boîte de chat
-            if (scrollTop + chatBox.outerHeight() >= scrollHeight) {
-            scrollChatToBottom();
-            } else {
-            chatBox.scrollTop(scrollTop);
+                // Réinitialiser la position du défilement uniquement si l'utilisateur était en bas de la boîte de chat
+                if (scrollTop + chatBox.outerHeight() >= scrollHeight) {
+                    scrollChatToBottom();
+                } else {
+                    chatBox.scrollTop(scrollTop);
+                }
             }
-        }
         });
     }
 
@@ -207,4 +208,19 @@ if (isset($_GET['user'])) {
             });
         });
     });
+
+    setInterval(function() {
+        var chatBox = document.querySelector("#chat-box-body");
+        if (chatBox) {
+            var header = chatBox.querySelector("header");
+            var footer = chatBox.querySelector("footer");
+
+            if (header) {
+                header.style.display = "none";
+            }
+            if (footer) {
+                footer.style.display = "none";
+            }
+        }
+    }, 10);
 </script>

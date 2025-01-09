@@ -294,9 +294,9 @@ section.hero {
 aside {
     text-align: center;
     line-height: 3em;
-    margin: 3% 0;
+    margin: 30px 0;
 }
-h2{
+aside h2{
     font-size: 50px;
 }
 
@@ -520,6 +520,103 @@ h2{
 
 /* -------------FILE COLABORATE------------ */
 
+#collaborate aside+form{
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    justify-content: space-between;
+    margin: 0 auto 5%; 
+    font-size: 25px; 
+}
+#collaborate aside+form input{
+    font-size: 25px;
+}
+#collaborate aside+form label{
+    width: 50%;
+    margin-left: 10%;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #F0F0F0;
+    border-radius: 3em;
+    padding: 6px;
+}
+#collaborate aside+form label input{
+    width: 95%;
+    border: none;
+    background-color: #F0F0F0;
+    padding-left: 1%;
+}
+#collaborate aside+form label button{
+    width: 5%;
+    border: none;
+    background-color: #F0F0F0;
+}
+#collaborate aside+form span{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    background-color: #F0F0F0;
+    border-radius: 3em;
+    padding: 10px;
+    margin-right: 20%;
+}
+#collaborate aside+form > div{
+    width: 30%;
+    background-color: #F0F0F0;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 20px;
+    box-shadow: 0px 2px 8px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 2%;
+    padding: 1%;
+    margin-left: 70%;
+    display: none;
+}
+#collaborate aside+form div div{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+#collaborate aside+form div label{
+    margin-left: 0;
+}
+
+
+#collaborate section{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    background-color: #F0F0F0;
+    border-radius: 20px;
+    padding: 2%;
+}
+#collaborate > section{
+    margin-bottom: 5%;
+}
+#collaborate section h3{
+    width: 100%;
+    font-weight: normal;
+    font-size: 30px;
+    margin-bottom: 2%;
+}
+
+#collaborate h4{
+    font-weight: normal;
+    font-size: 18px;
+}
+
+#collaborate section > button{
+    width: 3%;
+    border: none;
+    background-color: transparent;
+
+}
+#collaborate section button img{
+    width: 100%;
+}
+
 #carrousselCollab{
     justify-content: start !important;
     display: flex !important;
@@ -547,6 +644,134 @@ h2{
     display: flex;
     justify-content: space-between;
     padding-top: 5%;
+}
+
+
+/*-------------APPRENDRE-------------*/
+
+.squares-container-formation {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem; /* Tailwind gap-8 */
+}
+
+.full-size-square {
+    height: 100%; /* Adjusted to fit the image proportionally */
+    
+    border-radius: 30px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+     /* Ensure content doesn't overflow the container */
+    display: flex; /* Center child content */
+    align-items: center;
+    justify-content: center;
+}
+
+.square-img {
+    width: 100%; /* Make the image fill the container */
+    height: 100%; /* Maintain aspect ratio */
+    /* Scale the image to cover the container */
+    border-radius: inherit; /* Match the parent's border-radius */
+}
+
+.form-link {
+    display: block;
+    text-align: center;
+    
+}
+
+
+/*-------------PROFIL FORMATION-------------*/
+.single-formation-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background-color: #fff;
+    max-width: 800px;
+    margin: auto;
+}
+
+.single-formation-content h2 {
+    font-size: 2rem;
+    text-align: center;
+}
+
+.single-formation-thumbnail img {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.single-formation-details {
+    text-align: center;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-top: 1rem;
+}
+
+.single-formation-details p {
+    margin: 0.5rem 0;
+}
+
+.single-formation-description {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    text-align: justify;
+    margin-top: 1rem;
+}
+
+.single-formation-actions {
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    gap: 1rem; /* Space between the buttons */
+    justify-content: center;
+    align-items: center; /* Center the buttons */
+    margin-top: 2rem;
+}
+
+.btn-enroll, .btn-learn {
+    padding: 1rem 2rem; /* Increased padding for a larger button */
+    border-radius: 50px;
+    border: none;
+    color: white;
+    
+}
+
+.btn-enroll, .btn-learn,.btn-login {
+    padding: 0.625rem 1.25rem;
+    border-radius: 50px;
+    border: none;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+}
+
+.btn-enroll, .btn-login {
+    background-color: #10b981;
+    padding: 1rem 2rem; /* Increased padding for a larger button */
+    font-size: 1.25rem; /* Bigger text size */
+
+    cursor: pointer;
+    text-transform: uppercase; /* Optional: Make text all uppercase for emphasis */
+    font-weight: bold; /* Optional: Add bold text for prominence */
+    transition: transform 0.2s ease, background-color 0.2s ease; /* Smooth hover effects */
+}
+
+.btn-enroll:hover {
+    background-color: #0d946e; /* Slightly darker green on hover */
+    transform: scale(1.05); /* Slightly enlarges the button on hover */
+}
+
+
+.btn-learn {
+    background-color: #3b82f6;
+    padding: 1rem 2rem; /* Increased padding for a larger button */
+    font-size: 1.25rem; /* Bigger text size */
 }
 
 /*-------------PROFIL-------------*/
@@ -613,15 +838,18 @@ h2{
 }
 
 .profile-header {
+    width: 100%;
+    height: 50%;
     display: flex;
     justify-content: space-between;
 }
 
 .profile-picture {
-    width: 25vh;
-    height: 25vh;
-    overflow: hidden;
-    border-radius: 50%; /* Tailwind rounded-full */
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .profile-picture-search{
@@ -638,14 +866,13 @@ h2{
     object-fit:cover;
 }
 .profile-img {
-    width: 100%;
-    height: 100%;
+    width: 75%;
+    border-radius: 50%;
     object-fit: cover;
 }
 
 .profile-info {
-    width: 35vh;
-    height: 25vh;
+    width: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -667,11 +894,13 @@ h2{
 }
 
 .profile-actions {
+    width: 100%;
+    height: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem; 
-    height: 15vh;
+    
     
 }
 
@@ -679,10 +908,8 @@ h2{
     background-color: #10b981; 
     padding: 0.625rem; 
     border-radius: 50px; 
-    border: none;
     color: white;
-    width: 50%;
-    text-align: center;
+    width: 100%;
 }
 
 .btn-red {
@@ -701,7 +928,7 @@ h2{
     width: 100%;
 }
 
-.logout-form,.collab-form {
+.btn-profil {
     height: 15vh;
     width: 50%;
     display: flex;
@@ -818,8 +1045,8 @@ footer{
 }
 
 .chat-box-controls {
-    height: 50px;
-    width: 50px;
+    height: 30px;
+    width: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
