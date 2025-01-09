@@ -54,16 +54,13 @@
 
             <?php
             
-            $sql="SELECT * FROM collaboration ";
+            $sql="SELECT * FROM collaborations ";
             $result= $db->prepare($sql);
             $result->execute();
             $collaborations = $result->fetchAll(PDO::FETCH_ASSOC);
 
-            
-            
-            
-            
-           if (!empty($collaborations)): ?>
+
+            if (!empty($collaborations)): ?>
                 <?php foreach ($collaborations as $collab): ?>
                     <article class="oeuvre">
                         <img src="assets/img/picture1.png" alt="">
@@ -73,20 +70,34 @@
                                 
                             </div>
                             <?php
-                            
-                                $sqlPseudo="SELECT u.pseudo
-                                            FROM Users u
-                                            JOIN UserCollaborations uc ON u.id_user = uc.id_user
-                                            JOIN Collaborations c ON uc.id_collaboration = c.id_collaboration
-                                            WHERE c.id_collaboration = ".$collab['id_collaboration'];
-                                $resultPseudo= $db->prepare($sql);
-                                $resultPseudo->execute();
-                                $Pseudos = $resultPseudo->fetchAll(PDO::FETCH_ASSOC);
-                                var_dump($sqlPseudo);
-                                var_dump($resultPseudo);
-                                var_dump($Pseudos);
-                            ?>
-                            <p><?php foreach($Pseudos as $pseudo): echo $pseudo['pseudo']; endforeach; ?></p>
+                            $sqlPseudo = "
+                            SELECT  
+                                STRING_AGG(u.pseudo, ', ' ORDER BY u.pseudo) AS users
+                            FROM collaborations c
+                            JOIN usercollaborations uc ON c.id_collaborations = uc.id_collaborations
+                            JOIN users u ON uc.id_user = u.id_user
+                            WHERE c.id_collaborations = :id_collaborations
+                            GROUP BY c.id_collaborations
+                        ";
+                        
+                        $resultPseudo = $db->prepare($sqlPseudo);
+                        $resultPseudo->bindParam(':id_collaborations', $collab['id_collaborations'], PDO::PARAM_INT);
+                        $resultPseudo->execute();
+                        $Pseudos = $resultPseudo->fetchAll(PDO::FETCH_ASSOC);
+                        
+                        if (!empty($Pseudos)) {
+                        
+                            foreach ($Pseudos as $pseudo) {
+                                if (isset($pseudo['users'])) { 
+                                    echo htmlspecialchars($pseudo['users']) . "<br>"; 
+                                } else {
+                                    echo "Aucun utilisateur trouvé.<br>";
+                                }
+                            }
+                        } else {
+                            echo "Aucune collaboration trouvée.<br>";
+                        }
+                                   ?>
                         </div>
                     </article>
                 <?php endforeach; ?>
@@ -94,6 +105,34 @@
                 <p>Aucune collaboration trouvée.</p>
             <?php endif; ?>
 
+
+            $sqlPseudo = "
+    SELECT  
+        c.id_collaboration,
+        STRING_AGG(u.pseudo, ', ' ORDER BY u.pseudo) AS users
+    FROM collaboration c
+    JOIN userscollaborations uc ON c.id_collaboration = uc.id_collaboration
+    JOIN users u ON uc.id_user = u.id_user
+    GROUP BY c.id_collaboration
+";
+
+$resultPseudo = $db->prepare($sqlPseudo);
+$resultPseudo->execute();
+$Pseudos = $resultPseudo->fetchAll(PDO::FETCH_ASSOC);
+
+if (!empty($Pseudos)) {
+
+    foreach ($Pseudos as $pseudo) {
+        if (isset($pseudo['users'])) { 
+            echo htmlspecialchars($pseudo['users']) . "<br>"; 
+        } else {
+            echo "Aucun utilisateur trouvé.<br>";
+        }
+    }
+} else {
+    echo "Aucune collaboration trouvée.<br>";
+}
+           ?>
            
             
 
