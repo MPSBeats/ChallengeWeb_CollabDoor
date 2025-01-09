@@ -13,7 +13,7 @@ $db = (new Database())->connect();
 
     <aside>
         <h2>Découvrir</h2>
-        <p>Vois ce qui te plait chef</p>
+        <p>Viens découvrir les futures stars de demain !</p>
     </aside>
 
     <form action="search.php" method="get">
@@ -61,11 +61,6 @@ $db = (new Database())->connect();
             $result2->execute();
             $userscollaborations = $result2->fetchAll(PDO::FETCH_ASSOC);
 
-
-
-
-
-
             if (!empty($collaborations)): ?>
                 <?php foreach ($collaborations as $collab): ?>
                     <article class="oeuvre" onclick="window.location.href='index.php?page=productsheet&id=<?= $collab['id_collaborations'] ?>'">
@@ -96,34 +91,29 @@ $db = (new Database())->connect();
                 <p>Aucune collaboration trouvée.</p>
             <?php endif; ?>
 
-
-
-
-
-
         </section>
         <button id="button_right"><img src="assets/img/circle-chevron-right.svg" alt="fleche droite"></button>
 
     </section>
     <?php  // Récupération d'un utilisateur aléatoire
-$sqlRandomUser = "SELECT * FROM Users ORDER BY RANDOM() LIMIT 1";
-$resultRandomUser = $db->prepare($sqlRandomUser);
-$resultRandomUser->execute();
-$randomUser = $resultRandomUser->fetch(PDO::FETCH_ASSOC); 
+    $sqlRandomUser = "SELECT * FROM Users ORDER BY RANDOM() LIMIT 1";
+    $resultRandomUser = $db->prepare($sqlRandomUser);
+    $resultRandomUser->execute();
+    $randomUser = $resultRandomUser->fetch(PDO::FETCH_ASSOC);
 
 
-// Récupération des collaborations de l'utilisateur aléatoire
-$sqlUserCollabs = "
+    // Récupération des collaborations de l'utilisateur aléatoire
+    $sqlUserCollabs = "
     SELECT c.*
     FROM collaborations c
     JOIN usercollaborations uc ON c.id_collaborations = uc.id_collaborations
     WHERE uc.id_user = :id_user
 ";
-$resultUserCollabs = $db->prepare($sqlUserCollabs);
-$resultUserCollabs->bindParam(':id_user', $randomUser['id_user'], PDO::PARAM_INT);
-$resultUserCollabs->execute();
-$userCollaborations = $resultUserCollabs->fetchAll(PDO::FETCH_ASSOC);
-?>
+    $resultUserCollabs = $db->prepare($sqlUserCollabs);
+    $resultUserCollabs->bindParam(':id_user', $randomUser['id_user'], PDO::PARAM_INT);
+    $resultUserCollabs->execute();
+    $userCollaborations = $resultUserCollabs->fetchAll(PDO::FETCH_ASSOC);
+    ?>
 
 
     <section>
@@ -135,20 +125,20 @@ $userCollaborations = $resultUserCollabs->fetchAll(PDO::FETCH_ASSOC);
             </span>
             <img src="<?= htmlspecialchars($randomUser['picture']) ?>" alt="hero">
             <section id="carrousselartiste">
-            <article class="oeuvre"></article>
-            <?php if (!empty($userCollaborations)): ?>
-                <?php foreach ($userCollaborations as $collab): ?>
-                    <article class="oeuvre"  onclick="window.location.href='index.php?page=productsheet&id=<?= $collab['id_collaborations'] ?>'">
-                    <img src="<?= htmlspecialchars($collab['thumbnail']) ?>" alt="">
-                        <div>
-                            <h4><?= htmlspecialchars($collab['title']) ?></h4>
-                            <p>Publié le : <?= htmlspecialchars($collab['published_at']) ?></p>
-                        </div>
-                    </article>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <p>Aucune collaboration trouvée pour cet artiste.</p>
-            <?php endif; ?>
+                <article class="oeuvre"></article>
+                <?php if (!empty($userCollaborations)): ?>
+                    <?php foreach ($userCollaborations as $collab): ?>
+                        <article class="oeuvre">
+                            <img src="<?= htmlspecialchars($collab['thumbnail']) ?>" alt="">
+                            <div>
+                                <h4><?= htmlspecialchars($collab['title']) ?></h4>
+                                <p>Publié le : <?= htmlspecialchars($collab['published_at']) ?></p>
+                            </div>
+                        </article>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p>Aucune collaboration trouvée pour cet artiste.</p>
+                <?php endif; ?>
 
             </section>
         </div>

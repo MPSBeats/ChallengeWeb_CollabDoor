@@ -25,7 +25,7 @@ $db = (new Database())->connect();
     <section class="collaborate">
         <div class="big-card">
             <div class="top-card">
-                <h3><a href="index.php?page=collaborate">Collaborer</a></h3>
+                <h1><a href="index.php?page=collaborate">Collaborer</a></h1>
                 <p style="font-family: Fira code;"><a href="index.php?page=collaborate">--></a></p>
             </div>
 
@@ -69,7 +69,7 @@ $db = (new Database())->connect();
     <section class="discover">
         <div class="big-card">
         <div class="top-card">
-                <h3><a href="index.php?page=discover">Découvrir</a></h3>
+                <h1><a href="index.php?page=discover">Découvrir</a></h1>
                 <p style="font-family: Fira code;"><a href="index.php?page=discover">--></a></p>
             </div>
             <div class="bot-card">
@@ -118,7 +118,7 @@ $db = (new Database())->connect();
     <section class="learn">
         <div class="big-card">
             <div class="top-card">
-                <h1>Apprendre</h1>
+                <h1><a href="index.php?page=learn">Apprendre</a></h1>
                 <p style="font-family: Fira code;"><a href="index.php?page=learn">--></a></p>
             </div>
             <div class="work-in-progress">

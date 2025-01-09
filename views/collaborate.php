@@ -22,7 +22,7 @@ if (isset($_GET['user'])) {
 
     <aside>
         <h2>Collaborer</h2>
-        <p>Fais toi kiffer en colaborant avec quelqu'un</p>
+        <p>Trouve ton futur duo ou ta future équipe pour briller dans le game !</p>
     </aside>
 
     <form action="">

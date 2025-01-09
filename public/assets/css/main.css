@@ -806,16 +806,26 @@ footer{
 }
 
 .close-btn {
-    color: #fff;
-    background-color: transparent;
-    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 1.5rem;
+    
 }
 
-.close-btn:hover {
-    background-color: rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
+.chat-box-controls {
+    height: 50px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    background-color: #fff;
+    right: 10px;
+    top: 10px;
+    border-radius: 5px;
 }
 
 #chat-box-body {

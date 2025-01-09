@@ -33,6 +33,7 @@ if (isset($_GET['user'])) {
     $showChatBox = false; // Set to false initially
 
 }
+
 ?>
 
 <main class="profil">
@@ -84,7 +85,10 @@ if (isset($_GET['user'])) {
                         <button type="submit" name='collab' class="btn-blue">Ajouter une collab</button>
                     </form>
                     <form action="index.php?page=profile" method="post" class="logout-form">
-                        <button type="submit" name="logout" class="btn-red">Logout</button>
+                        <button type="submit" name="logout" class="btn-red">Déconnexion</button>
+                    </form>
+                    <form action="index.php?page=message" method="post" class="message-form">
+                        <button type="submit" name="message" class="btn-green">Message</button>
                     </form>
 
                 <?php } else { ?>
@@ -110,8 +114,7 @@ if (isset($_GET['user'])) {
                     <!-- Chat messages will be loaded here -->
                 </div>
                 <form class="chat-form" id="chat-form">
-                    <input type="hidden" id="sender" value="<?php echo htmlspecialchars($user); ?>">
-
+                    <input type="hidden" id="sender" value="<?php echo htmlspecialchars($_SESSION['pseudo']); ?>">
                     <input type="hidden" id="receiver" value="<?php echo $selectedUser; ?>">
                     <input type="text" id="message" placeholder="Tapez votre message..." required>
                     <button type="submit">Envoyer</button>

@@ -40,16 +40,13 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
+Our project, Collabdoor, is a web application designed to facilitate collaboration between artists.
+It allows users to create profiles, showcase their work, and connect with other artists.
+The platform also features a messaging system, allowing users to communicate with each other easily.
+Collabdoor aims to provide a space for artists to share their ideas, collaborate on projects, and learn from one another.
 
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should implement DRY principles to the rest of your life :smile:
+This project is a personnal project and we used the web development challenge to improve our skills, learn new things and structure our ideas to modify it to a real project in the future.
 
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
-
-Go to the next `section` to get started.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
