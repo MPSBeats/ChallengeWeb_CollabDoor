@@ -11,54 +11,54 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="space"></div>
 
     <div class="flex w-full justify-around">
-        <div style="background-color: blue; width: 60%; height: 65vh;">
-            <div style="display: flex; justify-content: space-between; margin: 0 5%; margin-bottom:2%">
-                <div class="option" data-action="samples" style="width: 30%; height: 10vh; background-color: red; display: flex; align-items: center; justify-content: center; cursor: pointer;">Mes Samples</div>
-                <div class="option" data-action="collabs" style="width: 30%; height: 10vh; background-color: red; display: flex; align-items: center; justify-content: center; cursor: pointer;">Mes Collabs</div>
-                <div class="option" data-action="formations" style="width: 30%; height: 10vh; background-color: red; display: flex; align-items: center; justify-content: center; cursor: pointer;">Mes Formations</div>
+        <div class="bg-blue-500 w-3/5 h-65vh">
+            <div class="flex justify-between mx-5 mb-2">
+                <div class="option w-1/3 h-10vh bg-red-500 flex items-center justify-center cursor-pointer" data-action="samples">Mes Samples</div>
+                <div class="option w-1/3 h-10vh bg-red-500 flex items-center justify-center cursor-pointer" data-action="collabs">Mes Collabs</div>
+                <div class="option w-1/3 h-10vh bg-red-500 flex items-center justify-center cursor-pointer" data-action="formations">Mes Formations</div>
             </div>
-            <div class="squares-container" style="display: flex; flex-wrap: wrap; justify-content: space-between; margin:0 5%; ">
-                <div class="square" style="height: 25vh; width: 30%; background-color: yellow; margin-bottom: 10px;"></div>
-                <div class="square" style="height: 25vh; width: 30%; background-color: yellow; margin-bottom: 10px;"></div>
-                <div class="square" style="height: 25vh; width: 30%; background-color: yellow; margin-bottom: 10px;"></div>
-                <div class="square" style="height: 25vh; width: 30%; background-color: yellow; margin-bottom: 10px;display:none;"></div>
-                <div class="square" style="height: 25vh; width: 30%; background-color: yellow; margin-bottom: 10px;display:none;"></div>
-                <div class="square" style="height: 25vh; width: 30%; background-color: yellow; margin-bottom: 10px;display:none;"></div>
+            <div class="squares-container flex flex-wrap justify-between mx-5">
+                <div class="square h-25vh w-1/3 bg-yellow-500 mb-2"></div>
+                <div class="square h-25vh w-1/3 bg-yellow-500 mb-2"></div>
+                <div class="square h-25vh w-1/3 bg-yellow-500 mb-2"></div>
+                <div class="square h-25vh w-1/3 bg-yellow-500 mb-2 hidden"></div>
+                <div class="square h-25vh w-1/3 bg-yellow-500 mb-2 hidden"></div>
+                <div class="square h-25vh w-1/3 bg-yellow-500 mb-2 hidden"></div>
             </div>
         </div>
 
-        <div style="border: 2px solid black;border-radius: 5%; width: 30%; height: 65vh;padding: 10px">
-            <div style="display: flex; justify-content: space-between;">
-                <div style="width: 25vh; height: 25vh; overflow: hidden; border-radius: 10%;">
-                    <img src="assets/img/picture1.png" alt="Profile PictureS" width="100%" height="100%" style="object-fit: cover;">
+        <div class="border-2 border-black rounded-lg w-1/3 h-65vh p-2.5">
+            <div class="flex justify-between">
+                <div class="w-25vh h-25vh overflow-hidden rounded-full">
+                    <img src="assets/img/picture1.png" alt="Profile PictureS" class="w-full h-full object-cover">
                 </div>
 
-                <div style=" width: 35vh; height: 25vh; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+                <div class="w-35vh h-25vh flex items-center justify-center flex-col">
                     <h2>MPSBeats</h2>
-                    <div style="display: flex; justify-content: space-around">
+                    <div class="flex justify-around">
                         <p>5*</p>
                         <p>|</p>
                         <p>Paris</p>
                     </div>
                 </div>
             </div>
-            <div style=" width: 100%; height: 25vh;">
+            <div class="w-full h-25vh">
                 <br>
                 <h2>Bio</h2>
                 <br>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod.</p>
                 <br>
-                <div style="display: flex;">
+                <div class="flex">
                     <p>Trap,</p>
                     <p>RNB,</p>
                     <p>NEW WAVE</p>
                 </div>
             </div>
-            <div style="display: flex; justify-content: center; align-items: center; height: 15vh;">
-                <button style="background-color: green; padding: 10px; border-radius: 50px; text-align: center; line-height: 5vh; border: none; color: white; width: 50%;">Rounded Button</button>
+            <div class="flex justify-center items-center h-15vh">
+                <button class="bg-green-500 p-2.5 rounded-full text-center leading-5vh border-none text-white w-1/2">Rounded Button</button>
 
-                <form action="index.php?page=profile" style="height:15vh; width:50%; display:flex; align-items:center" method="post">
-                    <button type="submit" style="background-color: red; padding: 10px; border-radius: 50px; text-align: center; line-height: 5vh; border: none; color: white; width: 100%;">Logout</button>
+                <form action="index.php?page=profile" class="h-15vh w-1/2 flex items-center" method="post">
+                    <button type="submit" class="bg-red-500 p-2.5 rounded-full text-center leading-5vh border-none text-white w-full">Logout</button>
                 </form>
             </div>
         </div>
