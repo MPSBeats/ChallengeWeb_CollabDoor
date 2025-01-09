@@ -20,6 +20,11 @@ document.querySelectorAll('a.smooth-scroll').forEach(anchor => {
 });
 
 
+
+
+
+
+//Carrousel pour carrousselpepite
 let button_left = document.getElementById('button_left');
 let button_right = document.getElementById('button_right');
 let carrousselOeuvre = document.getElementById('carrousselpepite');
