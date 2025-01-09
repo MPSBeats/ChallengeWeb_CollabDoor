@@ -1,3 +1,14 @@
+<?php
+
+    require_once '../models/database.php';
+    $db= (new Database())->connect();
+
+
+
+?>
+
+
+
 <main id="discover">
     <div class="space"></div>
     
@@ -40,69 +51,49 @@
         <h3>Pépite de la semaine :</h3>
         <button id="button_left"><img src="assets/img/circle-chevron-left.svg" alt="fleche gauche"></button>
         <section id="carrousselpepite">
-            <article class="oeuvre">
-                <img src="assets/img/picture1.png" alt="">
-                <div>
-                    <div>
-                    <h4>POUMTCHAK</h4>
-                    <span><p>5</p><button><img src="assets/img/heart.svg" alt="coeur img"></button></span></div>
-                    <p>MPS, elsyr, zoji, her...</p>
-                </div>
-            </article>
-            <article class="oeuvre">
-                <img src="assets/img/picture1.png" alt="">
-                <div>
-                    <div>
-                    <h4>POUMTCHAK</h4>
-                    <span><p>5</p><button><img src="assets/img/heart.svg" alt="coeur img"></button></span></div>
-                    <p>MPS, elsyr, zoji, her...</p>
-                </div>
-            </article>
-            <article class="oeuvre">
-                <img src="assets/img/picture1.png" alt="">
-                <div>
-                    <div>
-                    <h4>POUMTCHAK</h4>
-                    <span><p>5</p><button><img src="assets/img/heart.svg" alt="coeur img"></button></span></div>
-                    <p>MPS, elsyr, zoji, her...</p>
-                </div>
-            </article>
-            <article class="oeuvre">
-                <img src="assets/img/picture1.png" alt="">
-                <div>
-                    <div>
-                    <h4>POUMTCHAK</h4>
-                    <span><p>5</p><button><img src="assets/img/heart.svg" alt="coeur img"></button></span></div>
-                    <p>MPS, elsyr, zoji, her...</p>
-                </div>
-            </article>
-            <article class="oeuvre">
-                <img src="assets/img/picture1.png" alt="">
-                <div>
-                    <div>
-                    <h4>POUMTCHAK</h4>
-                    <span><p>5</p><button><img src="assets/img/heart.svg" alt="coeur img"></button></span></div>
-                    <p>MPS, elsyr, zoji, her...</p>
-                </div>
-            </article>
-            <article class="oeuvre">
-                <img src="assets/img/picture1.png" alt="">
-                <div>
-                    <div>
-                    <h4>POUMTCHAK</h4>
-                    <span><p>5</p><button><img src="assets/img/heart.svg" alt="coeur img"></button></span></div>
-                    <p>MPS, elsyr, zoji, her...</p>
-                </div>
-            </article>
-            <article class="oeuvre">
-                <img src="assets/img/picture1.png" alt="">
-                <div>
-                    <div>
-                    <h4>POUMTCHAK</h4>
-                    <span><p>5</p><button><img src="assets/img/heart.svg" alt="coeur img"></button></span></div>
-                    <p>MPS, elsyr, zoji, her...</p>
-                </div>
-            </article>
+
+            <?php
+            
+            $sql="SELECT * FROM collaboration ";
+            $result= $db->prepare($sql);
+            $result->execute();
+            $collaborations = $result->fetchAll(PDO::FETCH_ASSOC);
+
+            
+            
+            
+            
+           if (!empty($collaborations)): ?>
+                <?php foreach ($collaborations as $collab): ?>
+                    <article class="oeuvre">
+                        <img src="assets/img/picture1.png" alt="">
+                        <div>
+                            <div>
+                                <h4><?= htmlspecialchars($collab['title']) ?></h4>
+                                
+                            </div>
+                            <?php
+                            
+                                $sqlPseudo="SELECT u.pseudo
+                                            FROM Users u
+                                            JOIN UserCollaborations uc ON u.id_user = uc.id_user
+                                            JOIN Collaborations c ON uc.id_collaboration = c.id_collaboration
+                                            WHERE c.id_collaboration = ".$collab['id_collaboration'];
+                                $resultPseudo= $db->prepare($sql);
+                                $resultPseudo->execute();
+                                $Pseudos = $resultPseudo->fetchAll(PDO::FETCH_ASSOC);
+                                var_dump($sqlPseudo);
+                                var_dump($resultPseudo);
+                                var_dump($Pseudos);
+                            ?>
+                            <p><?php foreach($Pseudos as $pseudo): echo $pseudo['pseudo']; endforeach; ?></p>
+                        </div>
+                    </article>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>Aucune collaboration trouvée.</p>
+            <?php endif; ?>
+
            
             
 
