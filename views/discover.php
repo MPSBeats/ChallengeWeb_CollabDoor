@@ -128,7 +128,7 @@ $db = (new Database())->connect();
                 <article class="oeuvre"></article>
                 <?php if (!empty($userCollaborations)): ?>
                     <?php foreach ($userCollaborations as $collab): ?>
-                        <article class="oeuvre">
+                        <article class="oeuvre"  onclick="window.location.href='index.php?page=productsheet&id=<?= $collab['id_collaborations'] ?>'">
                             <img src="<?= htmlspecialchars($collab['thumbnail']) ?>" alt="">
                             <div>
                                 <h4><?= htmlspecialchars($collab['title']) ?></h4>
