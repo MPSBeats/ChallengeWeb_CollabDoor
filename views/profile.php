@@ -33,6 +33,7 @@ if (isset($_GET['user'])) {
     $showChatBox = false; // Set to false initially
 
 }
+
 ?>
 
 <main class="profil">
@@ -110,8 +111,7 @@ if (isset($_GET['user'])) {
                     <!-- Chat messages will be loaded here -->
                 </div>
                 <form class="chat-form" id="chat-form">
-                    <input type="hidden" id="sender" value="<?php echo htmlspecialchars($user); ?>">
-
+                    <input type="hidden" id="sender" value="<?php echo htmlspecialchars($_SESSION['pseudo']); ?>">
                     <input type="hidden" id="receiver" value="<?php echo $selectedUser; ?>">
                     <input type="text" id="message" placeholder="Tapez votre message..." required>
                     <button type="submit">Envoyer</button>
