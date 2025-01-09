@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="file" name="picture" id="picture" accept="image/png, image/jpeg" required>
                 <div class="btn-box">
                     <button type="button" id="retour3">Retour</button>
-                    <button type="submit">S'inscrire</button>
+                    <button id='submit' type="submit">S'inscrire</button>
                 </div>
             </div>
 
@@ -94,6 +94,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             var retour1 = document.getElementById("retour1");
             var retour2 = document.getElementById("retour2");
             var retour3 = document.getElementById("retour3");
+            var submit = document.getElementById("submit");
+
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    if (progress.style.width < '179px') {
+                        suivant1.click();
+                    } else if (progress.style.width === "180px") {
+                        suivant2.click();
+                    } else if (progress.style.width === "270px") {
+                        suivant3.click();
+                    } else if (progress.style.width === "360px") {
+                        submit.click();
+                    }
+                }
+            });
 
             suivant1.onclick = function() {
                 form1.style.left = "-450px";

@@ -1,8 +1,7 @@
 <?php
 
 $page = (isset($_GET['page'])) ? $_GET['page'] : 'home';
-
-
+$user = (isset($_GET['user'])) ? $_GET['user'] : '';
 
 
 switch ($page) {
@@ -47,5 +46,7 @@ switch ($page) {
         break;
 
     default:
+        include '../views/home.php';
         break;
 }
+?>
