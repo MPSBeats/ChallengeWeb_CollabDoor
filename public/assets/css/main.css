@@ -774,10 +774,8 @@ aside h2{
     background-color: #10b981; 
     padding: 0.625rem; 
     border-radius: 50px; 
-    border: none;
     color: white;
-    width: 50%;
-    text-align: center;
+    width: 100%;
 }
 
 .btn-red {
@@ -796,7 +794,7 @@ aside h2{
     width: 100%;
 }
 
-.logout-form,.collab-form {
+.btn-profil {
     height: 15vh;
     width: 50%;
     display: flex;

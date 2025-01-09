@@ -81,18 +81,18 @@ if (isset($_GET['user'])) {
             </div>
             <div class="profile-actions">
                 <?php if (!isset($_GET['artist'])) { ?>
-                    <form action="index.php?page=profile" method="post" class="collab-form">
+                    <form action="index.php?page=profile" method="post" class="btn-profil">
                         <button type="submit" name='collab' class="btn-blue">Ajouter une collab</button>
                     </form>
-                    <form action="index.php?page=profile" method="post" class="logout-form">
+                    <form action="index.php?page=profile" method="post" class="btn-profil">
                         <button type="submit" name="logout" class="btn-red">Déconnexion</button>
                     </form>
-                    <form action="index.php?page=message" method="post" class="message-form">
+                    <form action="index.php?page=message" method="post" class="btn-profil">
                         <button type="submit" name="message" class="btn-green">Message</button>
                     </form>
 
                 <?php } else { ?>
-                    <a href='index.php?page=profile&artist=<?php echo $pseudo?>&user=<?php echo $pseudo ?>'>
+                    <a href='index.php?page=profile&artist=<?php echo $pseudo ?>&user=<?php echo $pseudo ?>'>
                         Contacter
                     </a>
                 <?php } ?>
@@ -102,25 +102,25 @@ if (isset($_GET['user'])) {
 
 
 
-    <?php 
+    <?php
     //Affichage de la chatBox
     if ($showChatBox): ?>
-            <div class="chat-box" id="chat-box">
-                <div class="chat-box-header">
-                    <h2><?php echo ucfirst($selectedUser); ?></h2>
-                    <button class="close-btn" onclick="closeChat()">✖</button>
-                </div>
-                <div class="chat-box-body" id="chat-box-body">
-                    <!-- Chat messages will be loaded here -->
-                </div>
-                <form class="chat-form" id="chat-form">
-                    <input type="hidden" id="sender" value="<?php echo htmlspecialchars($_SESSION['pseudo']); ?>">
-                    <input type="hidden" id="receiver" value="<?php echo $selectedUser; ?>">
-                    <input type="text" id="message" placeholder="Tapez votre message..." required>
-                    <button type="submit">Envoyer</button>
-                </form>
+        <div class="chat-box" id="chat-box">
+            <div class="chat-box-header">
+                <h2><?php echo ucfirst($selectedUser); ?></h2>
+                <button class="close-btn" onclick="closeChat()">✖</button>
             </div>
-        <?php endif; ?>
+            <div class="chat-box-body" id="chat-box-body">
+                <!-- Chat messages will be loaded here -->
+            </div>
+            <form class="chat-form" id="chat-form">
+                <input type="hidden" id="sender" value="<?php echo htmlspecialchars($_SESSION['pseudo']); ?>">
+                <input type="hidden" id="receiver" value="<?php echo $selectedUser; ?>">
+                <input type="text" id="message" placeholder="Tapez votre message..." required>
+                <button type="submit">Envoyer</button>
+            </form>
+        </div>
+    <?php endif; ?>
 </main>
 
 <script>
@@ -196,22 +196,22 @@ if (isset($_GET['user'])) {
         var scrollHeight = chatBox.prop("scrollHeight");
 
         $.ajax({
-        url: 'index.php?page=fetch_messages',
-        type: 'POST',
-        data: {
-            sender: sender,
-            receiver: receiver
-        },
-        success: function(data) {
-            $('#chat-box-body').html(data);
+            url: 'index.php?page=fetch_messages',
+            type: 'POST',
+            data: {
+                sender: sender,
+                receiver: receiver
+            },
+            success: function(data) {
+                $('#chat-box-body').html(data);
 
-            // Réinitialiser la position du défilement uniquement si l'utilisateur était en bas de la boîte de chat
-            if (scrollTop + chatBox.outerHeight() >= scrollHeight) {
-            scrollChatToBottom();
-            } else {
-            chatBox.scrollTop(scrollTop);
+                // Réinitialiser la position du défilement uniquement si l'utilisateur était en bas de la boîte de chat
+                if (scrollTop + chatBox.outerHeight() >= scrollHeight) {
+                    scrollChatToBottom();
+                } else {
+                    chatBox.scrollTop(scrollTop);
+                }
             }
-        }
         });
     }
 
