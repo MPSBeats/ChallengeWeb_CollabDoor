@@ -30,7 +30,7 @@
     }
 ?>
 
-<main>
+<main class="login">
     <div class="space"></div>
     <?php if (isset($error)): ?>
             <p class="error"><?php echo htmlspecialchars($error); ?></p>

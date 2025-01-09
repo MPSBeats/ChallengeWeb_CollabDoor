@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<main>
+<main class="register">
     <div class="space"></div>
     <div class="form">
         <form action="index.php?page=register" method="post">
