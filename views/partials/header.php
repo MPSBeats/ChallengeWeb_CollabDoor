@@ -9,7 +9,6 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/main.css">
     <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
     <title>Document</title>
@@ -41,6 +40,14 @@ session_start();
                     </a></li>
             </ul>
             <?php if (isset($_SESSION['pseudo'])): ?>
+                <?php
+                // Example profile data from session or database
+                $profile = [
+                    'pseudo' => $_SESSION['pseudo'],
+                    'email' => $_SESSION['email'] ?? 'example@example.com', // Replace with actual session keys
+                    'age' => $_SESSION['age'] ?? 25 // Replace with actual session keys
+                ];
+                ?>
                 <ul class="user">
                     <li><a href="index.php?page=profile">
                             <button>
