@@ -25,7 +25,7 @@ $receiverId = $receiverStmt->fetch(PDO::FETCH_COLUMN);
 // Vérifiez que les IDs de l'expéditeur et du destinataire sont valides
 if (!$senderId) {
     echo "ID de l'expéditeur n'est pas valide pour le pseudo: $sender";
-    exit();
+    exit(); 
 }
 if (!$receiverId) {
     echo "ID du destinataire n'est pas valide pour le pseudo: $receiver";

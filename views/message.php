@@ -44,8 +44,14 @@ if (isset($_GET['user'])) {
                     // Fetch all users except the current user
                     $sqlMessage = "SELECT DISTINCT u2.pseudo FROM Users u1 JOIN UsersChats uc ON u1.id_user = uc.id_userchat JOIN Chats c ON uc.id_userchat::varchar = c.sender::varchar OR uc.id_userchat::varchar = c.receiver::varchar JOIN Users u2 ON (c.sender::varchar = u2.id_user::varchar OR c.receiver::varchar = u2.id_user::varchar) WHERE u1.pseudo = :pseudo AND u1.id_user <> u2.id_user";
                     $resultMessage = $db->prepare($sqlMessage);
-                    $resultMessage->execute([':pseudo' => $pseudo]);
-                    $users = $resultMEssage->fetchAll(PDO::FETCH_ASSOC);
+                    if ($resultMessage->execute([':pseudo' => $pseudo])) {
+                        $users = $resultMessage->fetchAll(PDO::FETCH_ASSOC);
+                        if (count($users) === 0) {
+                            echo "<li>Aucun message trouvé.</li>";
+                        }
+                    } else {
+                        echo "<li>Aucun message trouvé.</li>";
+                    }
 
                     if (count($users) > 0) {
                         foreach ($users as $row) {
