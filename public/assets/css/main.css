@@ -350,7 +350,6 @@ h2{
     margin-top: 2%;
     padding: 1%;
     margin-left: 70%;
-
     display: none;
 }
 #discover form div div{
@@ -432,6 +431,7 @@ h2{
     border: none;
     background-color: transparent;
 }
+
 #discover section > button{
     width: 3%;
     border: none;
