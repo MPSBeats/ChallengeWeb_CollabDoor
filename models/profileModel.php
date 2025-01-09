@@ -50,7 +50,7 @@ class Profile
                     Learnings.thumbnail,
                     Learnings.description,
                     Learnings.price,
-                    Learnings.data,
+                    Learnings.date,
                     Learnings.rate
                 FROM 
                     Users
