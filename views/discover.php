@@ -52,11 +52,11 @@ $db = (new Database())->connect();
         <button id="button_left"><img src="assets/img/circle-chevron-left.svg" alt="fleche gauche"></button>
         <section id="carrousselpepite">
             <?php
-            $sql1 = "SELECT * FROM collaboration ";
+            $sql1 = "SELECT * FROM collaborations";
             $result1 = $db->prepare($sql1);
             $result1->execute();
             $collaborations = $result1->fetchAll(PDO::FETCH_ASSOC);
-            $sql2 = "SELECT * FROM userscollaborations ";
+            $sql2 = "SELECT * FROM usercollaborations ";
             $result2 = $db->prepare($sql2);
             $result2->execute();
             $userscollaborations = $result2->fetchAll(PDO::FETCH_ASSOC);
@@ -79,15 +79,13 @@ $db = (new Database())->connect();
 
                             $sqlPseudo = "SELECT u.pseudo
                                             FROM Users u
-                                            JOIN UsersCollaborations uc ON u.id_user = uc.id_user
-                                            JOIN Collaboration c ON uc.id_collaboration = c.id_collaboration
-                                            WHERE c.id_collaboration = " . $collab['id_collaboration'];
+                                            JOIN UserCollaborations uc ON u.id_user = uc.id_user
+                                            JOIN Collaborations c ON uc.id_collaborations = c.id_collaborations
+                                            WHERE c.id_collaborations = " . $collab['id_collaborations'];
                             $resultPseudo = $db->prepare($sqlPseudo);
                             $resultPseudo->execute();
                             $Pseudos = $resultPseudo->fetchAll(PDO::FETCH_ASSOC);
-                            var_dump($sqlPseudo);
-                            var_dump($resultPseudo);
-                            var_dump($Pseudos);
+
                             ?>
                             <p><?php foreach ($Pseudos as $pseudo): echo $pseudo['pseudo'];
                                 endforeach; ?></p>
