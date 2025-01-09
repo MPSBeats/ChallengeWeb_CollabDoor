@@ -442,15 +442,6 @@ h2{
     width: 100%;
 }
 
-#carrousselartiste{
-    justify-content: start !important;
-    display: flex !important;
-    flex-wrap: nowrap !important;
-    overflow-x: auto !important;
-    width: 90% !important;
-    padding-left: 5% !important;
-    scrollbar-width: none;
-}
 
 #zoomartiste{
     width: 100%;
@@ -462,7 +453,6 @@ h2{
     position:absolute;
     border-radius: 50%;
     width: 23%;
-    z-index: 100;
 }
 #zoomartiste > span{
     width: 100%;
@@ -480,18 +470,18 @@ h2{
     background-color: transparent;
 }
 
-#zoomartiste #carrousselartiste {
+#zoomartiste #carrousselpepite {
     margin-left: 5%;
     background-color: transparent;
 }
 
-#zoomartiste #carrousselartiste .oeuvre {
+#zoomartiste #carrousselpepite .oeuvre {
     position: relative;
     overflow: hidden;
     width: 20%;
 }
 
-#zoomartiste #carrousselartiste .oeuvre div {
+#zoomartiste #carrousselpepite .oeuvre div {
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -503,7 +493,7 @@ h2{
 
 }
 
-#zoomartiste #carrousselartiste .oeuvre:hover div {
+#zoomartiste #carrousselpepite .oeuvre:hover div {
     transform: translateY(-5%);
     opacity: 1;
     display: flex;
@@ -512,17 +502,8 @@ h2{
 }
 
 
-/* -------------FILE COLABORATE------------ */
 
-#carrousselCollab{
-    justify-content: start !important;
-    display: flex !important;
-    flex-wrap: nowrap !important;
-    overflow-x: auto !important;
-    width: 90% !important;
-    padding-left: 5% !important;
-    scrollbar-width: none;
-}
+/* -------------FILE COLABORATE------------ */
 
 .fiche_artiste{
     margin-right: 3%;
@@ -567,4 +548,102 @@ footer{
     display: flex;
     gap: 16px;
     align-items: center;
+}
+
+
+/*--------------MESSAGES--------------*/
+
+.chat-box {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    height: 400px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Assurez-vous d'avoir cette propriété pour éviter les débordements */
+}
+
+.chat-box-header {
+    background-color: #0084ff;
+    color: #fff;
+    padding: 15px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-box-header h2 {
+    margin: 0;
+}
+
+.close-btn {
+    color: #fff;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.close-btn:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+}
+
+
+.chat-box-body {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto; /* Permet le défilement vertical */
+    -webkit-overflow-scrolling: touch; /* Pour un défilement fluide sur iOS */
+}
+
+.message {
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    max-width: 80%;
+    word-wrap: break-word;
+}
+
+.message p {
+    margin: 5px 0;
+}
+
+.chat-form {
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    background-color: #f9f9f9;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.chat-form input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.chat-form button {
+    background-color: #0084ff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.chat-form button:hover {
+    background-color: #0056b3;
 }
