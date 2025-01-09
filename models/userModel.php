@@ -40,4 +40,11 @@ class User
         }
         return false;
     }
+
+    public function getUserId($pseudo)
+    {
+        $stmt = $this->pdo->prepare('SELECT id_user FROM users WHERE pseudo= :pseudo');
+        $stmt->execute(['pseudo' => $pseudo]);
+        return $stmt->fetchColumn();
+    }
 }

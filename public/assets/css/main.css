@@ -543,6 +543,134 @@ h2{
     padding-top: 5%;
 }
 
+
+/*-------------APPRENDRE-------------*/
+
+.squares-container-formation {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem; /* Tailwind gap-8 */
+}
+
+.full-size-square {
+    height: 100%; /* Adjusted to fit the image proportionally */
+    
+    border-radius: 30px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+     /* Ensure content doesn't overflow the container */
+    display: flex; /* Center child content */
+    align-items: center;
+    justify-content: center;
+}
+
+.square-img {
+    width: 100%; /* Make the image fill the container */
+    height: 100%; /* Maintain aspect ratio */
+    /* Scale the image to cover the container */
+    border-radius: inherit; /* Match the parent's border-radius */
+}
+
+.form-link {
+    display: block;
+    text-align: center;
+    
+}
+
+
+/*-------------PROFIL FORMATION-------------*/
+.single-formation-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background-color: #fff;
+    max-width: 800px;
+    margin: auto;
+}
+
+.single-formation-content h2 {
+    font-size: 2rem;
+    text-align: center;
+}
+
+.single-formation-thumbnail img {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.single-formation-details {
+    text-align: center;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-top: 1rem;
+}
+
+.single-formation-details p {
+    margin: 0.5rem 0;
+}
+
+.single-formation-description {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    text-align: justify;
+    margin-top: 1rem;
+}
+
+.single-formation-actions {
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    gap: 1rem; /* Space between the buttons */
+    justify-content: center;
+    align-items: center; /* Center the buttons */
+    margin-top: 2rem;
+}
+
+.btn-enroll, .btn-learn {
+    padding: 1rem 2rem; /* Increased padding for a larger button */
+    border-radius: 50px;
+    border: none;
+    color: white;
+    
+}
+
+.btn-enroll, .btn-learn,.btn-login {
+    padding: 0.625rem 1.25rem;
+    border-radius: 50px;
+    border: none;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+}
+
+.btn-enroll, .btn-login {
+    background-color: #10b981;
+    padding: 1rem 2rem; /* Increased padding for a larger button */
+    font-size: 1.25rem; /* Bigger text size */
+
+    cursor: pointer;
+    text-transform: uppercase; /* Optional: Make text all uppercase for emphasis */
+    font-weight: bold; /* Optional: Add bold text for prominence */
+    transition: transform 0.2s ease, background-color 0.2s ease; /* Smooth hover effects */
+}
+
+.btn-enroll:hover {
+    background-color: #0d946e; /* Slightly darker green on hover */
+    transform: scale(1.05); /* Slightly enlarges the button on hover */
+}
+
+
+.btn-learn {
+    background-color: #3b82f6;
+    padding: 1rem 2rem; /* Increased padding for a larger button */
+    font-size: 1.25rem; /* Bigger text size */
+}
+
 /*-------------PROFIL-------------*/
 
 .profile-container {

@@ -16,12 +16,12 @@ $profil = new Profile();
 if (isset($_GET['artist'])) {
     $profilePicture = $profil->getPicture($_GET['artist']);
     $collabs = $profil->getAllCollabs($_GET['artist']);
-    $formations = $profil->getAllMasterclass($_GET['artist']);
+    $formations = $profil->getAllLearningsByUser($_GET['artist']);
     $pseudo = $_GET['artist'];
 } else {
     $profilePicture = $profil->getPicture($_SESSION['pseudo']);
     $collabs = $profil->getAllCollabs($_SESSION['pseudo']);
-    $formations = $profil->getAllMasterclass($_SESSION['pseudo']);
+    $formations = $profil->getAllLearningsByUser($_SESSION['pseudo']);
     $pseudo = $_SESSION['pseudo'];
 }
 
