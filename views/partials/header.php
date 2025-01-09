@@ -41,6 +41,14 @@ session_start();
                     </a></li>
             </ul>
             <?php if (isset($_SESSION['pseudo'])): ?>
+                <?php
+                // Example profile data from session or database
+                $profile = [
+                    'pseudo' => $_SESSION['pseudo'],
+                    'email' => $_SESSION['email'] ?? 'example@example.com', // Replace with actual session keys
+                    'age' => $_SESSION['age'] ?? 25 // Replace with actual session keys
+                ];
+                ?>
                 <ul class="user">
                     <li><a href="index.php?page=profile">
                             <button>

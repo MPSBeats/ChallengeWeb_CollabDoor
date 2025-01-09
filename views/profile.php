@@ -1,40 +1,49 @@
 <?php
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     session_destroy();
     header('Location: index.php?page=home');
     exit();
 }
+
+require_once '../models/profileModel.php';
+$profil = new Profile();
+$profilePicture = $profil->getPicture($_SESSION['pseudo']);
+$collabs = $profil->getAllCollabs($_SESSION['pseudo']);
+$formations = $profil->getAllMasterclass($_SESSION['pseudo']);
 ?>
 
 <main>
     <div class="space"></div>
 
     <div class="flex w-full justify-around">
-        <div class="bg-blue-500 w-3/5 h-65vh">
-            <div class="flex justify-between mx-5 mb-2">
+        <div class="bg-blue-500 w-3/5 h-auto">
+            <div class="flex flex-wrap">
                 <div class="option w-1/3 h-10vh bg-red-500 flex items-center justify-center cursor-pointer" data-action="samples">Mes Samples</div>
                 <div class="option w-1/3 h-10vh bg-red-500 flex items-center justify-center cursor-pointer" data-action="collabs">Mes Collabs</div>
                 <div class="option w-1/3 h-10vh bg-red-500 flex items-center justify-center cursor-pointer" data-action="formations">Mes Formations</div>
             </div>
-            <div class="squares-container flex flex-wrap justify-between mx-5">
-                <div class="square h-25vh w-1/3 bg-yellow-500 mb-2"></div>
-                <div class="square h-25vh w-1/3 bg-yellow-500 mb-2"></div>
-                <div class="square h-25vh w-1/3 bg-yellow-500 mb-2"></div>
-                <div class="square h-25vh w-1/3 bg-yellow-500 mb-2 hidden"></div>
-                <div class="square h-25vh w-1/3 bg-yellow-500 mb-2 hidden"></div>
-                <div class="square h-25vh w-1/3 bg-yellow-500 mb-2 hidden"></div>
+
+            <!-- Container for dynamic thumbnails -->
+            <div class="squares-container flex flex-wrap justify-center gap-8">
+                <!-- Render all thumbnails by default (collabs and formations) -->
+                <?php foreach ($collabs as $index => $collab): ?>
+                    <div class="square collab h-5vh w-1/3 bg-cover bg-center mb-2" style="background-image: url('<?= htmlspecialchars($collab['thumbnail']); ?>');"></div>
+                <?php endforeach; ?>
+
+                <?php foreach ($formations as $index => $formation): ?>
+                    <div class="square formation h-5vh w-1/3 bg-cover bg-center mb-2" style="background-image: url('<?= htmlspecialchars($formation['thumbnail']); ?>');"></div>
+                <?php endforeach; ?>
             </div>
         </div>
 
+        <!-- Profile Box -->
         <div class="border-2 border-black rounded-lg w-1/3 h-65vh p-2.5">
             <div class="flex justify-between">
                 <div class="w-25vh h-25vh overflow-hidden rounded-full">
-                    <img src="assets/img/picture1.png" alt="Profile PictureS" class="w-full h-full object-cover">
+                    <img src="<? $profilePicture ?>" alt="Profile Picture" class="w-full h-full object-cover">
                 </div>
-
                 <div class="w-35vh h-25vh flex items-center justify-center flex-col">
-                    <h2>MPSBeats</h2>
+                    <h2><?php echo $_SESSION['pseudo']; ?></h2>
                     <div class="flex justify-around">
                         <p>5*</p>
                         <p>|</p>
@@ -43,11 +52,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
             </div>
             <div class="w-full h-25vh">
-                <br>
                 <h2>Bio</h2>
-                <br>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod.</p>
-                <br>
                 <div class="flex">
                     <p>Trap,</p>
                     <p>RNB,</p>
@@ -55,14 +61,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
             </div>
             <div class="flex justify-center items-center h-15vh">
-                <button class="bg-green-500 p-2.5 rounded-full text-center leading-5vh border-none text-white w-1/2">Rounded Button</button>
-
-                <form action="index.php?page=profile" class="h-15vh w-1/2 flex items-center" method="post">
-                    <button type="submit" class="bg-red-500 p-2.5 rounded-full text-center leading-5vh border-none text-white w-full">Logout</button>
+                <button class="bg-green-500 p-2.5 rounded-full text-center text-white w-1/2">Rounded Button</button>
+                <form action="index.php?page=profile" method="post" class="h-15vh w-1/2 flex items-center">
+                    <button type="submit" class="bg-red-500 p-2.5 rounded-full text-white w-full">Logout</button>
                 </form>
             </div>
         </div>
-
     </div>
 </main>
 
@@ -75,35 +79,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             const squaresContainer = document.querySelector('.squares-container');
 
             if (action === 'samples') {
-                // Display only 3 squares and make them bigger
-                squares.forEach((square, index) => {
-                    if (index < 3) {
-                        square.style.display = 'block'; // Show the first 3 squares
-                        square.style.width = '30%'; // Increase width
-                        square.style.height = '25vh'; // Increase height
-                        square.style.backgroundColor = 'yellow'; // Change color
-                    } else {
-                        square.style.display = 'none'; // Hide the rest
-                    }
-                });
+
+                // For now, just showing the first 3 squares
+                const sampleSquares = document.querySelectorAll('.sample');
+                sampleSquares.forEach(square => square.style.display = 'block');
             } else {
-                // Reset all squares for other actions
+                // Reset and show all squares
                 squares.forEach(square => {
-                    square.style.display = 'block'; // Show all squares
-                    square.style.width = '30%'; // Reset to original width
-                    square.style.height = '25vh'; // Reset to original height
+                    square.style.display = 'block';  // Show all squares
+                    square.style.width = '30%';  // Reset width
+                    square.style.height = '25vh';  // Reset height
                 });
 
-                // Optionally, change their color for other actions
+                // Adjust colors or styles for specific options
                 if (action === 'collabs') {
-                    squares.forEach(square => square.style.backgroundColor = 'orange');
+                    // Show only collaboration squares
+                    document.querySelectorAll('.collab').forEach(square => square.style.display = 'block');
+                    document.querySelectorAll('.formation').forEach(square => square.style.display = 'none');
                 } else if (action === 'formations') {
-                    squares.forEach(square => square.style.backgroundColor = 'purple');
+                    // Show only formation squares
+                    document.querySelectorAll('.formation').forEach(square => square.style.display = 'block');
+                    document.querySelectorAll('.collab').forEach(square => square.style.display = 'none');
                 }
             }
         });
     });
 
-    // Simulate a click on the "samples" option when the page loads
-    document.querySelector('.option[data-action="samples"]').click();
+    // Simulate a click on the "collabs" option when the page loads
+    document.querySelector('.option[data-action="collabs"]').click();
 </script>
