@@ -42,8 +42,20 @@
 
     <section>
         <h3>Collaborer avec :</h3>
-        <button><img src="assets/img/circle-chevron-left.svg" alt="fleche gauche"></button>
-        <section id="carrousselpepite">
+        <button id="bLeftFiche"><img src="assets/img/circle-chevron-left.svg" alt="fleche gauche"></button>
+        <section id="carrousselCollab">
+            <article class="fiche_artiste">
+                <img src="assets/img/fiche_artistique.png" alt="">
+                <div>
+                    <h4>MpsontheBeat</h4>
+                    <p>Recherche violoniste qui sait faire différents styles</p>
+                    <ul>
+                        <li>#Violon</li>
+                        <li>#prod</li>
+                        <li>#hiphop</li>
+                    </ul>
+                </div>
+            </article>
             <article class="fiche_artiste">
                 <img src="assets/img/fiche_artistique.png" alt="">
                 <div>
@@ -117,7 +129,7 @@
                 </div>
             </article>
         </section>
-        <button><img src="assets/img/circle-chevron-right.svg" alt="fleche droite"></button>
+        <button id="bRightFiche"><img src="assets/img/circle-chevron-right.svg" alt="fleche droite"></button>
         
         </section>
 
