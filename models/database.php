@@ -5,8 +5,11 @@ class Database
     private $port = "5432";
     private $db_name = "collabdoor";
     private $username = "postgres";
+<<<<<<< HEAD
+    private $password = "Mapaaskla1";
+=======
     private $password = "Dorian93120";
-
+>>>>>>> 53758ff05ee9f7e7f3a0b46e2162997876fb5b43
     private $conn;
 
     public function connect()
@@ -32,4 +35,3 @@ class Database
         return $this->conn->query($sql);
     }
 }
-
