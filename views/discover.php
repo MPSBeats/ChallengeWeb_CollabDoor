@@ -7,7 +7,7 @@
     </aside>
 
     <form action="">
-        <label for="">
+        <label for="recherche">
         <input type="text" name="recherche" placeholder="Rechercher un artiste, une collab...">
         <button type="submit" name="recherche"><img src="assets/img/search.svg" alt="loupe"></button>
         </label>
@@ -38,7 +38,7 @@
 
     <section>
         <h3>Pépite de la semaine :</h3>
-        <button><img src="assets/img/circle-chevron-left.svg" alt="fleche gauche"></button>
+        <button id="button_left"><img src="assets/img/circle-chevron-left.svg" alt="fleche gauche"></button>
         <section id="carrousselpepite">
             <article class="oeuvre">
                 <img src="assets/img/picture1.png" alt="">
@@ -107,7 +107,7 @@
             
 
         </section>
-        <button><img src="assets/img/circle-chevron-right.svg" alt="fleche droite"></button>
+        <button id="button_right"><img src="assets/img/circle-chevron-right.svg" alt="fleche droite"></button>
         
     </section>
 
@@ -116,10 +116,10 @@
         <div id="zoomartiste">
             <span>
                 <p></p>
-                <h4 style="font-size: 25px;">Découvrez un gars random et sa collection</h4> <span><button><img src="assets/img/move-left.svg" alt="fleche gauche"></button> <button><img src="assets/img/move-right.svg" alt="fleche droite"></button></span>
+                <h4 style="font-size: 25px;">Découvrez un gars random et sa collection</h4> <span><button id="bLeftArtiste"><img src="assets/img/move-left.svg" alt="fleche gauche"></button> <button id="bRightArtiste"><img src="assets/img/move-right.svg" alt="fleche droite"></button></span>
             </span>
             <img src="assets/img/profile-picture.jpg" alt="hero">
-            <section id="carrousselpepite">
+            <section id="carrousselartiste">
             <article class="oeuvre">
             </article>
             <article class="oeuvre">
@@ -169,13 +169,6 @@
         </div>
         
     </section>
-
-
-
-
-
-
-
 
 
 

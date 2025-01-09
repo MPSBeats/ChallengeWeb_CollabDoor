@@ -442,6 +442,15 @@ h2{
     width: 100%;
 }
 
+#carrousselartiste{
+    justify-content: start !important;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    width: 90% !important;
+    padding-left: 5% !important;
+    scrollbar-width: none;
+}
 
 #zoomartiste{
     width: 100%;
@@ -453,6 +462,7 @@ h2{
     position:absolute;
     border-radius: 50%;
     width: 23%;
+    z-index: 100;
 }
 #zoomartiste > span{
     width: 100%;
@@ -470,18 +480,18 @@ h2{
     background-color: transparent;
 }
 
-#zoomartiste #carrousselpepite {
+#zoomartiste #carrousselartiste {
     margin-left: 5%;
     background-color: transparent;
 }
 
-#zoomartiste #carrousselpepite .oeuvre {
+#zoomartiste #carrousselartiste .oeuvre {
     position: relative;
     overflow: hidden;
     width: 20%;
 }
 
-#zoomartiste #carrousselpepite .oeuvre div {
+#zoomartiste #carrousselartiste .oeuvre div {
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -493,7 +503,7 @@ h2{
 
 }
 
-#zoomartiste #carrousselpepite .oeuvre:hover div {
+#zoomartiste #carrousselartiste .oeuvre:hover div {
     transform: translateY(-5%);
     opacity: 1;
     display: flex;
@@ -502,8 +512,17 @@ h2{
 }
 
 
-
 /* -------------FILE COLABORATE------------ */
+
+#carrousselCollab{
+    justify-content: start !important;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    width: 90% !important;
+    padding-left: 5% !important;
+    scrollbar-width: none;
+}
 
 .fiche_artiste{
     margin-right: 3%;
