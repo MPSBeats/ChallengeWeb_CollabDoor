@@ -71,6 +71,6 @@ class Profile
     {
         $stmt = $this->pdo->prepare('SELECT picture FROM users WHERE pseudo = :pseudo');
         $stmt->execute(['pseudo' => $pseudo]);
-        return $stmt->fetch(); // Fetches one record (assumes only one user per pseudo)
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }

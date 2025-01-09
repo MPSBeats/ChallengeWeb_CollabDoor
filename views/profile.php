@@ -35,13 +35,6 @@ if (isset($_GET['user'])) {
     $showChatBox = false; // Set to false initially
 
 }
-$sessionpseudo = $_SESSION['pseudo'];
-
-$sqlUser = "SELECT * FROM Users WHERE pseudo = :sessionpseudo";
-$resultUser = $db->prepare($sqlUser);
-$resultUser->execute(['sessionpseudo' => $sessionpseudo]);
-$user = $resultUser->fetch(PDO::FETCH_ASSOC);
-
 ?>
 
 <main class="profil">
@@ -81,7 +74,7 @@ $user = $resultUser->fetch(PDO::FETCH_ASSOC);
         <div class="profile-box">
             <div class="profile-header">
                 <div class="profile-picture">
-                    <img src="<?= htmlspecialchars($user['picture']) ?>" alt="Profile Picture" class="profile-img">
+                    <img src="<?= htmlspecialchars($profilePicture['picture']); ?>" alt="Profile Picture" class="profile-img">
                 </div>
                 <div class="profile-info">
                     <h2><?php echo $pseudo; ?></h2>
