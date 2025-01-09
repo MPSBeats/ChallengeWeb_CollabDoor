@@ -1,8 +1,7 @@
 <?php
 
 $page = (isset($_GET['page'])) ? $_GET['page'] : 'home';
-
-
+$user = (isset($_GET['user'])) ? $_GET['user'] : '';
 
 
 switch ($page) {
@@ -22,7 +21,6 @@ switch ($page) {
         include '../views/learn.php';
         break;
 
-
     case 'login':
         include '../views/login.php';
         break;
@@ -30,21 +28,25 @@ switch ($page) {
     case 'register':
         include '../views/register.php';
         break;
+
     case 'message':
         include '../views/message.php';
         break;
+
     case 'fetch_messages':
         include '../views/fetch_messages.php';
         break;
+
     case 'submit_message':
         include '../views/submit_message.php';
         break;
-
 
     case 'profile':
         include '../views/profile.php';
         break;
 
     default:
+        include '../views/home.php';
         break;
 }
+?>

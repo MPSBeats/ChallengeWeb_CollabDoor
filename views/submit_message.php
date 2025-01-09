@@ -1,26 +1,24 @@
 <?php
-session_start();
+require_once "../models/database.php";
 
-if (!isset($_SESSION['username'])) {
-    exit("You are not logged in");
-}
+$db = (new Database())->connect();
 
+$sender = strtolower($_POST['sender']);
+$receiver = strtolower($_POST['receiver']);
+$message = $_POST['message'];
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Database connection (similar to chat.php)
+// Récupérer l'ID de l'expéditeur
+$senderStmt = $db->prepare("SELECT id_user FROM Users WHERE LOWER(pseudo) = :pseudo");
+$senderStmt->execute([':pseudo' => $sender]);
+$senderId = $senderStmt->fetch(PDO::FETCH_COLUMN);
 
-    $sender = $_POST['sender'];
-    $receiver = $_POST['receiver'];
-    $message = $_POST['message'];
+// Récupérer l'ID du destinataire
+$receiverStmt = $db->prepare("SELECT id_user FROM Users WHERE LOWER(pseudo) = :pseudo");
+$receiverStmt->execute([':pseudo' => $receiver]);
+$receiverId = $receiverStmt->fetch(PDO::FETCH_COLUMN);
 
-    $sql = "INSERT INTO chats (sender, receiver, message) VALUES ('$sender', '$receiver', '$message')";
-    $db->query($sql);
-    $db->close();
-}
-
-
+// Insérer le message dans la base de données
+$sql = "INSERT INTO Chats (sender, receiver, message, created_at) VALUES (:sender, :receiver, :message, NOW())";
+$result = $db->prepare($sql);
+$result->execute([':sender' => $senderId, ':receiver' => $receiverId, ':message' => $message]);
 ?>
-
-<main>
-    <div class="space"></div>
-</main>

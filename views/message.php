@@ -1,7 +1,4 @@
-<main class="message">
-    <div class="space"></div>
-
-    <?php
+<?php
 session_start();
 require_once "../models/database.php";
 
@@ -12,20 +9,28 @@ if (!isset($_SESSION['pseudo'])) {
     exit();
 }
 
-    $pseudo = $_SESSION['pseudo'];
-    $selectedUser = '';
-
-
+$pseudo = strtolower($_SESSION['pseudo']);
+$selectedUser = '';
 
 if (isset($_GET['user'])) {
-    $selectedUser = $_GET['user'];
+    $selectedUser = strtolower($_GET['user']);
     $showChatBox = true; // Set to true only when a user is selected
 } else {
     $showChatBox = false; // Set to false initially
 }
-
 ?>
 
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Application</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <main class="messaging">
+        <div class="space"></div>
         <div class="account-info">
             <div class="welcome">
                 <h2>Bienvenue, <?php echo ucfirst($pseudo); ?>!</h2>
@@ -35,18 +40,17 @@ if (isset($_GET['user'])) {
                 <ul>
                     <?php 
                     // Fetch all users except the current user
-                    $sql = "SELECT DISTINCT u1.pseudo FROM Users u1 
-                            JOIN UsersChats uc ON u1.id_user = uc.id_userchat 
-                            JOIN Chats c ON uc.id_userchat = c.sender OR uc.id_userchat = c.receiver 
-                            JOIN Users u2 ON (c.sender = u2.id_user OR c.receiver = u2.id_user) 
-                            WHERE u1.id_user <> u2.id_user;";
-                    $result = $db->query($sql);
-                    if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
-                            $user = $row['pseudo'];
-                            $user = ucfirst($user);
-                            echo "<li><a href='message.php?user=$user'>$user</a></li>";
-                        }
+                    $sql = "SELECT DISTINCT u2.pseudo FROM Users u1 JOIN UsersChats uc ON u1.id_user = uc.id_userchat JOIN Chats c ON uc.id_userchat::varchar = c.sender::varchar OR uc.id_userchat::varchar = c.receiver::varchar JOIN Users u2 ON (c.sender::varchar = u2.id_user::varchar OR c.receiver::varchar = u2.id_user::varchar) WHERE u1.pseudo = :pseudo AND u1.id_user <> u2.id_user"; 
+                    $result = $db->prepare($sql); 
+                    $result->execute([':pseudo' => $pseudo]); 
+                    $users = $result->fetchAll(PDO::FETCH_ASSOC); 
+
+                    if (count($users) > 0) { 
+                        foreach ($users as $row) { 
+                            $user = $row['pseudo']; 
+                            $user = ucfirst($user); 
+                            echo "<li><a href='index.php?page=message&user=$user'>$user</a></li>"; 
+                        } 
                     }
                     ?>
                 </ul>
@@ -65,75 +69,65 @@ if (isset($_GET['user'])) {
             <form class="chat-form" id="chat-form">
                 <input type="hidden" id="sender" value="<?php echo $pseudo; ?>">
                 <input type="hidden" id="receiver" value="<?php echo $selectedUser; ?>">
-                <input type="text" id="message" placeholder="Type your message..." required>
-                <button type="submit">Send</button>
+                <input type="text" id="message" placeholder="Tapez votre message..." required>
+                <button type="submit">Envoyer</button>
             </form>
         </div>
-    </div>
-    <?php endif; ?>
-
-
-
+        <?php endif; ?>
+    </main>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-
         function closeChat() {
             document.getElementById("chat-box").style.display = "none";
         }
 
+        function fetchMessages() {
+            var sender = $('#sender').val();
+            var receiver = $('#receiver').val();
 
-        // Function to toggle chat box visibility
-        function toggleChatBox() {
-        var chatBox = document.getElementById("chat-box");
-        if (chatBox.style.display === "none") {
-            chatBox.style.display = "block"; // Show the chat box
-        } else {
-            chatBox.style.display = "none"; // Hide the chat box
-        }
-    }
+            // Sauvegarder la position actuelle du défilement
+            var chatBox = $('#chat-box-body');
+            var scrollTop = chatBox.scrollTop();
+            var scrollHeight = chatBox.prop("scrollHeight");
 
+            $.ajax({
+                url: 'index.php?page=fetch_messages',
+                type: 'POST',
+                data: {sender: sender, receiver: receiver},
+                success: function(data) {
+                    $('#chat-box-body').html(data);
 
-    function fetchMessages() {
-                var sender = $('#sender').val();
-                var receiver = $('#receiver').val();
-                
-                $.ajax({
-                    url: 'fetch_messages.php',
-                    type: 'POST',
-                    data: {sender: sender, receiver: receiver},
-                    success: function(data) {
-                        $('#chat-box-body').html(data);
+                    // Réinitialiser la position du défilement uniquement si l'utilisateur était en bas de la boîte de chat
+                    if (scrollTop + chatBox.outerHeight() >= scrollHeight) {
                         scrollChatToBottom();
+                    } else {
+                        chatBox.scrollTop(scrollTop);
                     }
-                });
-            }
-
-
-            // Function to scroll the chat box to the bottom
-            function scrollChatToBottom() {
-                var chatBox = $('#chat-box-body');
-                chatBox.scrollTop(chatBox.prop("scrollHeight"));
-            }
-
-    
-            
-            $(document).ready(function() {
-                // Fetch messages every 3 seconds
-                
-                fetchMessages();
-                setInterval(fetchMessages, 3000);
+                }
             });
+        }
 
+        function scrollChatToBottom() {
+            var chatBox = $('#chat-box-body');
+            chatBox.scrollTop(chatBox.prop("scrollHeight"));
+        }
 
-                // Submit the chat message
-                $('#chat-form').submit(function(e) {
+        $(document).ready(function() {
+            // Fetch messages for the selected user when the page loads
+            fetchMessages();
+
+            // Fetch messages every 3 seconds
+            setInterval(fetchMessages, 3000);
+
+            // Submit the chat message
+            $('#chat-form').submit(function(e) {
                 e.preventDefault();
                 var sender = $('#sender').val();
                 var receiver = $('#receiver').val();
                 var message = $('#message').val();
 
                 $.ajax({
-                    url: 'submit_message.php',
+                    url: 'index.php?page=submit_message',
                     type: 'POST',
                     data: {sender: sender, receiver: receiver, message: message},
                     success: function() {
@@ -141,13 +135,8 @@ if (isset($_GET['user'])) {
                         fetchMessages(); // Fetch messages after submitting
                     }
                 });
-
-                });
-
-
+            });
+        });
     </script>
-
-
-
-
-</main>
+</body>
+</html>
