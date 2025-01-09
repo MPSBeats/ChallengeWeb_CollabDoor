@@ -68,54 +68,52 @@ $db = (new Database())->connect();
 
     <section class="discover">
         <div class="big-card">
-            <div class="top-card">
-                <h1>Découvrir</h1>
+        <div class="top-card">
+                <h3><a href="index.php?page=discover">Découvrir</a></h3>
                 <p style="font-family: Fira code;"><a href="index.php?page=discover">--></a></p>
             </div>
             <div class="bot-card">
-                <div class="card">
-                    <img src="assets/img/picture1.png" alt="">
-                    <div style="width: 100%; display: flex; align-items:center; flex-direction: column;">
-                        <div style="display: flex; justify-content: space-around; width: 100%;">
-                            <p>POUMTCHAK</p>
-                            <p>5*</p>
+            <?php
+            $sql1 = "SELECT * FROM collaborations";
+            $result1 = $db->prepare($sql1);
+            $result1->execute();
+            $collaborations = $result1->fetchAll(PDO::FETCH_ASSOC);
+
+            if (!empty($collaborations)):
+                // Mélanger les collaborations pour un affichage aléatoire
+                shuffle($collaborations);
+
+                // Afficher seulement 4 collaborations aléatoires
+                foreach (array_slice($collaborations, 0, 4) as $collab): ?>
+                    <article class="oeuvre">
+                        <img src="assets/img/picture1.png" alt="">
+                        <div>
+                            <div>
+                                <h4><?= htmlspecialchars($collab['title']) ?></h4>
+                            </div>
+                            <?php
+                            $sqlPseudo = "SELECT u.pseudo
+                                        FROM Users u
+                                        JOIN UserCollaborations uc ON u.id_user = uc.id_user
+                                        JOIN Collaborations c ON uc.id_collaborations = c.id_collaborations
+                                        WHERE c.id_collaborations = " . $collab['id_collaborations'];
+                            $resultPseudo = $db->prepare($sqlPseudo);
+                            $resultPseudo->execute();
+                            $Pseudos = $resultPseudo->fetchAll(PDO::FETCH_ASSOC);
+                            ?>
+                            <p><?php foreach ($Pseudos as $pseudo): echo htmlspecialchars($pseudo['pseudo']) . ' '; endforeach; ?></p>
                         </div>
-                        <p>MPS</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="assets/img/picture2.png" alt="">
-                    <div style="width: 100%; display: flex; align-items:center; flex-direction: column;">
-                        <div style="display: flex; justify-content: space-around; width: 100%;">
-                            <p>Be Human</p>
-                            <p>5*</p>
-                        </div>
-                        <p>MPS</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="assets/img/picture3.png" alt="">
-                    <div style="width: 100%; display: flex; align-items:center; flex-direction: column;">
-                        <div style="display: flex; justify-content: space-around; width: 100%;">
-                            <p>BEFORE</p>
-                            <p>5*</p>
-                        </div>
-                        <p>MPS</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="assets/img/picture4.png" alt="">
-                    <div style="width: 100%; display: flex; align-items:center; flex-direction: column;">
-                        <div style="display: flex; justify-content: space-around; width: 100%;">
-                            <p>NEW</p>
-                            <p>5*</p>
-                        </div>
-                        <p>MPS</p>
-                    </div>
-                </div>
-            </div>
+                    </article>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>Aucune collaboration trouvée.</p>
+            <?php endif; ?>
         </div>
     </section>
+    
+
+
+
 
     <section class="learn">
         <div class="big-card">
