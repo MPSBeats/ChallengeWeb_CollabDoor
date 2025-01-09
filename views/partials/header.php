@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 ?>
 
@@ -8,6 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/main.css">
     <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
     <title>Document</title>
@@ -38,17 +40,27 @@
                         <h3>Apprendre</h3>
                     </a></li>
             </ul>
-            <ul class="user">
-                <li><a href="index.php?page=login">
-                        <button>
-                            <h3>Connexion</h3>
-                        </button>
-                    </a></li>
-                <li><a href="index.php?page=register">
-                        <button>
-                            <h3>Inscription</h3>
-                        </button>
-                    </a></li>
-            </ul>
+            <?php if (isset($_SESSION['pseudo'])): ?>
+                <ul class="user">
+                    <li><a href="index.php?page=profile">
+                            <button>
+                                <h3>Profile</h3>
+                            </button>
+                        </a></li>
+                </ul>
+            <?php else: ?>
+                <ul class="user">
+                    <li><a href="index.php?page=login">
+                            <button>
+                                <h3>Connexion</h3>
+                            </button>
+                        </a></li>
+                    <li><a href="index.php?page=register">
+                            <button>
+                                <h3>Inscription</h3>
+                            </button>
+                        </a></li>
+                </ul>
+            <?php endif; ?>
         </nav>
     </header>

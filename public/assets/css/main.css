@@ -95,7 +95,6 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-size: 25px;
     gap: 16px;
     padding: 16px;
 }

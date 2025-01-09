@@ -1,7 +1,16 @@
+<?php
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    session_destroy();
+    header('Location: index.php?page=home');
+    exit();
+}
+?>
+
 <main>
     <div class="space"></div>
 
-    <div style="display: flex; width: 100%; justify-content: space-around;">
+    <div class="flex w-full justify-around">
         <div style="background-color: blue; width: 60%; height: 65vh;">
             <div style="display: flex; justify-content: space-between; margin: 0 5%; margin-bottom:2%">
                 <div class="option" data-action="samples" style="width: 30%; height: 10vh; background-color: red; display: flex; align-items: center; justify-content: center; cursor: pointer;">Mes Samples</div>
@@ -20,17 +29,17 @@
 
         <div style="border: 2px solid black;border-radius: 5%; width: 30%; height: 65vh;padding: 10px">
             <div style="display: flex; justify-content: space-between;">
-            <div style="width: 25vh; height: 25vh; overflow: hidden; border-radius: 10%;">
-    <img src="assets/img/picture1.png" alt="Profile PictureS" width="100%" height="100%" style="object-fit: cover;">
-</div>
+                <div style="width: 25vh; height: 25vh; overflow: hidden; border-radius: 10%;">
+                    <img src="assets/img/picture1.png" alt="Profile PictureS" width="100%" height="100%" style="object-fit: cover;">
+                </div>
 
                 <div style=" width: 35vh; height: 25vh; display: flex; align-items: center; justify-content: center; flex-direction: column;">
                     <h2>MPSBeats</h2>
-                        <div style="display: flex; justify-content: space-around">
+                    <div style="display: flex; justify-content: space-around">
                         <p>5*</p>
                         <p>|</p>
                         <p>Paris</p>
-                        </div>
+                    </div>
                 </div>
             </div>
             <div style=" width: 100%; height: 25vh;">
@@ -47,8 +56,13 @@
             </div>
             <div style="display: flex; justify-content: center; align-items: center; height: 15vh;">
                 <button style="background-color: green; padding: 10px; border-radius: 50px; text-align: center; line-height: 5vh; border: none; color: white; width: 50%;">Rounded Button</button>
+
+                <form action="index.php?page=profile" style="height:15vh; width:50%; display:flex; align-items:center" method="post">
+                    <button type="submit" style="background-color: red; padding: 10px; border-radius: 50px; text-align: center; line-height: 5vh; border: none; color: white; width: 100%;">Logout</button>
+                </form>
             </div>
         </div>
+
     </div>
 </main>
 
