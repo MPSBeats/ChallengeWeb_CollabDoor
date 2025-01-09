@@ -21,7 +21,7 @@
         <div class="big-card">
             <div class="top-card">
                 <h1>Collaborer</h1>
-                <p style="font-family: Fira code;"> --> </p>
+                <p style="font-family: Fira code;"><a href="index.php?page=collaborate">--></a></p>
             </div>
             <div class="bot-card">
                 <div class="card">
@@ -48,7 +48,7 @@
         <div class="big-card">
             <div class="top-card">
                 <h1>Découvrir</h1>
-                <p style="font-family: Fira code;"> --> </p>
+                <p style="font-family: Fira code;"><a href="index.php?page=discover">--></a></p>
             </div>
             <div class="bot-card">
                 <div class="card">
@@ -99,7 +99,7 @@
         <div class="big-card">
             <div class="top-card">
                 <h1>Apprendre</h1>
-                <p style="font-family: Fira code;"> --> </p>
+                <p style="font-family: Fira code;"><a href="index.php?page=learn">--></a></p>
             </div>
             <div class="card"></div>
             <div class="card"></div>

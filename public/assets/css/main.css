@@ -595,13 +595,6 @@ footer{
     border-radius: 50%;
 }
 
-#chat-box-body {
-    max-height: 400px; /* Ajuste cette valeur selon tes besoins */
-    overflow-y: auto;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
 
 .chat-box-body {
     flex: 1;
