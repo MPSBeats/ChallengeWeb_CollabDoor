@@ -14,7 +14,7 @@ $db = (new Database())->connect();
 
     <aside>
         <h2>Découvrir</h2>
-        <p>Vois ce qui te plait chef</p>
+        <p>Viens découvrir les futures stars de demain !</p>
     </aside>
 
     <form action="">

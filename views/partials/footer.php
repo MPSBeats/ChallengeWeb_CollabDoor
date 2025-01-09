@@ -2,7 +2,7 @@
         <hr>
         <div class="footer-box">
         <div class="footer-content">
-            <p>Collabdoor &copy 2024</p>
+            <p>Collabdoor &copy 2025</p>
         </div>
         <div class="footer-social">
             <a href="#"><img src="assets/img/linkedin.svg" alt=""></a>
