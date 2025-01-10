@@ -58,7 +58,7 @@ $learnings = $learning->getAllLearnings();
                     <!-- Affichage des formations -->
                     <article class="oeuvre" onclick="window.location.href='index.php?page=learningProfile&learning=<?= $learning['title'] ?>'">
                         <img src="<?php echo $learning['thumbnail']; ?>" alt="image de l'oeuvre">
-                        <div class="oeuvre-info">
+                        <div class="oeuvre-info formation">
                             <div>
                                 <h4><?= htmlspecialchars($learning['title']) ?></h4>
                             </div>
