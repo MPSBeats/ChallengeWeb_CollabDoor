@@ -11,6 +11,9 @@ DROP TABLE IF EXISTS SearchCollaborations CASCADE;
 DROP TABLE IF EXISTS UserCollaborations CASCADE;
 DROP TABLE IF EXISTS UserLearnings CASCADE;
 DROP TABLE IF EXISTS LearningFilters CASCADE;
+DROP TABLE IF EXISTS collaborationsfilters CASCADE;
+DROP TABLE IF EXISTS userschats CASCADE;
+DROP TABLE IF EXISTS userssearchcollaborations CASCADE;
 
 CREATE TABLE Users (
     id_user SERIAL PRIMARY KEY,
@@ -155,6 +158,7 @@ ALTER SEQUENCE userlearnings_id_userlearning_seq RESTART WITH 1;
 ALTER SEQUENCE learningfilters_id_learningfilters_seq RESTART WITH 1;
 ALTER SEQUENCE collaborationsfilters_id_collaborationsfilters_seq RESTART WITH 1;
 ALTER SEQUENCE userschats_id_userchat_seq RESTART WITH 1;
+ALTER SEQUENCE userssearchcollaborations_id_userssearchcollaborations_seq RESTART WITH 1;
 
 
 -- Insertion des données dans la table MediaType
@@ -223,7 +227,37 @@ INSERT INTO public.UserCollaborations (id_user, id_collaborations) VALUES
 (7, 7),
 (8, 8),
 (9, 9),
-(10, 10);
+(10, 10),
+(1, 11),
+(1, 12),
+(1, 13),
+(1, 14),
+(1, 15),
+(1, 16),
+(1, 17),
+(1, 18),
+(1, 19),
+(1, 20),
+(2, 11),
+(2, 12),
+(2, 13),
+(2, 14),
+(2, 15),
+(2, 16),
+(2, 17),
+(2, 18),
+(2, 19),
+(2, 20),
+(3, 11),
+(3, 12),
+(3, 13),
+(3, 14),
+(3, 15),
+(3, 16),
+(3, 17),
+(3, 18),
+(3, 19),
+(3, 20);
 
 
 -- Insertion des données dans la table UsersLearnings
@@ -271,37 +305,8 @@ INSERT INTO public.userssearchcollaborations (id_user, id_searchcollaborations) 
 (4, 7),
 (3, 8),
 (2, 9),
-(1, 10),
-(1, 11),
-(1, 12),
-(1, 13),
-(1, 14),
-(1, 15),
-(1, 16),
-(1, 17),
-(1, 18),
-(1, 19),
-(1, 20),
-(2, 11),
-(2, 12),
-(2, 13),
-(2, 14),
-(2, 15),
-(2, 16),
-(2, 17),
-(2, 18),
-(2, 19),
-(2, 20),
-(3, 11),
-(3, 12),
-(3, 13),
-(3, 14),
-(3, 15),
-(3, 16),
-(3, 17),
-(3, 18),
-(3, 19),
-(3, 20);
+(1, 10);
+
 
 -- Insertion des données dans la table Filters
 INSERT INTO public.Filters (name) VALUES 
