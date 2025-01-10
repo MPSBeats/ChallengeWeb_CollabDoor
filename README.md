@@ -58,6 +58,7 @@ This project was built using the following technologies:
 * [![CSS][css]][css-url]
 * [![Ajax][ajax]][ajax-url]
 * [![Javascript][js]][js-url]
+* [![PHP][php]][php-url]
 
 
 
@@ -177,5 +178,5 @@ Make sure you have the following installed on your machine:
 [ajax-url]: https://developer.mozilla.org/en-US/docs/Web/Guide/AJAX
 [js]: https://shields.io/badge/JavaScript-F7DF1E?logo=JavaScript&logoColor=000&style=flat-square
 [js-url]: https://developer.mozilla.org/en-US/docs/Web/JavaScript
-[tailwindcss.com]: https://img.shields.io/badge/Tailwind_CSS-grey?style=flat-square&logo=tailwind-css&logoColor=38B2AC
-[tailwindcss-url]: https://tailwindcss.com
+[php]: https://shields.io/badge/-PHP-3776AB?style=flat&logo=php
+[php-url]: https://www.php.net/
