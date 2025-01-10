@@ -77,24 +77,30 @@ if (isset($_GET['user'])) {
                     <article class="oeuvre">
 
                         <?php
-                        $sqlThumbnail = "SELECT sc.thumbnail
-FROM searchcollaborations sc
-JOIN userssearchcollaborations usc ON sc.id_searchcollaborations = usc.id_searchcollaborations
-JOIN Users u ON usc.id_user = u.id_user
-WHERE u.id_user = 1;
-";
-                        $resultThumbnail = $db->prepare($sqlThumbnail);
-                        $resultThumbnail->execute();
-                        $thumbnails = $resultThumbnail->fetch(PDO::FETCH_ASSOC);
-                        var_dump($thumbnails);     
+
+
+                        $Pseudos = $collaborations->getPseudoSearchCollaboration($collab['id_searchcollaborations']);
                         
+                        foreach ($Pseudos as $pseudo) {
+                          $pseudo_user=  $pseudo['id_user'];
+                        $sqlThumbnail = "SELECT sc.thumbnail
+                        FROM searchcollaborations sc
+                        JOIN userssearchcollaborations usc ON sc.id_searchcollaborations = usc.id_searchcollaborations
+                        JOIN Users u ON usc.id_user = u.id_user
+                        WHERE u.id_user = :pesudo_user ;
+                        ";
+                        $resultThumbnail = $db->prepare($sqlThumbnail);
+                        $resultThumbnail->execute([':pesudo_user' => $pseudo_user]);
+                        $thumbnails = $resultThumbnail->fetch(PDO::FETCH_ASSOC);
+                        }
                         ?>
-                        <img src="<?= htmlspecialchars($thumbnails['thumbnail'])  ?>" alt="efqf">
+                       
                         <div class="oeuvre-info">
+                            <img src="<?= htmlspecialchars($thumbnails['thumbnail'])?>" alt="">
                             <h4 style="text-align:center"><?= htmlspecialchars($collab['title']) ?></h4>
                             <?php
 
-                            $Pseudos = $collaborations->getPseudoSearchCollaboration($collab['id_searchcollaborations']);
+                           
 
                             $profil = new Profile();
                             $profilePicture = $profil->getPicture($Pseudos[0]['pseudo']);

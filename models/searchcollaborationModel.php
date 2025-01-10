@@ -46,7 +46,7 @@ class SearchCollaboration
 
     
     public function getPseudoSearchCollaboration($idSearchCollaboration) {
-        $sqlPseudo = "SELECT u.pseudo
+        $sqlPseudo = "SELECT u.pseudo, u.id_user
                       FROM Users u
                       JOIN userssearchcollaborations uc ON u.id_user = uc.id_user
                       JOIN SearchCollaborations c ON uc.id_searchcollaborations = c.id_searchcollaborations
@@ -56,5 +56,22 @@ class SearchCollaboration
         return $stmt->fetchAll(PDO::FETCH_ASSOC); // Retourne tous les résultats sous forme de tableau associatif
     }
     
+    public function getSearchThumbnail($userId){
+        $sqlThumbnail = "SELECT sc.thumbnail
+                        FROM searchcollaborations sc
+                        JOIN userssearchcollaborations usc ON sc.id_searchcollaborations = usc.id_searchcollaborations
+                        JOIN Users u ON usc.id_user = u.id_user
+                        WHERE u.id_user = $userId;
+                        ";
+        $resultThumbnail = $this->pdo->prepare($sqlThumbnail);
+        $resultThumbnail->execute();
+        return $resultThumbnail->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function getIdForCollab(){
+        $sqlId = "SELECT id_user FROM Users";
+        $resultId = $this->pdo->prepare($sqlId);
+        $resultId->execute();
+        return $resultId->fetchAll(PDO::FETCH_ASSOC);
+    }
     
 }
