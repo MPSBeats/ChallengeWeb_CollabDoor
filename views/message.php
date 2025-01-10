@@ -3,11 +3,12 @@
 require_once "../models/database.php";
 require_once "../models/chatboxModel.php";
 
-
+// Connexion à la base de données et récupération des messages des utilisateurs
 $db = (new Database())->connect();
 $users = new Chatbox();
 $userMessage = $users->fetchMessageUsers($_SESSION['pseudo']);
 
+// Redirection vers la page de connexion si l'utilisateur n'est pas connecté
 if (!isset($_SESSION['pseudo'])) {
     header("Location: index.php?page=login");
     exit();
@@ -16,11 +17,12 @@ if (!isset($_SESSION['pseudo'])) {
 $pseudo = strtolower($_SESSION['pseudo']);
 $selectedUser = '';
 
+// Vérification si un utilisateur est sélectionné pour afficher la boîte de chat
 if (isset($_GET['user'])) {
     $selectedUser = strtolower($_GET['user']);
-    $showChatBox = true; // Set to true only when a user is selected
+    $showChatBox = true;
 } else {
-    $showChatBox = false; // Set to false initially
+    $showChatBox = false;
 }
 ?>
 
@@ -45,14 +47,13 @@ if (isset($_GET['user'])) {
                 <h2>Choisi un artiste avec qui discuter:</h2>
                 <ul>
                     <?php
-                    
+                    // Affichage de la liste des utilisateurs avec qui discuter
                     if (count($userMessage) > 0) {
                         foreach ($userMessage as $row) {
                             $user = $row['pseudo'];
                             echo "<li><a href='index.php?page=message&user=$user'>$user</a></li>";
                         }
                     }
-
                     ?>
                 </ul>
             </div>
@@ -67,7 +68,7 @@ if (isset($_GET['user'])) {
                     </div>
                 </div>
                 <div class="chat-box-body" id="chat-box-body">
-                    <!-- Chat messages will be loaded here -->
+                    <!-- Les messages du chat seront chargés ici -->
                 </div>
                 <form class="chat-form" id="chat-form">
                     <input type="hidden" id="sender" value="<?php echo $pseudo; ?>">
@@ -119,13 +120,13 @@ if (isset($_GET['user'])) {
         }
 
         $(document).ready(function() {
-            // Fetch messages for the selected user when the page loads
+            // Charger les messages pour l'utilisateur sélectionné au chargement de la page
             fetchMessages();
 
-            // Fetch messages every 3 seconds
+            // Charger les messages toutes les 3 secondes
             setInterval(fetchMessages, 3000);
 
-            // Submit the chat message
+            // Soumettre le message du chat
             $('#chat-form').submit(function(e) {
                 e.preventDefault();
                 var sender = $('#sender').val();
@@ -142,7 +143,7 @@ if (isset($_GET['user'])) {
                     },
                     success: function() {
                         $('#message').val('');
-                        fetchMessages(); // Fetch messages after submitting
+                        fetchMessages(); // Charger les messages après soumission
                     }
                 });
             });

@@ -2,8 +2,8 @@
 require_once '../models/userModel.php';
 $user = new User();
 
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Récupération et sécurisation des données du formulaire
     $pseudo = htmlspecialchars($_POST['pseudo']);
     $password = htmlspecialchars($_POST['password']);
     $firstname = htmlspecialchars($_POST['firstname']);
@@ -14,11 +14,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $phone = htmlspecialchars($_POST['phone']);
     $picture = htmlspecialchars($_POST['picture']);
 
-    
-    // Vérifaction des champs vides
+    // Vérification des champs vides
     if (empty($pseudo) || empty($password) || empty($firstname) || empty($lastname) || empty($birth) || empty($country) || empty($email) || empty($phone) || empty($picture)) {
         $error = 'Veuillez remplir tous les champs';
     } else {
+        // Tentative d'inscription de l'utilisateur
         if ($user->register($pseudo, $password, $firstname, $lastname, $birth, $country, $email, $phone, $picture)) {
             $succes = 'Inscription réussie ! Vous pouvez vous connecter.';
         } else {
@@ -32,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="space"></div>
     <div class="form">
         <form action="index.php?page=register" method="post">
+            <!-- Formulaire étape 1 : Création de compte -->
             <div class="form-box" id="form1">
                 <h3>Créer un compte</h3>
                 <input type="text" name="pseudo" id="pseudo" placeholder="Pseudo" required>
@@ -42,6 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
             </div>
 
+            <!-- Formulaire étape 2 : Informations personnelles -->
             <div class="form-box" id="form2">
                 <h3>Informations personnelles</h3>
                 <input type="text" name="firstname" id="firstnamme" placeholder="Prénom" required>
@@ -54,6 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
             </div>
 
+            <!-- Formulaire étape 3 : Informations de contact -->
             <div class="form-box" id="form3">
                 <h3>Informations de contact</h3>
                 <input type="email" name="email" id="email" placeholder="Email" required>
@@ -64,6 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
             </div>
 
+            <!-- Formulaire étape 4 : Photo de profil -->
             <div class="form-box" id="form4">
                 <h3>Photo de profil</h3>
                 <input type="file" name="picture" id="picture" accept="image/png, image/jpeg" required>
@@ -73,6 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
             </div>
 
+            <!-- Barre de progression -->
             <div class="step-row">
                 <div id="progress"></div>
                 <div class="step-col"><small>Etape 1</small></div>
@@ -83,6 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
 
         <script>
+            // Gestion des étapes du formulaire
             var form1 = document.getElementById("form1");
             var form2 = document.getElementById("form2");
             var form3 = document.getElementById("form3");
@@ -96,6 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             var retour3 = document.getElementById("retour3");
             var submit = document.getElementById("submit");
 
+            // Gestion de la navigation avec la touche "Enter"
             document.addEventListener('keydown', function(event) {
                 if (event.key === 'Enter') {
                     event.preventDefault();
@@ -111,6 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             });
 
+            // Navigation entre les étapes du formulaire
             suivant1.onclick = function() {
                 form1.style.left = "-450px";
                 form2.style.left = "40px";
@@ -147,6 +155,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 progress.style.width = "270px";
             }
         </script>
-
-
 </main>

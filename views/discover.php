@@ -1,9 +1,10 @@
 <?php
 
+// Inclusion du fichier de connexion à la base de données
 require_once '../models/database.php';
 $db = (new Database())->connect();
 
-
+// Inclusion du modèle Discover
 require_once '../models/discoverModel.php';
 $discover = new Discover();
 ?>
@@ -16,6 +17,7 @@ $discover = new Discover();
         <p>Viens découvrir les futures stars de demain !</p>
     </aside>
 
+    <!-- Formulaire de recherche -->
     <form action="search.php" method="get">
         <label for="recherche">
             <input type="text" name="recherche" placeholder="Rechercher un artiste, une collab...">
@@ -51,10 +53,10 @@ $discover = new Discover();
         <button id="button_left"><img src="assets/img/circle-chevron-left.svg" alt="fleche gauche"></button>
         <section id="carrousselpepite">
             <?php
-
+            // Récupération de toutes les collaborations
             $collaborations = $discover->getAllCollaborations();
 
-
+            // Récupération de toutes les collaborations des utilisateurs
             $userscollaborations = $discover->getAllUserCollaborations();
 
             if (!empty($collaborations)): ?>
@@ -64,10 +66,9 @@ $discover = new Discover();
                         <div>
                             <div>
                                 <h4><?= htmlspecialchars($collab['title']) ?></h4>
-
                             </div>
                             <?php
-
+                            // Récupération des pseudos des utilisateurs pour chaque collaboration
                             $sqlPseudo = "SELECT u.pseudo
                                             FROM Users u
                                             JOIN UserCollaborations uc ON u.id_user = uc.id_user
@@ -76,7 +77,6 @@ $discover = new Discover();
                             $resultPseudo = $db->prepare($sqlPseudo);
                             $resultPseudo->execute();
                             $Pseudos = $resultPseudo->fetchAll(PDO::FETCH_ASSOC);
-
                             ?>
                             <div id="pseudoOeuvre">
                             <?php foreach ($Pseudos as $pseudo):?> 
@@ -88,17 +88,16 @@ $discover = new Discover();
             <?php else: ?>
                 <p>Aucune collaboration trouvée.</p>
             <?php endif; ?>
-
         </section>
         <button id="button_right"><img src="assets/img/circle-chevron-right.svg" alt="fleche droite"></button>
-
     </section>
-    <?php  // Récupération d'un utilisateur aléatoire
+
+    <?php  
+    // Récupération d'un utilisateur aléatoire
     $sqlRandomUser = "SELECT * FROM Users ORDER BY RANDOM() LIMIT 1";
     $resultRandomUser = $db->prepare($sqlRandomUser);
     $resultRandomUser->execute();
     $randomUser = $resultRandomUser->fetch(PDO::FETCH_ASSOC);
-
 
     // Récupération des collaborations de l'utilisateur aléatoire
     $sqlUserCollabs = "
@@ -112,7 +111,6 @@ $discover = new Discover();
     $resultUserCollabs->execute();
     $userCollaborations = $resultUserCollabs->fetchAll(PDO::FETCH_ASSOC);
     ?>
-
 
     <section>
         <h3>Zoom sur un artiste</h3>
@@ -137,10 +135,7 @@ $discover = new Discover();
                 <?php else: ?>
                     <p>Aucune collaboration trouvée pour cet artiste.</p>
                 <?php endif; ?>
-
             </section>
         </div>
-
     </section>
-
 </main>
