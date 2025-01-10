@@ -1,6 +1,22 @@
 <?php
 session_start();
 
+// Determine the page title based on the current page
+$page = $_GET['page'] ?? 'home'; // Default to 'home' if no page is set
+
+
+$pageTitles = [
+    'home' => 'Home - CollabDoor',
+    'collaborate' => 'Collaborer - CollabDoor',
+    'discover' => 'Découvrir - CollabDoor',
+    'learn' => 'Apprendre - CollabDoor',
+    'profile' => 'Profil - CollabDoor',
+    'login' => 'Connexion - CollabDoor',
+    'register' => 'Inscription - CollabDoor',
+];
+
+
+$title = $pageTitles[$page] ?? 'CollabDoor'; // Default to 'CollabDoor' if page not in the array
 ?>
 
 <!DOCTYPE html>
@@ -10,15 +26,16 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="icon" href="/assets/img/IconCollabDoor.png" type="image/x-icon">
     <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
-    <title>Document</title>
+    <title><?= htmlspecialchars($title) ?></title>
 </head>
 
 <body>
     <header>
         <nav>
             <a href="index.php?page=home">
-                <img src="/assets/img/IconCollabdoor.svg" alt="logo" >
+                <img src="/assets/img/IconCollabdoor.svg" alt="logo">
             </a>
             <button class="c-header_nav_burger" data-header="burger" hidden></button>
             <ul class="collaborate">
@@ -34,11 +51,10 @@ session_start();
             </ul>
             <?php if (isset($_SESSION['pseudo'])): ?>
                 <?php
-                // Example profile data from session or database
                 $profile = [
                     'pseudo' => $_SESSION['pseudo'],
-                    'email' => $_SESSION['email'] ?? 'example@example.com', // Replace with actual session keys
-                    'age' => $_SESSION['age'] ?? 25 // Replace with actual session keys
+                    'email' => $_SESSION['email'] ?? 'example@example.com',
+                    'age' => $_SESSION['age'] ?? 25
                 ];
                 ?>
                 <ul class="user">
@@ -64,3 +80,6 @@ session_start();
             <?php endif; ?>
         </nav>
     </header>
+</body>
+
+</html>
