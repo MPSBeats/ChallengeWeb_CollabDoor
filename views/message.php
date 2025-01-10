@@ -34,7 +34,7 @@ if (isset($_GET['user'])) {
 </head>
 
 <body>
-    <main class="messaging">
+    <main class="messaging" style="min-height: 90vh;">
         <div class="space"></div>
         <div class="account-info">
             <div class="welcome">
@@ -44,7 +44,7 @@ if (isset($_GET['user'])) {
                 <h2>Choisi un artiste avec qui discuter:</h2>
                 <ul>
                     <?php
-                    
+
                     if (count($userMessage) > 0) {
                         foreach ($userMessage as $row) {
                             $user = $row['pseudo'];
