@@ -3,6 +3,8 @@
 require_once "../models/database.php";
 
 $db = (new Database())->connect();
+$users = new Chatbox();
+$usersMessage = $user->fetchMessageUsers($pseudo);
 
 if (!isset($_SESSION['pseudo'])) {
     header("Location: index.php?page=login");
@@ -48,20 +50,12 @@ if (isset($_GET['user'])) {
                                     JOIN Users u2 ON (c.sender = u2.id_user OR c.receiver = u2.id_user)
                                     WHERE u1.pseudo = :pseudo AND u1.id_user <> u2.id_user;
                                     ";
-                    $resultMessage = $db->prepare($sqlMessage);
-                    if ($resultMessage->execute([':pseudo' => $pseudo])) {
-                        $users = $resultMessage->fetchAll(PDO::FETCH_ASSOC);
-                        if (count($users) === 0) {
-                            echo "<li>Aucun message trouvé.</li>";
-                        }
-                    } else {
-                        echo "<li>Aucun message trouvé.</li>";
-                    }
+                    
 
-                    if (count($users) > 0) {
-                        foreach ($users as $row) {
+                    if (count($userMessage) > 0) {
+                        foreach ($userMessage as $row) {
                             $user = $row['pseudo'];
-                            $user = ucfirst($user);
+                            $user = ucfirst($userMessage);
                             echo "<li><a href='index.php?page=message&user=$user'>$user</a></li>";
                         }
                     }
