@@ -42,7 +42,7 @@ $users = new User();
 
             // Mélanger les utilisateurs pour un affichage aléatoire
             shuffle($usersAll);
-            
+
 
             // Récupérer le pseudo de l'utilisateur connecté
             $currentUser = $_SESSION['pseudo'] ?? '';
@@ -89,7 +89,7 @@ $users = new User();
                     // Afficher seulement 4 collaborations aléatoires
                     foreach (array_slice($collaborationsAll, 0, 4) as $collab): ?>
                         <article class="oeuvre">
-                            <img src="assets/img/picture1.png" alt="">
+                            <img src="<?php echo $collab['thumbnail'] ?>" alt="">
                             <div>
                                 <?php
                                 // Récupérer les pseudos des utilisateurs associés à chaque collaboration
@@ -117,7 +117,7 @@ $users = new User();
                 <p style="font-family: Fira code;"><a href="index.php?page=learn">--></a></p>
             </div>
             <div class="bot-card">
-            <?php
+                <?php
                 // Récupérer toutes les formations
                 $learnings = $learns->getAllLearnings();
 
@@ -128,17 +128,20 @@ $users = new User();
                     // Afficher seulement 4 formations aléatoires
                     foreach (array_slice($learnings, 0, 4) as $learning): ?>
                         <article class="oeuvre">
-                            <img src="<?php echo $learning['thumbnail']?>" alt="">
+                            <img src="<?php echo $learning['thumbnail'] ?>" alt="">
+
                             <div>
-                                <div>
-                                    <h4><?= htmlspecialchars($learning['title']) ?></h4>
-                                </div>
+                                <h4><?= htmlspecialchars($learning['title']) ?></h4>
                                 <?php
                                 // Récupérer les pseudos des utilisateurs associés à chaque formation
                                 $Pseudos = $learns->getPseudoByLearning($learning['id_learning']);
                                 ?>
-                                <p><?php foreach ($Pseudos as $pseudo): echo htmlspecialchars($pseudo['pseudo']) . ' '; endforeach; ?></p>
+                                <p><?php foreach ($Pseudos as $pseudo): echo htmlspecialchars($pseudo['pseudo']) . ' ';
+                                    endforeach; ?></p>
                             </div>
+
+
+
                         </article>
                     <?php endforeach; ?>
                 <?php else: ?>
