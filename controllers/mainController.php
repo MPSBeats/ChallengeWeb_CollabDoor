@@ -34,11 +34,11 @@ switch ($page) {
         break;
 
     case 'fetch_messages':
-        include '../views/fetch_messages.php';
+        include '../models/fetch_messages.php';
         break;
 
     case 'submit_message':
-        include '../views/submit_message.php';
+        include '../models/submit_message.php';
         break;
 
     case 'profile':
