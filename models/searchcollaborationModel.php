@@ -57,7 +57,7 @@ class SearchCollaboration
     }
     
     public function getSearchThumbnail($userId){
-        $sqlThumbnail = "SELECT sc.thumbnail
+        $sqlThumbnail = "SELECT sc.thumbnail, sc.id_searchcollaborations
                         FROM searchcollaborations sc
                         JOIN userssearchcollaborations usc ON sc.id_searchcollaborations = usc.id_searchcollaborations
                         JOIN Users u ON usc.id_user = u.id_user

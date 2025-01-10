@@ -104,7 +104,7 @@ $discover = new Discover();
                 <p></p> <!-- exprès pour faire l'espace a gauche -->
                 <h4 style="font-size: 25px;">Découvrez <?= htmlspecialchars($randomUser['pseudo']) ?> et sa collection</h4> <span><button id="bLeftArtiste"><img src="assets/img/move-left.svg" alt="fleche gauche"></button> <button id="bRightArtiste"><img src="assets/img/move-right.svg" alt="fleche droite"></button></span>
             </span>
-            <img src="<?= htmlspecialchars($randomUser['picture']) ?>" alt="hero">
+            <img style="cursor: pointer;" src="<?= htmlspecialchars($randomUser['picture']); ?>" alt="<?= htmlspecialchars($randomUser['pseudo']); ?>" onclick="window.location.href='index.php?page=profile&artist=<?= htmlspecialchars($randomUser['pseudo']) ?>'">
             <section id="carrousselartiste">
                 <article class="oeuvre"></article>
                 <?php if (!empty($userCollaborations)): ?>
