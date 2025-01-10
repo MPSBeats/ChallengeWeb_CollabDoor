@@ -35,14 +35,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<main>
+<main id="collaboration-main" style="min-height:90vh">
     <div class="space"></div>
     <form action="index.php?page=collaborationsheet" method="post">
-        <div class="form-box" id="form">
+        <div class="form-box" id="collaboration-form">
             <h3>Créer une fiche recherche de collaboration :</h3>
-            <input type="text" name="title" id="title" placeholder="Titre" required>
-            <input type="file" name="thumbnail" id="thumbnail" accept="image/png, image/jpeg" required>
-            <div class="btn-box">
+            <input type="text" name="title" id="collaboration-title" placeholder="Titre" required>
+            <input type="file" name="thumbnail" id="collaboration-thumbnail" accept="image/png, image/jpeg" required>
+            <div class="btn-box" id="collaboration-btn-box">
                 <button type='submit' name='create'>Créer</button>
             </div>
         </div>
