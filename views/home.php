@@ -9,7 +9,7 @@ $db = (new Database())->connect();
         <div class="space"></div>
         <div class="content">
             <img src="assets/img/logoCollabdoor.png" alt="">
-            <h2>Your Gateway to Seamless Collaboration</h2>
+            <h2>La collab entre artistes n'a jamais été aussi facile !</h2>
         </div>
         <div class="arrow-help">
             <a href="#collaborate" id="arrow" class="smooth-scroll">

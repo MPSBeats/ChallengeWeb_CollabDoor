@@ -4,6 +4,8 @@ require_once '../models/database.php';
 $db = (new Database())->connect();
 
 
+require_once '../models/discoverModel.php';
+$discover = new Discover();
 ?>
 
 <main id="discover">
@@ -49,15 +51,11 @@ $db = (new Database())->connect();
         <button id="button_left"><img src="assets/img/circle-chevron-left.svg" alt="fleche gauche"></button>
         <section id="carrousselpepite">
             <?php
-            $sql1 = "SELECT * FROM collaborations";
-            $result1 = $db->prepare($sql1);
-            $result1->execute();
-            $collaborations = $result1->fetchAll(PDO::FETCH_ASSOC);
 
-            $sql2 = "SELECT * FROM usercollaborations ";
-            $result2 = $db->prepare($sql2);
-            $result2->execute();
-            $userscollaborations = $result2->fetchAll(PDO::FETCH_ASSOC);
+            $collaborations = $discover->getAllCollaborations();
+
+
+            $userscollaborations = $discover->getAllUserCollaborations();
 
             if (!empty($collaborations)): ?>
                 <?php foreach ($collaborations as $collab): ?>
