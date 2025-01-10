@@ -2,8 +2,10 @@
 require_once '../models/profileModel.php';
 require_once '../models/database.php';
 require_once '../models/searchcollaborationModel.php';
+require_once '../models/collaborateModel.php';
 
 $db = (new Database())->connect();
+
 
 $selectedUser = '';
 
@@ -70,67 +72,56 @@ $collaborations = new SearchCollaboration();
         <section id="carrousselCollab">
             <?php
 
-            
+
             $allcollaborations = $collaborations->getAllSearchCollaborations();
 
             if (!empty($collaborations)): ?>
                 <?php foreach ($allcollaborations as $collab): ?>
-                    <article class="oeuvre">
+    <article class="oeuvre">
+        <?php
+        // Fetch the pseudo for the collaboration
+        $Pseudos = $collaborations->getPseudoSearchCollaboration($collab['id_searchcollaborations']);
+        if (!empty($Pseudos)) {
+            foreach ($Pseudos as $pseudo) {
+                $pseudo_user = $pseudo['id_user'];
+                $thumbnails = $collaborations->getSearchThumbnail($pseudo_user);
+                $profilePicture = (new Profile())->getPicture($pseudo['pseudo']);
+        ?>
 
-                        <?php
+        <div class="oeuvre-info">
+            <img src="<?= htmlspecialchars($thumbnails[0]['thumbnail'] ?? 'default-thumbnail.jpg') ?>" alt="Thumbnail">
+            
+            <h4 style="text-align:center"><?= htmlspecialchars($collab['title']) ?></h4>
 
-                        //Requete pour avoir l'image de la fiche de l'utilisateur
-                        $Pseudos = $collaborations->getPseudoSearchCollaboration($collab['id_searchcollaborations']);
-                        foreach ($Pseudos as $pseudo) {
-                          $pseudo_user=  $pseudo['id_user'];
-                        $sqlThumbnail = "SELECT sc.thumbnail
-                        FROM searchcollaborations sc
-                        JOIN userssearchcollaborations usc ON sc.id_searchcollaborations = usc.id_searchcollaborations
-                        JOIN Users u ON usc.id_user = u.id_user
-                        WHERE u.id_user = :pesudo_user ;
-                        ";
-                        $resultThumbnail = $db->prepare($sqlThumbnail);
-                        $resultThumbnail->execute([':pesudo_user' => $pseudo_user]);
-                        $thumbnails = $resultThumbnail->fetch(PDO::FETCH_ASSOC);
-                        }
-                        ?>
-                       
-                        <div class="oeuvre-info">
-                            <img src="<?= htmlspecialchars($thumbnails['thumbnail'])?>" alt="">
-                            <h4 style="text-align:center"><?= htmlspecialchars($collab['title']) ?></h4>
-                            <?php
+            <div>
+                <div class="profile-picture-search">
+                    <img 
+                        src="<?= htmlspecialchars($profilePicture['picture'] ?? 'default-profile.jpg') ?>" 
+                        alt="Profile picture" 
+                        class="profile-img-search-collab"
+                        onclick="window.location.href='index.php?page=profile&artist=<?= htmlspecialchars($pseudo['pseudo'] ?? '') ?>'"
+                    >
+                </div>
+                <p style="width: 50%;"><?= htmlspecialchars($pseudo['pseudo'] ?? 'Aucun pseudo trouvé.') ?></p>
+            </div>
 
-                           
+            <?php if (!empty($user)): ?>
+                <a href='index.php?page=collaborate&user=<?= htmlspecialchars($pseudo['pseudo'] ?? '') ?>'>
+                    <img src="assets/img/mail-plus.svg" alt="Collaborate">
+                </a>
+            <?php else: ?>
+                <a href="#" onclick="alert('Veuillez vous connecter avant de collaborer.');">
+                    <img src="assets/img/mail-plus.svg" alt="Collaborate">
+                </a>
+            <?php endif; ?>
+        </div>
+        <?php
+            } 
+        }
+        ?>
+    </article>
+<?php endforeach; ?>
 
-                            $profil = new Profile();
-                            $profilePicture = $profil->getPicture($Pseudos[0]['pseudo']);
-
-                            ?>
-                            <div>
-                                <div class="profile-picture-search">
-                                    <img src="<?= htmlspecialchars($profilePicture['picture']); ?>" alt="Profile picture" class="profile-img-search-collab" onclick="window.location.href='index.php?page=profile&artist=<?=$Pseudos[0]['pseudo']?>'">
-                                </div>
-                                <?php
-                                if (!empty($Pseudos)): ?>
-                                    <p style="width: 50%;"><?php echo $Pseudos[0]['pseudo'] ?></p>
-                                <?php else: ?>
-                                    <p style="width: 50%;">Aucun pseudo trouvé.</p>
-                                <?php endif; ?>
-                            </div>
-                            <?php if (!empty($user)): ?>
-                                <a href='index.php?page=collaborate&user=<?php echo htmlspecialchars($Pseudos[0]['pseudo']) ?>'>
-                                    <img src="assets/img/mail-plus.svg">
-                                </a>
-                            <?php else: ?>
-                                <a href="#" onclick="alert('Veuillez vous connecter avant de collaborer.');">
-                                    <img src="assets/img/mail-plus.svg">
-                                </a>
-                            <?php endif; ?>
-
-
-                        </div>
-                    </article>
-                <?php endforeach; ?>
             <?php else: ?>
                 <p>Aucune collaboration trouvée.</p>
             <?php endif; ?>

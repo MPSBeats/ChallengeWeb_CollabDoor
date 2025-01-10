@@ -14,13 +14,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $phone = htmlspecialchars($_POST['phone']);
     $picture = htmlspecialchars($_POST['picture']);
 
+    
+
     // Vérification des champs vides
     if (empty($pseudo) || empty($password) || empty($firstname) || empty($lastname) || empty($birth) || empty($country) || empty($email) || empty($phone) || empty($picture)) {
         $error = 'Veuillez remplir tous les champs';
     } else {
         // Tentative d'inscription de l'utilisateur
         if ($user->register($pseudo, $password, $firstname, $lastname, $birth, $country, $email, $phone, $picture)) {
-            $succes = 'Inscription réussie ! Vous pouvez vous connecter.';
+            $success = 'Inscription réussie ! Vous pouvez vous connecter.';
         } else {
             $error = 'Une erreur est survenue lors de l\'inscription';
         }
@@ -31,6 +33,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <main class="register">
     <div class="space"></div>
     <div class="form">
+    <?php if (isset($success)): ?>
+        <div class="alert alert-success" role="alert">
+            <?php echo $success; ?>
+        </div>
+        <?php endif; ?>
+        <?php if (isset($error)): ?>
+        <div class="alert alert-danger" role="alert">
+            <?php echo $error; ?>
+        </div>
+        <?php endif; ?>
         <form action="index.php?page=register" method="post">
             <!-- Formulaire étape 1 : Création de compte -->
             <div class="form-box" id="form1">
