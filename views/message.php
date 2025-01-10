@@ -3,6 +3,7 @@
 require_once "../models/database.php";
 require_once "../models/chatboxModel.php";
 
+
 $db = (new Database())->connect();
 $users = new Chatbox();
 $userMessage = $users->fetchMessageUsers($_SESSION['pseudo']);

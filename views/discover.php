@@ -4,6 +4,8 @@ require_once '../models/database.php';
 $db = (new Database())->connect();
 
 
+require_once '../models/discoverModel.php';
+$discover = new Discover();
 ?>
 
 <main id="discover">
@@ -49,15 +51,11 @@ $db = (new Database())->connect();
         <button id="button_left"><img src="assets/img/circle-chevron-left.svg" alt="fleche gauche"></button>
         <section id="carrousselpepite">
             <?php
-            $sql1 = "SELECT * FROM collaborations";
-            $result1 = $db->prepare($sql1);
-            $result1->execute();
-            $collaborations = $result1->fetchAll(PDO::FETCH_ASSOC);
 
-            $sql2 = "SELECT * FROM usercollaborations ";
-            $result2 = $db->prepare($sql2);
-            $result2->execute();
-            $userscollaborations = $result2->fetchAll(PDO::FETCH_ASSOC);
+            $collaborations = $discover->getAllCollaborations();
+
+
+            $userscollaborations = $discover->getAllUserCollaborations();
 
             if (!empty($collaborations)): ?>
                 <?php foreach ($collaborations as $collab): ?>
@@ -70,14 +68,8 @@ $db = (new Database())->connect();
                             </div>
                             <?php
 
-                            $sqlPseudo = "SELECT u.pseudo
-                                            FROM Users u
-                                            JOIN UserCollaborations uc ON u.id_user = uc.id_user
-                                            JOIN Collaborations c ON uc.id_collaborations = c.id_collaborations
-                                            WHERE c.id_collaborations = " . $collab['id_collaborations'];
-                            $resultPseudo = $db->prepare($sqlPseudo);
-                            $resultPseudo->execute();
-                            $Pseudos = $resultPseudo->fetchAll(PDO::FETCH_ASSOC);
+                            
+                            $Pseudos = $discover->getUserPseudosByCollaborationId($collab['id_collaborations']);
 
                             ?>
                             <div id="pseudoOeuvre">
@@ -96,23 +88,12 @@ $db = (new Database())->connect();
 
     </section>
     <?php  // Récupération d'un utilisateur aléatoire
-    $sqlRandomUser = "SELECT * FROM Users ORDER BY RANDOM() LIMIT 1";
-    $resultRandomUser = $db->prepare($sqlRandomUser);
-    $resultRandomUser->execute();
-    $randomUser = $resultRandomUser->fetch(PDO::FETCH_ASSOC);
+    
+    $randomUser = $discover->getRandomUser();
 
 
-    // Récupération des collaborations de l'utilisateur aléatoire
-    $sqlUserCollabs = "
-    SELECT c.*
-    FROM collaborations c
-    JOIN usercollaborations uc ON c.id_collaborations = uc.id_collaborations
-    WHERE uc.id_user = :id_user
-";
-    $resultUserCollabs = $db->prepare($sqlUserCollabs);
-    $resultUserCollabs->bindParam(':id_user', $randomUser['id_user'], PDO::PARAM_INT);
-    $resultUserCollabs->execute();
-    $userCollaborations = $resultUserCollabs->fetchAll(PDO::FETCH_ASSOC);
+    
+    $userCollaborations = $discover->getCollaborationsByRandomUserId($randomUser['id_user']);
     ?>
 
 
