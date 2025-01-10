@@ -74,7 +74,21 @@ if (isset($_GET['user'])) {
             if (!empty($collaborations)): ?>
                 <?php foreach ($collaborations as $collab): ?>
                     <article class="oeuvre">
-                        <img src="assets/img/picture1.png" alt="">
+
+                        <?php
+                        $sqlThumbnail = "SELECT sc.thumbnail
+FROM searchcollaborations sc
+JOIN userssearchcollaborations usc ON sc.id_searchcollaborations = usc.id_searchcollaborations
+JOIN Users u ON usc.id_user = u.id_user
+WHERE u.id_user = 1;
+";
+                        $resultThumbnail = $db->prepare($sqlThumbnail);
+                        $resultThumbnail->execute();
+                        $thumbnails = $resultThumbnail->fetch(PDO::FETCH_ASSOC);
+                        var_dump($thumbnails);     
+                        
+                        ?>
+                        <img src="<?= htmlspecialchars($thumbnails['thumbnail'])  ?>" alt="efqf">
                         <div class="oeuvre-info">
                             <h4 style="text-align:center"><?= htmlspecialchars($collab['title']) ?></h4>
                             <?php
