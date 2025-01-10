@@ -1,32 +1,76 @@
 <?php
 require_once '../models/learnsModel.php';
+require_once '../models/database.php';
+$db = (new Database())->connect();
 
 $learning = new Learn();
 $learnings = $learning->getAllLearnings()
 
 ?>
 
-<main>
+<main id="discover">
     <div class="space"></div>
-    <div>
-        <h2>Les formations</h2>
-    </div>
-    <div class="squares-container-formation">
-        <!-- Render all thumbnails by default (collabs and formations) -->
-        <?php foreach ($learnings as $index => $learning): ?>
 
-            <form id="myForm<?= $index ?>" style="display: block; width: 30%" action="index.php" method="get">
-                <a class="form-link" href=" #" onclick="document.getElementById('myForm<?= $index ?>').submit(); return false;">
-                    <div class="full-size-square ">
-                        <img src="<?= htmlspecialchars($learning['thumbnail']); ?>" alt="Learning Thumbnail" class="square-img">
-                    </div>
-                    <input type="hidden" name="page" value="learningProfile">
-                    <input type="hidden" name="learning" value="<?= htmlspecialchars($learning['title']); ?>">
-                    <p><?= htmlspecialchars($learning['title']); ?></p>
-                </a>
-            </form>
+    <aside>
+        <h2>Apprendre</h2>
+        <p>Réveiller l'artiste qui someille en vous !</p>
+    </aside>
 
-        <?php endforeach; ?>
-    </div>
+    <form action="search.php" method="get">
+        <label for="recherche">
+            <input type="text" name="recherche" placeholder="Rechercher une formation">
+            <button type="submit" name="recherche"><img src="assets/img/search.svg" alt="loupe"></button>
+        </label>
+        <span>Filtrer par <img src="assets/img/chevron-up.svg" alt="up"></span>
+        <div id="filter">
+            <div>
+                <input type="radio" name="type" id="instrument" value="1">
+                <label for="instrument">Instrument</label>
+            </div>
+            <div>
+                <input type="radio" name="type" id="duree" value="2">
+                <label for="duree">Durée</label>
+            </div>
+            <hr>
+            <div>
+                <input type="radio" name="choix" id="recent" value="3">
+                <label for="recent">Plus récent</label>
+            </div>
+            <div>
+                <input type="radio" name="choix" id="populaire" value="4">
+                <label for="populaire">Plus Populaire</label>
+            </div>
+            <label for="recherchetag" id="tag">
+                <input type="text" name="recherchetag" placeholder="Rechercher un #tag...">
+                <button name="recherchetag"><img src="assets/img/search.svg" alt="loupe"></button></label>
+        </div>
+    </form>
+
+    <section>
+        <h3>Les formations</h3>
+        <button id="button_left"><img src="assets/img/circle-chevron-left.svg" alt="fleche gauche"></button>
+        <section id="carrousselpepite">
+            <?php
+
+            if (!empty($learnings)): ?>
+                <?php foreach ($learnings as $learning): ?>
+                    <article class="oeuvre" onclick="window.location.href='index.php?page=learningProfile&learning=<?= $learning['title'] ?>'">
+                        <img src="assets/img/picture1.png" alt="">
+                        <div>
+                            <div>
+                                <h4><?= htmlspecialchars($learning['title']) ?></h4>
+                            </div>
+                        </div>
+                    </article>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>Aucune formations trouvée.</p>
+            <?php endif; ?>
+
+        </section>
+        <button id="button_right"><img src="assets/img/circle-chevron-right.svg" alt="fleche droite"></button>
+
+    </section>
+    
 
 </main>
