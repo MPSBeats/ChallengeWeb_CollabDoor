@@ -1,5 +1,7 @@
 <?php
+// Vérifie si la requête est de type POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Si le bouton de déconnexion est cliqué
     if (isset($_POST['logout'])) {
         session_destroy();
         header('Location: index.php?page=home');
@@ -15,6 +17,7 @@ $profil = new Profile();
 
 $db = (new Database())->connect();
 
+// Récupère les informations du profil en fonction de l'artiste ou de l'utilisateur connecté
 if (isset($_GET['artist'])) {
     $profilePicture = $profil->getPicture($_GET['artist']);
     $collabs = $profil->getAllCollabs($_GET['artist']);
@@ -27,13 +30,12 @@ if (isset($_GET['artist'])) {
     $pseudo = $_SESSION['pseudo'];
 }
 
-
+// Vérifie si un utilisateur est sélectionné pour le chat
 if (isset($_GET['user'])) {
     $selectedUser = strtolower($_GET['user']);
-    $showChatBox = true; // Set to true only when a user is selected
+    $showChatBox = true; // Affiche la chatbox si un utilisateur est sélectionné
 } else {
-    $showChatBox = false; // Set to false initially
-
+    $showChatBox = false; // Cache la chatbox par défaut
 }
 ?>
 
@@ -54,15 +56,14 @@ if (isset($_GET['user'])) {
                 </div>
             </div>
 
-            <!-- Container for dynamic thumbnails -->
+            <!-- Conteneur pour les vignettes dynamiques -->
             <div class="squares-container">
-                <!-- Render all thumbnails by default (collabs and formations) -->
+                <!-- Affiche toutes les vignettes par défaut (collabs et formations) -->
                 <?php foreach ($collabs as $index => $collab): ?>
                     <div class="square collab" style="width: 100%;">
                         <img src="<?= htmlspecialchars($collab['thumbnail']); ?>" alt="Collab Thumbnail" style="width: 100%; height: 100%;">
                     </div>
                 <?php endforeach; ?>
-
 
                 <?php foreach ($formations as $index => $formation): ?>
                     <div class="square formation" style="z-index: 10;background-image: url('<?= htmlspecialchars($formation['thumbnail']); ?>');"></div>
@@ -70,7 +71,7 @@ if (isset($_GET['user'])) {
             </div>
         </div>
 
-        <!-- Profile Box -->
+        <!-- Boîte de profil -->
         <div class="profile-box">
             <div class="profile-header">
                 <div class="profile-picture">
@@ -91,7 +92,6 @@ if (isset($_GET['user'])) {
                     <form action="index.php?page=message" method="post" class="btn-profil">
                         <button type="submit" name="message" class="btn-green">Message</button>
                     </form>
-
                 <?php } else { ?>
                     <div class="btn-profil">
                         <button onclick="window.location.href='index.php?page=profile&artist=<?php echo $pseudo ?>&user=<?php echo $pseudo; ?>'" class="btn-green">Contacter</button>
@@ -101,10 +101,8 @@ if (isset($_GET['user'])) {
         </div>
     </div>
 
-
-
     <?php
-    //Affichage de la chatBox
+    // Affichage de la chatBox
     if ($showChatBox): ?>
         <div class="chat-box" id="chat-box">
             <div class="chat-box-header">
@@ -112,7 +110,7 @@ if (isset($_GET['user'])) {
                 <button class="close-btn" onclick="closeChat()">✖</button>
             </div>
             <div class="chat-box-body" id="chat-box-body">
-                <!-- Chat messages will be loaded here -->
+                <!-- Les messages du chat seront chargés ici -->
             </div>
             <form class="chat-form" id="chat-form">
                 <input type="hidden" id="sender" value="<?php echo htmlspecialchars($_SESSION['pseudo']); ?>">
@@ -125,7 +123,7 @@ if (isset($_GET['user'])) {
 </main>
 
 <script>
-    // Add event listeners to the top options
+    // Ajoute des écouteurs d'événements aux options en haut
     document.querySelectorAll('.option').forEach(option => {
         option.addEventListener('click', function() {
             const action = this.getAttribute('data-action');
@@ -133,36 +131,32 @@ if (isset($_GET['user'])) {
             const squaresContainer = document.querySelector('.squares-container');
 
             if (action === 'samples') {
-
-
-                // For now, just showing the first 3 squares
+                // Pour l'instant, affiche seulement les 3 premières vignettes
                 squares.forEach((square, index) => {
                     if (index < 3) {
-                        square.style.display = 'block'; // Show the first 3 squares
-                        square.style.width = '30%'; // Adjust width
-                        square.style.height = '25vh'; // Adjust height
+                        square.style.display = 'block'; // Affiche les 3 premières vignettes
+                        square.style.width = '30%'; // Ajuste la largeur
+                        square.style.height = '25vh'; // Ajuste la hauteur
                     } else {
-                        square.style.display = 'none'; // Hide the rest
+                        square.style.display = 'none'; // Cache le reste
                     }
                 });
             } else {
-                // Reset and show all squares
+                // Réinitialise et affiche toutes les vignettes
                 squares.forEach(square => {
-                    square.style.display = 'block'; // Show all squares
-                    square.style.width = '30%'; // Reset width
-                    square.style.height = '25vh'; // Reset height
+                    square.style.display = 'block'; // Affiche toutes les vignettes
+                    square.style.width = '30%'; // Réinitialise la largeur
+                    square.style.height = '25vh'; // Réinitialise la hauteur
                 });
 
-                // Adjust colors or styles for specific options
+                // Ajuste les couleurs ou les styles pour des options spécifiques
                 if (action === 'collabs') {
-                    // Show only collaboration squares
+                    // Affiche seulement les vignettes de collaboration
                     document.querySelectorAll('.collab').forEach(square => square.style.display = 'block');
                     document.querySelectorAll('.formation').forEach(square => square.style.display = 'none');
                     document.querySelectorAll('.sample').forEach(square => square.style.display = 'none');
-
-
                 } else if (action === 'formations') {
-                    // Show only formation squares
+                    // Affiche seulement les vignettes de formation
                     document.querySelectorAll('.formation').forEach(square => square.style.display = 'block');
                     document.querySelectorAll('.collab').forEach(square => square.style.display = 'none');
                     document.querySelectorAll('.sample').forEach(square => square.style.display = 'none');
@@ -171,7 +165,7 @@ if (isset($_GET['user'])) {
         });
     });
 
-    // Simulate a click on the "collabs" option when the page loads
+    // Simule un clic sur l'option "collabs" lorsque la page se charge
     document.querySelector('.option[data-action="collabs"]').click();
 </script>
 
@@ -191,7 +185,7 @@ if (isset($_GET['user'])) {
         console.log("Sender: " + sender);
         console.log("Receiver: " + receiver);
 
-        // Sauvegarder la position actuelle du défilement
+        // Sauvegarde la position actuelle du défilement
         var chatBox = $('#chat-box-body');
         var scrollTop = chatBox.scrollTop();
         var scrollHeight = chatBox.prop("scrollHeight");
@@ -206,7 +200,7 @@ if (isset($_GET['user'])) {
             success: function(data) {
                 $('#chat-box-body').html(data);
 
-                // Réinitialiser la position du défilement uniquement si l'utilisateur était en bas de la boîte de chat
+                // Réinitialise la position du défilement uniquement si l'utilisateur était en bas de la boîte de chat
                 if (scrollTop + chatBox.outerHeight() >= scrollHeight) {
                     scrollChatToBottom();
                 } else {
@@ -222,13 +216,13 @@ if (isset($_GET['user'])) {
     }
 
     $(document).ready(function() {
-        // Fetch messages for the selected user when the page loads
+        // Récupère les messages pour l'utilisateur sélectionné lorsque la page se charge
         fetchMessages();
 
-        // Fetch messages every 3 seconds
+        // Récupère les messages toutes les 3 secondes
         setInterval(fetchMessages, 3000);
 
-        // Submit the chat message
+        // Soumet le message du chat
         $('#chat-form').submit(function(e) {
             e.preventDefault();
             var sender = $('#sender').val();
@@ -245,7 +239,7 @@ if (isset($_GET['user'])) {
                 },
                 success: function() {
                     $('#message').val('');
-                    fetchMessages(); // Fetch messages after submitting
+                    fetchMessages(); // Récupère les messages après soumission
                 }
             });
         });

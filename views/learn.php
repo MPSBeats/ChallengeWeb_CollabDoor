@@ -1,9 +1,10 @@
 <?php
+// Inclusion du modèle learnsModel.php
 require_once '../models/learnsModel.php';
 
-
+// Création d'une instance de la classe Learn et récupération de toutes les formations
 $learning = new Learn();
-$learnings = $learning->getAllLearnings()
+$learnings = $learning->getAllLearnings();
 
 ?>
 
@@ -15,6 +16,7 @@ $learnings = $learning->getAllLearnings()
         <p>Réveiller l'artiste qui someille en vous !</p>
     </aside>
 
+    <!-- Formulaire de recherche et de filtrage -->
     <form action="search.php" method="get">
         <label for="recherche">
             <input type="text" name="recherche" placeholder="Rechercher une formation">
@@ -50,9 +52,10 @@ $learnings = $learning->getAllLearnings()
         <button id="button_left"><img src="assets/img/circle-chevron-left.svg" alt="fleche gauche"></button>
         <section id="carrousselpepite">
             <?php
-
+            // Vérification si des formations sont disponibles
             if (!empty($learnings)): ?>
                 <?php foreach ($learnings as $learning): ?>
+                    <!-- Affichage des formations -->
                     <article class="oeuvre" onclick="window.location.href='index.php?page=learningProfile&learning=<?= $learning['title'] ?>'">
                         <img src="<?php echo $learning['thumbnail']; ?>" alt="image de l'oeuvre">
                         <div>
@@ -65,11 +68,7 @@ $learnings = $learning->getAllLearnings()
             <?php else: ?>
                 <p>Aucune formations trouvée.</p>
             <?php endif; ?>
-
         </section>
         <button id="button_right"><img src="assets/img/circle-chevron-right.svg" alt="fleche droite"></button>
-
     </section>
-    
-
 </main>
