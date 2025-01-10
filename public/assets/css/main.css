@@ -628,8 +628,10 @@ aside h2{
     flex-wrap: nowrap !important;
     overflow-x: auto !important;
     width: 90% !important;
+    height: 45vh;
     padding-left: 5% !important;
     scrollbar-width: none;
+    
 }
 
 .fiche_artiste{
