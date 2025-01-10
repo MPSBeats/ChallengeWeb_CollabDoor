@@ -97,7 +97,7 @@ $collaborations = new SearchCollaboration();
                         ?>
 
                         <div class="oeuvre-info">
-                            <img src="<?= htmlspecialchars($thumbnailsAndId['thumbnail']) ?>" onclick="window.location.href='index.php?page=productsheet&id=<?= htmlspecialchars($thumbnailsAndId['id_searchcollaborations'])?>'" alt="">
+                            <img src="<?= htmlspecialchars($thumbnailsAndId['thumbnail']) ?>" onclick="window.location.href='index.php?page=searchsheet&id=<?= htmlspecialchars($thumbnailsAndId['id_searchcollaborations'])?>'" alt="">
                             <h4 style="text-align:center"><?= htmlspecialchars($collab['title']) ?></h4>
                             <?php
 
