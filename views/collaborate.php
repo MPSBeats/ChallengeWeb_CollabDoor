@@ -1,6 +1,8 @@
 <?php
 require_once '../models/profileModel.php';
 require_once '../models/database.php';
+require_once '../models/searchcollaborationModel.php';
+
 $db = (new Database())->connect();
 
 $selectedUser = '';
@@ -66,13 +68,12 @@ if (isset($_GET['user'])) {
         <button id="bLeftFiche"><img src="assets/img/circle-chevron-left.svg" alt="fleche gauche"></button>
         <section id="carrousselCollab">
             <?php
-            $sql = "SELECT * FROM searchcollaborations";
-            $result = $db->prepare($sql);
-            $result->execute();
-            $collaborations = $result->fetchAll(PDO::FETCH_ASSOC);
+
+            $collaborations = new SearchCollaboration();
+            $allcollaborations = $collaborations->getAllSearchCollaborations();
 
             if (!empty($collaborations)): ?>
-                <?php foreach ($collaborations as $collab): ?>
+                <?php foreach ($allcollaborations as $collab): ?>
                     <article class="oeuvre">
 
                         <?php
@@ -92,14 +93,8 @@ WHERE u.id_user = 1;
                         <div class="oeuvre-info">
                             <h4 style="text-align:center"><?= htmlspecialchars($collab['title']) ?></h4>
                             <?php
-                            $sqlPseudo = "SELECT u.pseudo
-                                          FROM Users u
-                                          JOIN userssearchcollaborations uc ON u.id_user = uc.id_user
-                                          JOIN SearchCollaborations c ON uc.id_searchcollaborations = c.id_searchcollaborations
-                                          WHERE c.id_searchcollaborations = ?";
-                            $resultPseudo = $db->prepare($sqlPseudo);
-                            $resultPseudo->execute([$collab['id_searchcollaborations']]);
-                            $Pseudos = $resultPseudo->fetchAll(PDO::FETCH_ASSOC);
+
+                            $Pseudos = $collaborations->getPseudoSearchCollaboration($collab['id_searchcollaborations']);
 
                             $profil = new Profile();
                             $profilePicture = $profil->getPicture($Pseudos[0]['pseudo']);

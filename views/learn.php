@@ -1,7 +1,6 @@
 <?php
 require_once '../models/learnsModel.php';
-require_once '../models/database.php';
-$db = (new Database())->connect();
+
 
 $learning = new Learn();
 $learnings = $learning->getAllLearnings()
