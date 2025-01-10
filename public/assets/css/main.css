@@ -402,7 +402,7 @@ aside h2{
     margin-right: 4%;
     width: 16%;
 }
-.oeuvre:hover{
+#discover .oeuvre:hover{
     cursor: pointer;
     scale: 1.05;
 }
@@ -449,6 +449,9 @@ aside h2{
 }
 #discover #carrousselpepite .oeuvre p{
     margin-right: 5%;
+}
+#pseudoOeuvre{
+    justify-content: start;
 }
 #carrousselartiste{
     justify-content: start !important;

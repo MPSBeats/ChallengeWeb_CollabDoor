@@ -93,7 +93,7 @@ if (isset($_GET['user'])) {
                             ?>
                             <div>
                                 <div class="profile-picture-search">
-                                    <img src="<?= htmlspecialchars($profilePicture['picture']); ?>" alt="Profile picture" class="profile-img-search-collab" onclick="window.location.href='index.php?page=profilView&id=1'">
+                                    <img src="<?= htmlspecialchars($profilePicture['picture']); ?>" alt="Profile picture" class="profile-img-search-collab" onclick="window.location.href='index.php?page=profile&artist=<?=$Pseudos[0]['pseudo']?>'">
                                 </div>
                                 <?php
                                 if (!empty($Pseudos)): ?>
