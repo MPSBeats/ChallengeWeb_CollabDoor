@@ -38,7 +38,7 @@ $db = (new Database())->connect();
 
             // Mélanger les utilisateurs pour un affichage aléatoire
             shuffle($users);
-            
+
             // Récupérer le pseudo de l'utilisateur connecté
             $currentUser = $_SESSION['pseudo'] ?? '';
 
@@ -90,9 +90,6 @@ $db = (new Database())->connect();
                         <article class="oeuvre">
                             <img src="assets/img/picture1.png" alt="">
                             <div>
-                                <div>
-                                    <h4><?= htmlspecialchars($collab['title']) ?></h4>
-                                </div>
                                 <?php
                                 // Récupérer les pseudos des utilisateurs associés à chaque collaboration
                                 $sqlPseudo = "SELECT u.pseudo
@@ -104,7 +101,10 @@ $db = (new Database())->connect();
                                 $resultPseudo->execute();
                                 $Pseudos = $resultPseudo->fetchAll(PDO::FETCH_ASSOC);
                                 ?>
-                                <p><?php foreach ($Pseudos as $pseudo): echo htmlspecialchars($pseudo['pseudo']) . ' '; endforeach; ?></p>
+                                <h4><?= htmlspecialchars($collab['title']) ?></h4>
+                                <p><?php foreach ($Pseudos as $pseudo): echo htmlspecialchars($pseudo['pseudo']) . ' ';
+                                    endforeach; ?></p>
+
                             </div>
                         </article>
                     <?php endforeach; ?>
