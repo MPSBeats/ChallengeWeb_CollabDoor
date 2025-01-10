@@ -28,4 +28,17 @@ class Collaborate {
         $stmt->execute([$idCollaboration]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC); // Retourne tous les résultats sous forme de tableau associatif
     }
+
+    public function getThumbnailsByUserId($userId) {
+        $sql = "SELECT sc.thumbnail
+                FROM searchcollaborations sc
+                JOIN userssearchcollaborations usc ON sc.id_searchcollaborations = usc.id_searchcollaborations
+                JOIN Users u ON usc.id_user = u.id_user
+                WHERE u.id_user = :user_id";
+
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([':user_id' => $userId]);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 };
