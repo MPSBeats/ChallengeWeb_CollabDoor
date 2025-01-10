@@ -1,6 +1,8 @@
 <?php
 require_once '../models/profileModel.php';
 require_once '../models/database.php';
+require_once '../models/searchcollaborationModel.php';
+
 $db = (new Database())->connect();
 
 $selectedUser = '';
@@ -66,26 +68,19 @@ if (isset($_GET['user'])) {
         <button id="bLeftFiche"><img src="assets/img/circle-chevron-left.svg" alt="fleche gauche"></button>
         <section id="carrousselCollab">
             <?php
-            $sql = "SELECT * FROM searchcollaborations";
-            $result = $db->prepare($sql);
-            $result->execute();
-            $collaborations = $result->fetchAll(PDO::FETCH_ASSOC);
+
+            $collaborations = new SearchCollaboration();
+            $allcollaborations = $collaborations->getAllSearchCollaborations();
 
             if (!empty($collaborations)): ?>
-                <?php foreach ($collaborations as $collab): ?>
+                <?php foreach ($allcollaborations as $collab): ?>
                     <article class="oeuvre">
                         <img src="assets/img/picture1.png" alt="">
                         <div class="oeuvre-info">
                             <h4 style="text-align:center"><?= htmlspecialchars($collab['title']) ?></h4>
                             <?php
-                            $sqlPseudo = "SELECT u.pseudo
-                                          FROM Users u
-                                          JOIN userssearchcollaborations uc ON u.id_user = uc.id_user
-                                          JOIN SearchCollaborations c ON uc.id_searchcollaborations = c.id_searchcollaborations
-                                          WHERE c.id_searchcollaborations = ?";
-                            $resultPseudo = $db->prepare($sqlPseudo);
-                            $resultPseudo->execute([$collab['id_searchcollaborations']]);
-                            $Pseudos = $resultPseudo->fetchAll(PDO::FETCH_ASSOC);
+
+                            $Pseudos = $collaborations->getPseudoSearchCollaboration($collab['id_searchcollaborations']);
 
                             $profil = new Profile();
                             $profilePicture = $profil->getPicture($Pseudos[0]['pseudo']);
@@ -93,7 +88,7 @@ if (isset($_GET['user'])) {
                             ?>
                             <div>
                                 <div class="profile-picture-search">
-                                    <img src="<?= htmlspecialchars($profilePicture['picture']); ?>" alt="Profile picture" class="profile-img-search-collab" onclick="window.location.href='index.php?page=profilView&id=1'">
+                                    <img src="<?= htmlspecialchars($profilePicture['picture']); ?>" alt="Profile picture" class="profile-img-search-collab" onclick="window.location.href='index.php?page=profile&artist=<?=$Pseudos[0]['pseudo']?>'">
                                 </div>
                                 <?php
                                 if (!empty($Pseudos)): ?>
