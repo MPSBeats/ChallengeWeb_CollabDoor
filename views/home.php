@@ -89,7 +89,7 @@ $users = new User();
                     // Afficher seulement 4 collaborations aléatoires
                     foreach (array_slice($collaborationsAll, 0, 4) as $collab): ?>
                         <article class="oeuvre">
-                            <img src="assets/img/picture1.png" alt="">
+                            <img src="<?php echo $collab['thumbnail'] ?>" alt="">
                             <div>
                                 <?php
                                 // Récupérer les pseudos des utilisateurs associés à chaque collaboration
