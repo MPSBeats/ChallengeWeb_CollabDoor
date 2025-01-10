@@ -6,8 +6,6 @@ $db = (new Database())->connect();
 
 ?>
 
-
-
 <main id="discover">
     <div class="space"></div>
 
