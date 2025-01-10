@@ -93,9 +93,9 @@ if (isset($_GET['user'])) {
                     </form>
 
                 <?php } else { ?>
-                    <a href='index.php?page=profile&artist=<?php echo $pseudo ?>&user=<?php echo $pseudo ?>'>
-                        Contacter
-                    </a>
+                    <div class="btn-profil">
+                        <button onclick="window.location.href='index.php?page=collaborate&user=<?php echo $pseudo; ?>'" class="btn-green">Contacter</button>
+                    </div>
                 <?php } ?>
             </div>
         </div>

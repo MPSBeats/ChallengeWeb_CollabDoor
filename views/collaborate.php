@@ -1,11 +1,17 @@
 <?php
-
+require_once '../models/profileModel.php';
 require_once '../models/database.php';
 $db = (new Database())->connect();
 
 $selectedUser = '';
 
-$user = strtolower($_SESSION['pseudo']);
+if (isset($_SESSION['pseudo'])) {
+    $user = strtolower($_SESSION['pseudo']);
+} else {
+    $user = '';
+}
+
+// $profilePicture = $profil->getPicture($user);
 
 
 if (isset($_GET['user'])) {
@@ -69,10 +75,8 @@ if (isset($_GET['user'])) {
                 <?php foreach ($collaborations as $collab): ?>
                     <article class="oeuvre">
                         <img src="assets/img/picture1.png" alt="">
-                        <div>
-                            <div>
-                                <h4><?= htmlspecialchars($collab['title']) ?></h4>
-                            </div>
+                        <div class="oeuvre-info">
+                            <h4 style="text-align:center"><?= htmlspecialchars($collab['title']) ?></h4>
                             <?php
                             $sqlPseudo = "SELECT u.pseudo
                                           FROM Users u
@@ -82,25 +86,31 @@ if (isset($_GET['user'])) {
                             $resultPseudo = $db->prepare($sqlPseudo);
                             $resultPseudo->execute([$collab['id_searchcollaborations']]);
                             $Pseudos = $resultPseudo->fetchAll(PDO::FETCH_ASSOC);
+
+                            $profil = new Profile();
+                            $profilePicture = $profil->getPicture($Pseudos[0]['pseudo']);
+
                             ?>
-                            <div class="profile-picture-search">
-                                <img src="<? $profilePicture ?>" alt="Profile Picture" class="profile-img-search-collab" onclick="window.location.href='index.php?page=profilView&id=1'">
-                            </div>
-                            <a href='index.php?page=collaborate&user=<?php
-                                                                        if (!empty($Pseudos)):
-                                                                            foreach ($Pseudos as $pseudo):
-                                                                                echo htmlspecialchars($pseudo['pseudo']);
-                                                                            endforeach;
-                                                                        endif; ?>'>
+                            <div>
+                                <div class="profile-picture-search">
+                                    <img src="<?= htmlspecialchars($profilePicture['picture']); ?>" alt="Profile picture" class="profile-img-search-collab" onclick="window.location.href='index.php?page=profilView&id=1'">
+                                </div>
                                 <?php
                                 if (!empty($Pseudos)): ?>
-                                    <p><?php foreach ($Pseudos as $pseudo): echo htmlspecialchars($pseudo['pseudo']);
-                                        endforeach; ?></p>
+                                    <p style="width: 50%;"><?php echo $Pseudos[0]['pseudo'] ?></p>
                                 <?php else: ?>
-                                    <p>Aucun pseudo trouvé.</p>
+                                    <p style="width: 50%;">Aucun pseudo trouvé.</p>
                                 <?php endif; ?>
-                                <img src="assets/img/mail-plus.svg">
-                            </a>
+                            </div>
+                            <?php if (!empty($user)): ?>
+                                <a href='index.php?page=collaborate&user=<?php echo htmlspecialchars($Pseudos[0]['pseudo']) ?>'>
+                                    <img src="assets/img/mail-plus.svg">
+                                </a>
+                            <?php else: ?>
+                                <a href="#" onclick="alert('Veuillez vous connecter avant de collaborer.');">
+                                    <img src="assets/img/mail-plus.svg">
+                                </a>
+                            <?php endif; ?>
 
 
                         </div>

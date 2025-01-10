@@ -406,16 +406,17 @@ aside h2{
     cursor: pointer;
     scale: 1.05;
 }
-.oeuvre div{
+.oeuvre div.oeuvre-info{
     width: 100%;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+
 }
-.oeuvre img{
+.oeuvre>img{
     width: 100%;
 }
-.oeuvre div div{
-    width: 100%;
+.oeuvre div > div{
+    height: 50px;
     display: flex;
     justify-content: space-between;
     margin: 7% 0;
@@ -435,6 +436,7 @@ aside h2{
     border: none;
     background-color: transparent;
 }
+
 
 #discover section > button{
     width: 3%;
@@ -853,13 +855,12 @@ aside h2{
 }
 
 .profile-picture-search{
-    width: 5vh !important;
-    height: 5vh !important;
-    display:flex;
+    width: 50%;
 }
 
 .profile-img-search-collab{
-    width: 100%;
+    
+    max-width: 75%;
     overflow: hidden;
     border-radius: 50%; /* Tailwind rounded-full */
     border: #000 2px solid;
