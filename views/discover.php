@@ -62,7 +62,7 @@ $discover = new Discover();
             if (!empty($collaborations)): ?>
                 <?php foreach ($collaborations as $collab): ?>
                     <article class="oeuvre" onclick="window.location.href='index.php?page=productsheet&id=<?= $collab['id_collaborations'] ?>'">
-                        <img src="assets/img/picture1.png" alt="">
+                        <img src="<?php  echo $collab['thumbnail']; ?>" alt="image de l'oeuvre">
                         <div>
                             <div>
                                 <h4><?= htmlspecialchars($collab['title']) ?></h4>

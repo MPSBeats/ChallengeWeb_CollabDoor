@@ -62,6 +62,12 @@ $learnings = $learning->getAllLearnings();
                             <div>
                                 <h4><?= htmlspecialchars($learning['title']) ?></h4>
                             </div>
+                            <div>
+                                <p><?= htmlspecialchars($learning['price']) ?></p>
+                            </div>
+                            <div>
+                                <p><?= htmlspecialchars($learning['rate']) ?></p>
+                            </div>
                         </div>
                     </article>
                 <?php endforeach; ?>
