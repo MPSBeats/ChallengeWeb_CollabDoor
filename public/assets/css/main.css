@@ -628,8 +628,10 @@ aside h2{
     flex-wrap: nowrap !important;
     overflow-x: auto !important;
     width: 90% !important;
+    height: 45vh;
     padding-left: 5% !important;
     scrollbar-width: none;
+    
 }
 
 .fiche_artiste{
@@ -978,6 +980,8 @@ footer{
 
 /*--------------MESSAGES--------------*/
 
+
+
 .chat-box {
     display: flex;
     flex-direction: column;
@@ -1056,6 +1060,51 @@ footer{
 
 .message p {
     margin: 5px 0;
+}
+
+.account-info {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+}
+
+.account-info .welcome h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.account-info .user-list h2 {
+    font-size: 20px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.account-info .user-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.account-info .user-list ul li {
+    margin-bottom: 10px;
+}
+
+.account-info .user-list ul li a {
+    display: block;
+    padding: 10px 15px;
+    background-color: #fff;
+    border-radius: 5px;
+    color: #333;
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.account-info .user-list ul li a:hover {
+    background-color: #e0e0e0;
+    transform: translateY(-2px);
 }
 
 .chat-form {

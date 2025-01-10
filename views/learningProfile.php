@@ -1,41 +1,45 @@
 <?php
 
+/**
+ * Ce fichier gère l'affichage et l'inscription à une formation spécifique.
+ * 
+ * @file learningProfile.php
+ */
+
 require_once '../models/learnsModel.php';
 require_once '../models/userModel.php';
 
 $learning = new Learn();
 $user = new User();
 
-// Check if a specific formation is selected
+// Vérifie si une formation spécifique est sélectionnée
 if (isset($_GET['learning'])) {
     $selectedFormation = $learning->getLearningById($_GET['learning']);
     $currentLearning = $title = htmlspecialchars($selectedFormation['title']);
 } else {
-    header('Location: index.php?page=formations'); // Redirect if no formation is selected
+    // Redirige vers la page des formations si aucune formation n'est sélectionnée
+    header('Location: index.php?page=formations');
     exit();
 }
 
-
-
-// Check if the user is enrolling in a course
+// Vérifie si l'utilisateur s'inscrit à une formation
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['formation_id'])) {
     if (isset($_SESSION['pseudo'])) {
-        $userId = $user->getUserId($_SESSION['pseudo']); // Assuming the session contains the user ID
+        $userId = $user->getUserId($_SESSION['pseudo']); // Récupère l'ID de l'utilisateur à partir de la session
         $formationId = $_POST['formation_id'];
         $isEnrolled = $learning->insertUserLearning($userId, $formationId);
 
         if ($isEnrolled) {
-            // Redirect to the same page with a success message
+            // Redirige vers la même page avec un message de succès
             header("Location: index.php?page=learningProfile&learning=$currentLearning&success=true&id=$formationId");
             exit();
         } else {
-            // Redirect to the same page with an error message
-
+            // Redirige vers la même page avec un message d'erreur
             header("Location: index.php?page=learningProfile&learning=$currentLearning&error=true&id=$formationId");
             exit();
         }
-            } else {
-        // Redirect to login if not logged in
+    } else {
+        // Redirige vers la page de connexion si l'utilisateur n'est pas connecté
         header('Location: index.php?page=login');
         exit();
     }
@@ -43,11 +47,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['formation_id'])) {
 
 ?>
 
-
 <main style="min-height:90vh;">
     <div class="space"></div>
 
-    <!-- Section for a Single Formation -->
+    <!-- Section pour une formation spécifique -->
     <div class="single-formation-container">
         <div class="single-formation-content">
             <h2><?= htmlspecialchars($selectedFormation['title']); ?></h2>

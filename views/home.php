@@ -1,6 +1,7 @@
 <?php
 require_once "../models/database.php";
 
+// Connexion à la base de données
 $db = (new Database())->connect();
 ?>
 
@@ -8,8 +9,8 @@ $db = (new Database())->connect();
     <section class="hero">
         <div class="space"></div>
         <div class="content">
-            <img src="assets/img/logoCollabdoor.png" alt="">
-            <h2>Your Gateway to Seamless Collaboration</h2>
+            <img src="assets/img/logoCollabdoor.svg" alt="" width="800vh">
+            <h2>La collab entre artistes n'a jamais été aussi facile !</h2>
         </div>
         <div class="arrow-help">
             <a href="#collaborate" id="arrow" class="smooth-scroll">
@@ -37,6 +38,7 @@ $db = (new Database())->connect();
 
             // Mélanger les utilisateurs pour un affichage aléatoire
             shuffle($users);
+
             // Récupérer le pseudo de l'utilisateur connecté
             $currentUser = $_SESSION['pseudo'] ?? '';
 
@@ -45,20 +47,19 @@ $db = (new Database())->connect();
                 return $user['pseudo'] !== $currentUser;
             });
 
-
             // Limiter le nombre d'utilisateurs affichés à 4
             $filteredUsers = array_slice($filteredUsers, 0, 4);
             ?>
 
             <div class="bot-card">
                 <?php foreach ($filteredUsers as $user): ?>
-
                     <form action="index.php" method="get" class="card">
+                        <!-- Ajouter les paramètres 'page' et 'artist' à l'URL -->
                         <input type="hidden" name="page" value="profile">
                         <input type="hidden" name="artist" value="<?= htmlspecialchars($user['pseudo']); ?>">
+                        <!-- Afficher l'image de l'utilisateur, clique pour soumettre le formulaire -->
                         <img style="cursor: pointer;" src="<?= htmlspecialchars($user['picture']); ?>" alt="<?= htmlspecialchars($user['pseudo']); ?>" onclick="this.closest('form').submit();">
                         <p><?= htmlspecialchars($user['pseudo']); ?></p>
-
                     </form>
                 <?php endforeach; ?>
             </div>
@@ -74,6 +75,7 @@ $db = (new Database())->connect();
             </div>
             <div class="bot-card">
                 <?php
+                // Récupérer toutes les collaborations
                 $sql1 = "SELECT * FROM collaborations";
                 $result1 = $db->prepare($sql1);
                 $result1->execute();
@@ -88,21 +90,21 @@ $db = (new Database())->connect();
                         <article class="oeuvre">
                             <img src="assets/img/picture1.png" alt="">
                             <div>
-                                <div>
-                                    <h4><?= htmlspecialchars($collab['title']) ?></h4>
-                                </div>
                                 <?php
+                                // Récupérer les pseudos des utilisateurs associés à chaque collaboration
                                 $sqlPseudo = "SELECT u.pseudo
-                                        FROM Users u
-                                        JOIN UserCollaborations uc ON u.id_user = uc.id_user
-                                        JOIN Collaborations c ON uc.id_collaborations = c.id_collaborations
-                                        WHERE c.id_collaborations = " . $collab['id_collaborations'];
+                                              FROM Users u
+                                              JOIN UserCollaborations uc ON u.id_user = uc.id_user
+                                              JOIN Collaborations c ON uc.id_collaborations = c.id_collaborations
+                                              WHERE c.id_collaborations = " . $collab['id_collaborations'];
                                 $resultPseudo = $db->prepare($sqlPseudo);
                                 $resultPseudo->execute();
                                 $Pseudos = $resultPseudo->fetchAll(PDO::FETCH_ASSOC);
                                 ?>
+                                <h4><?= htmlspecialchars($collab['title']) ?></h4>
                                 <p><?php foreach ($Pseudos as $pseudo): echo htmlspecialchars($pseudo['pseudo']) . ' ';
                                     endforeach; ?></p>
+
                             </div>
                         </article>
                     <?php endforeach; ?>
@@ -110,11 +112,8 @@ $db = (new Database())->connect();
                     <p>Aucune collaboration trouvée.</p>
                 <?php endif; ?>
             </div>
+        </div>
     </section>
-
-
-
-
 
     <section class="learn">
         <div class="big-card">
