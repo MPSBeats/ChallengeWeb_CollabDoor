@@ -68,15 +68,10 @@ $discover = new Discover();
                                 <h4><?= htmlspecialchars($collab['title']) ?></h4>
                             </div>
                             <?php
-                            // Récupération des pseudos des utilisateurs pour chaque collaboration
-                            $sqlPseudo = "SELECT u.pseudo
-                                            FROM Users u
-                                            JOIN UserCollaborations uc ON u.id_user = uc.id_user
-                                            JOIN Collaborations c ON uc.id_collaborations = c.id_collaborations
-                                            WHERE c.id_collaborations = " . $collab['id_collaborations'];
-                            $resultPseudo = $db->prepare($sqlPseudo);
-                            $resultPseudo->execute();
-                            $Pseudos = $resultPseudo->fetchAll(PDO::FETCH_ASSOC);
+
+                            
+                            $Pseudos = $discover->getUserPseudosByCollaborationId($collab['id_collaborations']);
+
                             ?>
                             <div id="pseudoOeuvre">
                             <?php foreach ($Pseudos as $pseudo):?> 
@@ -92,24 +87,14 @@ $discover = new Discover();
         <button id="button_right"><img src="assets/img/circle-chevron-right.svg" alt="fleche droite"></button>
     </section>
 
-    <?php  
-    // Récupération d'un utilisateur aléatoire
-    $sqlRandomUser = "SELECT * FROM Users ORDER BY RANDOM() LIMIT 1";
-    $resultRandomUser = $db->prepare($sqlRandomUser);
-    $resultRandomUser->execute();
-    $randomUser = $resultRandomUser->fetch(PDO::FETCH_ASSOC);
+    <?php  // Récupération d'un utilisateur aléatoire
+    
+    $randomUser = $discover->getRandomUser();
 
-    // Récupération des collaborations de l'utilisateur aléatoire
-    $sqlUserCollabs = "
-    SELECT c.*
-    FROM collaborations c
-    JOIN usercollaborations uc ON c.id_collaborations = uc.id_collaborations
-    WHERE uc.id_user = :id_user
-";
-    $resultUserCollabs = $db->prepare($sqlUserCollabs);
-    $resultUserCollabs->bindParam(':id_user', $randomUser['id_user'], PDO::PARAM_INT);
-    $resultUserCollabs->execute();
-    $userCollaborations = $resultUserCollabs->fetchAll(PDO::FETCH_ASSOC);
+
+    
+    $userCollaborations = $discover->getCollaborationsByRandomUserId($randomUser['id_user']);
+
     ?>
 
     <section>
