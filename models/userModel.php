@@ -47,4 +47,11 @@ class User
         $stmt->execute(['pseudo' => $pseudo]);
         return $stmt->fetchColumn();
     }
+
+    public function getPseudoPicture()
+    {
+        $stmt = $this->pdo->prepare('SELECT pseudo, picture FROM Users');
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
 }

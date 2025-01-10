@@ -1,8 +1,14 @@
 <?php
 require_once "../models/database.php";
+require_once "../models/learnsModel.php";
+require_once "../models/collaborateModel.php";
+require_once "../models/userModel.php";
 
 // Connexion à la base de données
 $db = (new Database())->connect();
+$learns = new Learn();
+$collaborations = new Collaborate();
+$users = new User();
 ?>
 
 <main>
@@ -32,18 +38,16 @@ $db = (new Database())->connect();
 
             <?php
             // Récupérer les données des utilisateurs
-            $stmt = $db->prepare("SELECT pseudo, picture FROM Users");
-            $stmt->execute();
-            $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $usersAll = $users->getPseudoPicture();
 
             // Mélanger les utilisateurs pour un affichage aléatoire
-            shuffle($users);
+            shuffle($usersAll);
+            
 
             // Récupérer le pseudo de l'utilisateur connecté
             $currentUser = $_SESSION['pseudo'] ?? '';
-
             // Filtrer les utilisateurs pour exclure l'utilisateur connecté
-            $filteredUsers = array_filter($users, function ($user) use ($currentUser) {
+            $filteredUsers = array_filter($usersAll, function ($user) use ($currentUser) {
                 return $user['pseudo'] !== $currentUser;
             });
 
@@ -76,30 +80,21 @@ $db = (new Database())->connect();
             <div class="bot-card">
                 <?php
                 // Récupérer toutes les collaborations
-                $sql1 = "SELECT * FROM collaborations";
-                $result1 = $db->prepare($sql1);
-                $result1->execute();
-                $collaborations = $result1->fetchAll(PDO::FETCH_ASSOC);
+                $collaborationsAll = $collaborations->getAllCollaborations();
 
-                if (!empty($collaborations)):
+                if (!empty($collaborationsAll)):
                     // Mélanger les collaborations pour un affichage aléatoire
-                    shuffle($collaborations);
+                    shuffle($collaborationsAll);
 
                     // Afficher seulement 4 collaborations aléatoires
-                    foreach (array_slice($collaborations, 0, 4) as $collab): ?>
+                    foreach (array_slice($collaborationsAll, 0, 4) as $collab): ?>
                         <article class="oeuvre">
                             <img src="assets/img/picture1.png" alt="">
                             <div>
                                 <?php
                                 // Récupérer les pseudos des utilisateurs associés à chaque collaboration
-                                $sqlPseudo = "SELECT u.pseudo
-                                              FROM Users u
-                                              JOIN UserCollaborations uc ON u.id_user = uc.id_user
-                                              JOIN Collaborations c ON uc.id_collaborations = c.id_collaborations
-                                              WHERE c.id_collaborations = " . $collab['id_collaborations'];
-                                $resultPseudo = $db->prepare($sqlPseudo);
-                                $resultPseudo->execute();
-                                $Pseudos = $resultPseudo->fetchAll(PDO::FETCH_ASSOC);
+
+                                $Pseudos = $collaborations->getPseudoCollaboration($collab['id_collaborations']);
                                 ?>
                                 <h4><?= htmlspecialchars($collab['title']) ?></h4>
                                 <p><?php foreach ($Pseudos as $pseudo): echo htmlspecialchars($pseudo['pseudo']) . ' ';
@@ -121,9 +116,37 @@ $db = (new Database())->connect();
                 <h1><a href="index.php?page=learn">Apprendre</a></h1>
                 <p style="font-family: Fira code;"><a href="index.php?page=learn">--></a></p>
             </div>
-            <div class="work-in-progress">
-                🚧 Work in progress 🚧
+            <div class="bot-card">
+            <?php
+                // Récupérer toutes les formations
+                $learnings = $learns->getAllLearnings();
+
+                if (!empty($learnings)):
+                    // Mélanger les formations pour un affichage aléatoire
+                    shuffle($learnings);
+
+                    // Afficher seulement 4 formations aléatoires
+                    foreach (array_slice($learnings, 0, 4) as $learning): ?>
+                        <article class="oeuvre">
+                            <img src="<?php echo $learning['thumbnail']?>" alt="">
+                            <div>
+                                <div>
+                                    <h4><?= htmlspecialchars($learning['title']) ?></h4>
+                                </div>
+                                <?php
+                                // Récupérer les pseudos des utilisateurs associés à chaque formation
+                                $Pseudos = $learns->getPseudoByLearning($learning['id_learning']);
+                                ?>
+                                <p><?php foreach ($Pseudos as $pseudo): echo htmlspecialchars($pseudo['pseudo']) . ' '; endforeach; ?></p>
+                            </div>
+                        </article>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p>Aucune formation trouvée.</p>
+                <?php endif; ?>
+
             </div>
+
         </div>
     </section>
 </main>

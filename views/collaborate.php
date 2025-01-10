@@ -23,6 +23,7 @@ if (isset($_GET['user'])) {
     $showChatBox = false; // Set to false initially
 
 }
+$collaborations = new SearchCollaboration();
 ?>
 
 <main id="collaborate">
@@ -69,7 +70,7 @@ if (isset($_GET['user'])) {
         <section id="carrousselCollab">
             <?php
 
-            $collaborations = new SearchCollaboration();
+            
             $allcollaborations = $collaborations->getAllSearchCollaborations();
 
             if (!empty($collaborations)): ?>
