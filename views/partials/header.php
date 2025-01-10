@@ -60,7 +60,7 @@ $title = $pageTitles[$page] ?? 'CollabDoor'; // Default to 'CollabDoor' if page 
                 <ul class="user">
                     <li><a href="index.php?page=profile">
                             <button>
-                                <h3>Profile</h3>
+                                <h3>Profil</h3>
                             </button>
                         </a></li>
                 </ul>
