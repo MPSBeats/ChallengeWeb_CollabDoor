@@ -78,9 +78,8 @@ if (isset($_GET['user'])) {
 
                         <?php
 
-
+                        //Requete pour avoir l'image de la fiche de l'utilisateur
                         $Pseudos = $collaborations->getPseudoSearchCollaboration($collab['id_searchcollaborations']);
-                        
                         foreach ($Pseudos as $pseudo) {
                           $pseudo_user=  $pseudo['id_user'];
                         $sqlThumbnail = "SELECT sc.thumbnail

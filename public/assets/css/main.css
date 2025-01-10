@@ -412,6 +412,14 @@ aside h2{
     flex-direction: column;
 
 }
+.oeuvre div.oeuvre-info:hover{
+    scale: 1.05;
+}
+.oeuvre div.oeuvre-info:hover img{
+    cursor: pointer;
+}
+
+
 .oeuvre>img{
     width: 100%;
 }
