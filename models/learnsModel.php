@@ -19,7 +19,17 @@ class Learn
         return $stmt->fetch(); // Fetches one record (assumes only one user per pseudo)
     }
 
-    
+    public function getPseudoByLearning($id_learning)
+    {
+        $sqlPseudo = "SELECT u.pseudo
+                      FROM Users u
+                      JOIN userlearnings uc ON u.id_user = uc.id_user
+                      JOIN learnings c ON uc.id_learning = c.id_learning
+                      WHERE c.id_learning = ?";
+        $stmt = $this->pdo->prepare($sqlPseudo);
+        $stmt->execute([$id_learning]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC); // Retourne tous les résultats sous forme de tableau associatif
+    }
 
     // Get all masterclasses for the user
     public function getAllLearnings()
