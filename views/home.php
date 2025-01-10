@@ -15,7 +15,7 @@ $users = new User();
     <section class="hero">
         <div class="space"></div>
         <div class="content">
-            <img src="assets/img/logoCollabdoor.png" alt="">
+            <img src="assets/img/logoCollabdoor.svg" alt="" width="800vh">
             <h2>La collab entre artistes n'a jamais été aussi facile !</h2>
         </div>
         <div class="arrow-help">
@@ -43,6 +43,7 @@ $users = new User();
             // Mélanger les utilisateurs pour un affichage aléatoire
             shuffle($usersAll);
             
+
             // Récupérer le pseudo de l'utilisateur connecté
             $currentUser = $_SESSION['pseudo'] ?? '';
             // Filtrer les utilisateurs pour exclure l'utilisateur connecté
@@ -90,15 +91,15 @@ $users = new User();
                         <article class="oeuvre">
                             <img src="assets/img/picture1.png" alt="">
                             <div>
-                                <div>
-                                    <h4><?= htmlspecialchars($collab['title']) ?></h4>
-                                </div>
                                 <?php
                                 // Récupérer les pseudos des utilisateurs associés à chaque collaboration
 
                                 $Pseudos = $collaborations->getPseudoCollaboration($collab['id_collaborations']);
                                 ?>
-                                <p><?php foreach ($Pseudos as $pseudo): echo htmlspecialchars($pseudo['pseudo']) . ' '; endforeach; ?></p>
+                                <h4><?= htmlspecialchars($collab['title']) ?></h4>
+                                <p><?php foreach ($Pseudos as $pseudo): echo htmlspecialchars($pseudo['pseudo']) . ' ';
+                                    endforeach; ?></p>
+
                             </div>
                         </article>
                     <?php endforeach; ?>

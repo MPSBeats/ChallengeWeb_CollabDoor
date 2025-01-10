@@ -53,10 +53,10 @@ $discover = new Discover();
         <button id="button_left"><img src="assets/img/circle-chevron-left.svg" alt="fleche gauche"></button>
         <section id="carrousselpepite">
             <?php
-            // Récupération de toutes les collaborations
+
             $collaborations = $discover->getAllCollaborations();
 
-            // Récupération de toutes les collaborations des utilisateurs
+
             $userscollaborations = $discover->getAllUserCollaborations();
 
             if (!empty($collaborations)): ?>
