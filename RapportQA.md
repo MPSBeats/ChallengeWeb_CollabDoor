@@ -1,4 +1,4 @@
-# Guide QA - Évaluation Projet
+# Guide QA - Évaluation Projet Groupe 8
 
 ## Checklist de Tests
 
