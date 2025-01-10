@@ -32,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <main class="login">
     <div class="space"></div>
+    <h1>Connexion :</h1>
     <?php if (isset($error)): ?>
         <p class="error"><?php echo htmlspecialchars($error); ?></p> <!-- Affichage du message d'erreur -->
     <?php endif; ?>
