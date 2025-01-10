@@ -1,6 +1,7 @@
 <?php
 require_once '../models/database.php';
 require_once '../models/productsheetModel.php';
+require_once '../models/profileModel.php';
 
 $db = (new Database())->connect();
 
@@ -28,9 +29,11 @@ $Pseudo = $Pseudos[0] ?? null; // Accès au premier élément du tableau
             <h4>L'Équipe</h4>
             <ul>
                 <?php
+                $profil = new Profile();
+                $profilePicture = $profil->getPicture($Pseudos[0]['pseudo']);
                 // Boucle pour afficher les pseudos des utilisateurs
                 foreach ($Pseudos as $pseudo) {
-                    ?><li onclick="window.location.href='index.php?page=profilView&id=<?= $pseudo['id_user']?>'"> <?=$pseudo['pseudo']?></li>
+                    ?><li onclick="window.location.href='index.php?page=profile&artist=<?=$Pseudos[0]['pseudo']?>'"> <?=$pseudo['pseudo']?></li>
                 <?php } ?>
             </ul>
 

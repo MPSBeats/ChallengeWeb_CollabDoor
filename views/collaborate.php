@@ -70,7 +70,7 @@ $collaborations = new SearchCollaboration();
         <section id="carrousselCollab">
             <?php
 
-            
+
             $allcollaborations = $collaborations->getAllSearchCollaborations();
 
             if (!empty($collaborations)): ?>
@@ -82,25 +82,26 @@ $collaborations = new SearchCollaboration();
                         //Requete pour avoir l'image de la fiche de l'utilisateur
                         $Pseudos = $collaborations->getPseudoSearchCollaboration($collab['id_searchcollaborations']);
                         foreach ($Pseudos as $pseudo) {
-                          $pseudo_user=  $pseudo['id_user'];
-                        $sqlThumbnail = "SELECT sc.thumbnail
-                        FROM searchcollaborations sc
-                        JOIN userssearchcollaborations usc ON sc.id_searchcollaborations = usc.id_searchcollaborations
-                        JOIN Users u ON usc.id_user = u.id_user
-                        WHERE u.id_user = :pesudo_user ;
-                        ";
-                        $resultThumbnail = $db->prepare($sqlThumbnail);
-                        $resultThumbnail->execute([':pesudo_user' => $pseudo_user]);
-                        $thumbnails = $resultThumbnail->fetch(PDO::FETCH_ASSOC);
+                            $pseudo_user =  $pseudo['id_user'];
+                            $sqlThumbnail = "SELECT sc.thumbnail, sc.id_searchcollaborations
+                                            FROM searchcollaborations sc
+                                            JOIN userssearchcollaborations usc ON sc.id_searchcollaborations = usc.id_searchcollaborations
+                                            JOIN Users u ON usc.id_user = u.id_user
+                                            WHERE u.id_user = :pseudo_user ;
+                                            ";
+                            $resultThumbnail = $db->prepare($sqlThumbnail);
+                            $resultThumbnail->execute([':pseudo_user' => $pseudo_user]);
+                            $thumbnailsAndId = $resultThumbnail->fetch(PDO::FETCH_ASSOC);
                         }
+
                         ?>
-                       
+
                         <div class="oeuvre-info">
-                            <img src="<?= htmlspecialchars($thumbnails['thumbnail'])?>" alt="">
+                            <img src="<?= htmlspecialchars($thumbnailsAndId['thumbnail']) ?>" onclick="window.location.href='index.php?page=productsheet&id=<?= htmlspecialchars($thumbnailsAndId['id_searchcollaborations'])?>'" alt="">
                             <h4 style="text-align:center"><?= htmlspecialchars($collab['title']) ?></h4>
                             <?php
 
-                           
+
 
                             $profil = new Profile();
                             $profilePicture = $profil->getPicture($Pseudos[0]['pseudo']);
@@ -108,7 +109,7 @@ $collaborations = new SearchCollaboration();
                             ?>
                             <div>
                                 <div class="profile-picture-search">
-                                    <img src="<?= htmlspecialchars($profilePicture['picture']); ?>" alt="Profile picture" class="profile-img-search-collab" onclick="window.location.href='index.php?page=profile&artist=<?=$Pseudos[0]['pseudo']?>'">
+                                    <img src="<?= htmlspecialchars($profilePicture['picture']); ?>" alt="Profile picture" class="profile-img-search-collab" onclick="window.location.href='index.php?page=profile&artist=<?= $Pseudos[0]['pseudo'] ?>'">
                                 </div>
                                 <?php
                                 if (!empty($Pseudos)): ?>
