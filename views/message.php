@@ -2,6 +2,7 @@
 
 require_once "../models/database.php";
 
+
 $db = (new Database())->connect();
 $users = new Chatbox();
 $usersMessage = $user->fetchMessageUsers($pseudo);

@@ -1,25 +1,17 @@
 <?php
 
 require_once '../models/database.php';
+require_once '../models/productsheetModel.php';
 $db = (new Database())->connect();
+$productsheet = new ProductSheet();
 
-
-$sqlcollab = "SELECT * FROM collaborations WHERE id_collaborations = " . $_GET['id'];
-$resultCollab = $db->prepare($sqlcollab);
-$resultCollab->execute();
-$collaborations = $resultCollab->fetchAll(PDO::FETCH_ASSOC);
+$collaborations = $productsheet->fetchCollaborationById($_GET['id']);
 $collaboration = $collaborations[0] ?? null; // Accédez au premier élément du tableau
 
 
  // Requête pour récupérer les pseudos des utilisateurs associés à la collaboration
- $sqlPseudo = "SELECT u.pseudo, u.id_user
- FROM Users u
- JOIN UserCollaborations uc ON u.id_user = uc.id_user
- JOIN Collaborations c ON uc.id_collaborations = c.id_collaborations
- WHERE c.id_collaborations = " . $_GET['id'];
-$resultPseudo = $db->prepare($sqlPseudo);
-$resultPseudo->execute();
-$Pseudos = $resultPseudo->fetchAll(PDO::FETCH_ASSOC);
+
+$Pseudos = $productsheet->fetchUsersByCollaborationId($_GET['id']);
 $Pseudo = $Pseudos[0] ?? null; // Accédez au premier élément du tableau
 
 ?>
