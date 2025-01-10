@@ -57,10 +57,6 @@ switch ($page) {
         include '../views/productsheet.php';
         break;
 
-    case 'profilView':
-        include '../views/profilView.php';
-        break;
-
 
     default:
         include '../views/home.php';

@@ -10,6 +10,14 @@ class SearchCollaboration
         $this->pdo = (new Database())->connect();
     }
 
+    public function getAllSearchCollaborations()
+    {
+        $stmt = $this->pdo->prepare('SELECT * FROM searchcollaborations');
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC); // Retourne tous les résultats sous forme de tableau associatif
+    }
+    
+    
     public function createSearchCollaboration($title, $thumbnail)
     {
         $published_at = date('Y-m-d H:i:s');
@@ -35,4 +43,18 @@ class SearchCollaboration
             'id_searchcollaborations' => $collaborationId
         ]);
     }
+
+    
+    public function getPseudoSearchCollaboration($idSearchCollaboration) {
+        $sqlPseudo = "SELECT u.pseudo
+                      FROM Users u
+                      JOIN userssearchcollaborations uc ON u.id_user = uc.id_user
+                      JOIN SearchCollaborations c ON uc.id_searchcollaborations = c.id_searchcollaborations
+                      WHERE c.id_searchcollaborations = ?";
+        $stmt = $this->pdo->prepare($sqlPseudo);
+        $stmt->execute([$idSearchCollaboration]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC); // Retourne tous les résultats sous forme de tableau associatif
+    }
+    
+    
 }
