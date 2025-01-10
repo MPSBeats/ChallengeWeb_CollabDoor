@@ -1,8 +1,9 @@
 <?php
 require_once '../models/searchcollaborationModel.php';
+require_once '../models/userModel.php';
 
 $collaborationSheet = new SearchCollaboration();
-
+$user = new User();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['create'])) {
@@ -12,8 +13,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (empty($title) || empty($thumbnail)) {
             $error = 'Veuillez remplir tous les champs';
         } else {
-            if ($collaborationSheet->createSearchCollaboration($title, $thumbnail)) {
-                $succes = 'Collaboration créée !';
+
+            if ($id = $collaborationSheet->createSearchCollaboration($title, $thumbnail)) {
+                $user_id = $user->getUserId($_SESSION['pseudo']);
+                if ($collaborationSheet->createUserSearchCollaboration($user_id, $id)) {
+                    $succes = 'Collaboration créée !';
+                } else {
+                    $error = 'Une erreur est survenue lors de la création de la collaboration';
+                };
             } else {
                 $error = 'Une erreur est survenue lors de la création de la collaboration';
             }
