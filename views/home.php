@@ -8,7 +8,7 @@ $db = (new Database())->connect();
     <section class="hero">
         <div class="space"></div>
         <div class="content">
-            <img src="assets/img/logoCollabdoor.png" alt="">
+            <img src="assets/img/logoCollabdoor.svg" alt="" width="800vh">
             <h2>La collab entre artistes n'a jamais été aussi facile !</h2>
         </div>
         <div class="arrow-help">
